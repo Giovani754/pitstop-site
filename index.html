@@ -1518,12 +1518,12 @@
        ═══════════════════════════════════════════ -->
   <script>
     // ── Safety net: garante conteúdo visível mesmo se algo falhar ──────────
-    // Após 2.5s, força tudo visível como fallback para conexões lentas
+    // Após 1.5s, força tudo visível como fallback para conexões lentas
     setTimeout(function() {
       document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) {
         el.classList.add('visible');
       });
-    }, 2500);
+    }, 1500);
 
     // ── Navbar scroll behavior ──────────────────────────────────────────────
     const header = document.getElementById('header');
@@ -1575,7 +1575,7 @@
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
 
     revealEls.forEach(el => revealObserver.observe(el));
 
@@ -1608,7 +1608,7 @@
           counterObserver.unobserve(el);
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.2 });
 
     counterEls.forEach(el => counterObserver.observe(el));
 
