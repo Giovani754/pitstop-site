@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth">
+<html lang="pt-BR" class="scroll-smooth" style="overflow-x:hidden; max-width:100%">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>PitStop Centro Automotivo | Mecânica Especializada em São Paulo</title>
   <meta name="description" content="PitStop Centro Automotivo – Mecânica especializada em São Paulo. Troca de óleo, revisão completa, freios, suspensão, elétrica e ar-condicionado. 12 anos de experiência, garantia em todos os serviços.">
   <meta name="keywords" content="mecânica automotiva, troca de óleo, revisão completa, freios, suspensão, elétrica automotiva, São Paulo, PitStop">
@@ -59,10 +59,20 @@
 
   <!-- Google Fonts -->
   <!-- Garante fundo preto antes do Tailwind carregar — evita flash branco no mobile -->
-  <style>html,body{background:#080808;}</style>
+  <style>
+    html, body {
+      background: #080808;
+      /* Bloqueia scroll horizontal globalmente */
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+  </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Preconnect para o CDN do Tailwind reduzir latência -->
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
@@ -130,6 +140,8 @@
       color: #e5e5e5;
       font-family: 'Inter', sans-serif;
       overflow-x: hidden;
+      max-width: 100%;
+      width: 100%;
     }
 
     /* ── Scrollbar ── */
@@ -220,12 +232,12 @@
       100% { transform: translateX(-200px); opacity: 0; }
     }
 
-    .car-float    { animation: carFloat 4s ease-in-out infinite; transform-origin: center; }
-    .wheel-spin   { animation: wheelSpin 1.8s linear infinite; transform-origin: center; }
-    .scan-line    { animation: scanLine 2.5s ease-in-out infinite; }
+    .car-float    { animation: carFloat 4s ease-in-out infinite; transform-origin: center; will-change: transform; }
+    .wheel-spin   { animation: wheelSpin 1.8s linear infinite; transform-origin: center; will-change: transform; }
+    .scan-line    { animation: scanLine 2.5s ease-in-out infinite; will-change: transform; }
     .pulse-ring   { animation: pulse-ring 1.8s ease-out infinite; }
-    .gear-cw      { animation: gearRotate 8s linear infinite; }
-    .gear-ccw     { animation: gearRotateReverse 6s linear infinite; }
+    .gear-cw      { animation: gearRotate 8s linear infinite; will-change: transform; }
+    .gear-ccw     { animation: gearRotateReverse 6s linear infinite; will-change: transform; }
     .blink-dot    { animation: blink 1.2s ease-in-out infinite; }
 
     .spark {
@@ -245,12 +257,27 @@
     .speed-line:nth-child(4) { animation-delay: 0.9s;  }
     .speed-line:nth-child(5) { animation-delay: 1.2s;  }
 
+    /* Reduz animações pesadas em mobile para melhor performance */
+    @media (max-width: 767px) {
+      .gear-cw, .gear-ccw, .spark { animation: none; }
+      .speed-line { animation-duration: 2.5s; }
+      .car-float  { animation-duration: 5s; }
+    }
+
     /* ── Parallax section ── */
     .parallax-bg {
       background:
         linear-gradient(to bottom, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.85) 100%),
         url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23F97316' fill-opacity='0.06'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      background-attachment: fixed;
+      /* background-attachment: fixed removido — quebra em iOS/Android causando scroll lateral */
+      background-attachment: scroll;
+      background-size: auto;
+    }
+
+    /* ── Seções — bloqueia overflow lateral no mobile ── */
+    section, footer, header, div.parallax-bg {
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
     /* ── Section divider ── */
@@ -269,30 +296,32 @@
     }
 
     /* ── Reveal Animations ── */
-    .reveal {
+    /* Começa visível — JS adiciona classe .js-ready no body para ativar as animações */
+    /* Isso garante que em conexões lentas o conteúdo sempre aparece */
+    .js-ready .reveal {
       opacity: 0;
       transform: translateY(35px);
       transition: opacity 0.75s ease-out, transform 0.75s ease-out;
     }
-    .reveal.visible {
+    .js-ready .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    .reveal-left {
+    .js-ready .reveal-left {
       opacity: 0;
       transform: translateX(-45px);
       transition: opacity 0.75s ease-out, transform 0.75s ease-out;
     }
-    .reveal-left.visible {
+    .js-ready .reveal-left.visible {
       opacity: 1;
       transform: translateX(0);
     }
-    .reveal-right {
+    .js-ready .reveal-right {
       opacity: 0;
       transform: translateX(45px);
       transition: opacity 0.75s ease-out, transform 0.75s ease-out;
     }
-    .reveal-right.visible {
+    .js-ready .reveal-right.visible {
       opacity: 1;
       transform: translateX(0);
     }
@@ -462,9 +491,9 @@
        HERO
        ═══════════════════════════════════════════ -->
   <section id="inicio" class="relative min-h-screen flex items-center hero-bg overflow-hidden">
-    <!-- Glow orbs -->
-    <div class="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-orange/6 rounded-full blur-[140px] pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-orange/3 rounded-full blur-[100px] pointer-events-none"></div>
+    <!-- Glow orbs — contidos dentro da seção, não vazam para mobile -->
+    <div class="absolute top-1/3 right-0 w-64 h-64 md:w-96 md:h-96 bg-orange/6 rounded-full blur-[100px] pointer-events-none" style="max-width:50vw;"></div>
+    <div class="absolute bottom-0 left-0 w-48 h-48 md:w-64 md:h-64 bg-orange/4 rounded-full blur-[80px] pointer-events-none" style="max-width:40vw;"></div>
 
     <!-- Linha decorativa esquerda -->
     <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-transparent via-orange/30 to-transparent hidden lg:block"></div>
@@ -1076,7 +1105,7 @@
   <section id="depoimentos" class="relative py-24 lg:py-32 bg-[#080808]">
     <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-orange/15 to-transparent"></div>
     <!-- Glow sutil de fundo -->
-    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-orange/4 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-48 bg-orange/4 rounded-full blur-[80px] pointer-events-none"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
@@ -1303,7 +1332,7 @@
        ═══════════════════════════════════════════ -->
   <section class="relative py-24 lg:py-32 overflow-hidden" style="background: linear-gradient(135deg, #080808 0%, #110800 50%, #1a0c00 100%);">
     <!-- Glow laranja de fundo -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-orange/8 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-48 md:w-96 md:h-64 bg-orange/8 rounded-full blur-[100px] pointer-events-none"></div>
     <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-orange/50 to-transparent"></div>
 
     <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -1497,6 +1526,17 @@
        JAVASCRIPT
        ═══════════════════════════════════════════ -->
   <script>
+    // ── Safety net: garante conteúdo visível mesmo se algo falhar ──────────
+    // Adiciona js-ready para ativar as reveal animations
+    document.body.classList.add('js-ready');
+
+    // Após 3s, força tudo visível como fallback para conexões lentas
+    setTimeout(function() {
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) {
+        el.classList.add('visible');
+      });
+    }, 3000);
+
     // ── Navbar scroll behavior ──────────────────────────────────────────────
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
