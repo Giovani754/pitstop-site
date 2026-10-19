@@ -257,13 +257,6 @@
     .speed-line:nth-child(4) { animation-delay: 0.9s;  }
     .speed-line:nth-child(5) { animation-delay: 1.2s;  }
 
-    /* Reduz animações pesadas em mobile para melhor performance */
-    @media (max-width: 767px) {
-      .gear-cw, .gear-ccw, .spark { animation: none; }
-      .speed-line { animation-duration: 2.5s; }
-      .car-float  { animation-duration: 5s; }
-    }
-
     /* ── Parallax section ── */
     .parallax-bg {
       background:
@@ -296,32 +289,30 @@
     }
 
     /* ── Reveal Animations ── */
-    /* Começa visível — JS adiciona classe .js-ready no body para ativar as animações */
-    /* Isso garante que em conexões lentas o conteúdo sempre aparece */
-    .js-ready .reveal {
+    .reveal {
       opacity: 0;
       transform: translateY(35px);
       transition: opacity 0.75s ease-out, transform 0.75s ease-out;
     }
-    .js-ready .reveal.visible {
+    .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    .js-ready .reveal-left {
+    .reveal-left {
       opacity: 0;
       transform: translateX(-45px);
       transition: opacity 0.75s ease-out, transform 0.75s ease-out;
     }
-    .js-ready .reveal-left.visible {
+    .reveal-left.visible {
       opacity: 1;
       transform: translateX(0);
     }
-    .js-ready .reveal-right {
+    .reveal-right {
       opacity: 0;
       transform: translateX(45px);
       transition: opacity 0.75s ease-out, transform 0.75s ease-out;
     }
-    .js-ready .reveal-right.visible {
+    .reveal-right.visible {
       opacity: 1;
       transform: translateX(0);
     }
@@ -1527,15 +1518,12 @@
        ═══════════════════════════════════════════ -->
   <script>
     // ── Safety net: garante conteúdo visível mesmo se algo falhar ──────────
-    // Adiciona js-ready para ativar as reveal animations
-    document.body.classList.add('js-ready');
-
-    // Após 3s, força tudo visível como fallback para conexões lentas
+    // Após 2.5s, força tudo visível como fallback para conexões lentas
     setTimeout(function() {
       document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) {
         el.classList.add('visible');
       });
-    }, 3000);
+    }, 2500);
 
     // ── Navbar scroll behavior ──────────────────────────────────────────────
     const header = document.getElementById('header');
