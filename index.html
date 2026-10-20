@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth" style="overflow-x:hidden; max-width:100%">
+<html lang="pt-BR" class="scroll-smooth" style="overflow-x:hidden;max-width:100%">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>PitStop Centro Automotivo | Mecânica Especializada em São Paulo</title>
   <meta name="description" content="PitStop Centro Automotivo – Mecânica especializada em São Paulo. Troca de óleo, revisão completa, freios, suspensão, elétrica e ar-condicionado. 12 anos de experiência, garantia em todos os serviços.">
   <meta name="keywords" content="mecânica automotiva, troca de óleo, revisão completa, freios, suspensão, elétrica automotiva, São Paulo, PitStop">
@@ -58,21 +58,13 @@
   </script>
 
   <!-- Google Fonts -->
+  <!-- Fundo preto antes do Tailwind carregar: evita flash branco no mobile -->
+  <style>html,body{background:#080808;overflow-x:hidden;max-width:100%;}</style>
   <!-- Garante fundo preto antes do Tailwind carregar — evita flash branco no mobile -->
-  <style>
-    html, body {
-      background: #080808;
-      /* Bloqueia scroll horizontal globalmente */
-      overflow-x: hidden;
-      max-width: 100%;
-    }
-  </style>
+  <style>html,body{background:#080808;}</style>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Preconnect para o CDN do Tailwind reduzir latência -->
-  <link rel="preconnect" href="https://cdn.tailwindcss.com">
-  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
@@ -143,6 +135,9 @@
       max-width: 100%;
       width: 100%;
     }
+
+    /* ── Seções: bloqueia overflow lateral no mobile ── */
+    section, footer { overflow-x: hidden; }
 
     /* ── Scrollbar ── */
     ::-webkit-scrollbar { width: 5px; }
@@ -232,12 +227,12 @@
       100% { transform: translateX(-200px); opacity: 0; }
     }
 
-    .car-float    { animation: carFloat 4s ease-in-out infinite; transform-origin: center; will-change: transform; }
-    .wheel-spin   { animation: wheelSpin 1.8s linear infinite; transform-origin: center; will-change: transform; }
-    .scan-line    { animation: scanLine 2.5s ease-in-out infinite; will-change: transform; }
+    .car-float    { animation: carFloat 4s ease-in-out infinite; transform-origin: center; }
+    .wheel-spin   { animation: wheelSpin 1.8s linear infinite; transform-origin: center; }
+    .scan-line    { animation: scanLine 2.5s ease-in-out infinite; }
     .pulse-ring   { animation: pulse-ring 1.8s ease-out infinite; }
-    .gear-cw      { animation: gearRotate 8s linear infinite; will-change: transform; }
-    .gear-ccw     { animation: gearRotateReverse 6s linear infinite; will-change: transform; }
+    .gear-cw      { animation: gearRotate 8s linear infinite; }
+    .gear-ccw     { animation: gearRotateReverse 6s linear infinite; }
     .blink-dot    { animation: blink 1.2s ease-in-out infinite; }
 
     .spark {
@@ -262,15 +257,7 @@
       background:
         linear-gradient(to bottom, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.85) 100%),
         url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23F97316' fill-opacity='0.06'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      /* background-attachment: fixed removido — quebra em iOS/Android causando scroll lateral */
       background-attachment: scroll;
-      background-size: auto;
-    }
-
-    /* ── Seções — bloqueia overflow lateral no mobile ── */
-    section, footer, header, div.parallax-bg {
-      max-width: 100%;
-      overflow-x: hidden;
     }
 
     /* ── Section divider ── */
@@ -482,9 +469,9 @@
        HERO
        ═══════════════════════════════════════════ -->
   <section id="inicio" class="relative min-h-screen flex items-center hero-bg overflow-hidden">
-    <!-- Glow orbs — contidos dentro da seção, não vazam para mobile -->
-    <div class="absolute top-1/3 right-0 w-64 h-64 md:w-96 md:h-96 bg-orange/6 rounded-full blur-[100px] pointer-events-none" style="max-width:50vw;"></div>
-    <div class="absolute bottom-0 left-0 w-48 h-48 md:w-64 md:h-64 bg-orange/4 rounded-full blur-[80px] pointer-events-none" style="max-width:40vw;"></div>
+    <!-- Glow orbs — max-width evita overflow lateral no mobile -->
+    <div class="absolute top-1/3 right-0 w-64 h-64 md:w-96 md:h-96 bg-orange/6 rounded-full blur-[100px] pointer-events-none" style="max-width:70vw;"></div>
+    <div class="absolute bottom-0 left-0 w-48 h-48 md:w-72 md:h-72 bg-orange/3 rounded-full blur-[80px] pointer-events-none" style="max-width:50vw;"></div>
 
     <!-- Linha decorativa esquerda -->
     <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-transparent via-orange/30 to-transparent hidden lg:block"></div>
@@ -1096,7 +1083,7 @@
   <section id="depoimentos" class="relative py-24 lg:py-32 bg-[#080808]">
     <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-orange/15 to-transparent"></div>
     <!-- Glow sutil de fundo -->
-    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-48 bg-orange/4 rounded-full blur-[80px] pointer-events-none"></div>
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-40 md:w-96 bg-orange/4 rounded-full blur-[80px] pointer-events-none"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
@@ -1517,14 +1504,6 @@
        JAVASCRIPT
        ═══════════════════════════════════════════ -->
   <script>
-    // ── Safety net: garante conteúdo visível mesmo se algo falhar ──────────
-    // Após 1.5s, força tudo visível como fallback para conexões lentas
-    setTimeout(function() {
-      document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) {
-        el.classList.add('visible');
-      });
-    }, 1500);
-
     // ── Navbar scroll behavior ──────────────────────────────────────────────
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
@@ -1575,7 +1554,7 @@
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
     revealEls.forEach(el => revealObserver.observe(el));
 
@@ -1608,7 +1587,7 @@
           counterObserver.unobserve(el);
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.5 });
 
     counterEls.forEach(el => counterObserver.observe(el));
 
