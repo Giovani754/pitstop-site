@@ -59,7 +59,33 @@
 
   <!-- Google Fonts -->
   <!-- Fundo preto antes do Tailwind carregar: evita flash branco no mobile -->
-  <style>html,body{background:#080808;overflow-x:hidden;max-width:100%;}</style>
+  <style>html,body{background:#080808;overflow-x:hidden;max-width:100%;}    /* ── Hero 3D Stage & Motion Styles ── */
+    .hero-visual-stage {
+      perspective: 1200px;
+    }
+    .hero-visual-card {
+      transform-style: preserve-3d;
+      will-change: transform, box-shadow;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.85), 0 0 35px rgba(249,115,22,0.12), inset 0 1px 0 0 rgba(255,255,255,0.08);
+      transition: box-shadow 0.5s ease;
+    }
+    .hero-visual-card:hover {
+      box-shadow: 0 35px 80px rgba(0,0,0,0.95), 0 0 50px rgba(249,115,22,0.25), inset 0 1px 0 0 rgba(249,115,22,0.4);
+    }
+    .hero-obd-led {
+      filter: drop-shadow(0 0 4px currentColor);
+    }
+    @keyframes obdGlowPulse {
+      0%, 100% { filter: drop-shadow(0 0 2px rgba(249,115,22,0.3)); }
+      50%       { filter: drop-shadow(0 0 8px rgba(249,115,22,0.9)); }
+    }
+    .hero-obd-glow {
+      animation: obdGlowPulse 2.2s ease-in-out infinite;
+    }
+    .hero-tag-system, .hero-tag-warranty {
+      will-change: transform;
+    }
+</style>
   <!-- Garante fundo preto antes do Tailwind carregar — evita flash branco no mobile -->
   <style>html,body{background:#080808;}</style>
 
@@ -68,6 +94,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
+    <!-- GSAP CDN (GreenSock Core) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -470,8 +498,8 @@
        ═══════════════════════════════════════════ -->
   <section id="inicio" class="relative min-h-screen flex items-center hero-bg overflow-hidden">
     <!-- Glow orbs — max-width evita overflow lateral no mobile -->
-    <div class="absolute top-1/3 right-0 w-64 h-64 md:w-96 md:h-96 bg-orange/6 rounded-full blur-[100px] pointer-events-none" style="max-width:70vw;"></div>
-    <div class="absolute bottom-0 left-0 w-48 h-48 md:w-72 md:h-72 bg-orange/3 rounded-full blur-[80px] pointer-events-none" style="max-width:50vw;"></div>
+    <div class="hero-glow-1 absolute top-1/3 right-0 w-64 h-64 md:w-96 md:h-96 bg-orange/6 rounded-full blur-[100px] pointer-events-none" style="max-width:70vw; will-change: transform;"></div>
+    <div class="hero-glow-2 absolute bottom-0 left-0 w-48 h-48 md:w-72 md:h-72 bg-orange/3 rounded-full blur-[80px] pointer-events-none" style="max-width:50vw; will-change: transform;"></div>
 
     <!-- Linha decorativa esquerda -->
     <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-transparent via-orange/30 to-transparent hidden lg:block"></div>
@@ -529,7 +557,7 @@
               </svg>
             </div>
             <div>
-              <p class="text-white font-bold text-sm leading-none">12 Anos</p>
+              <p class="hero-counter text-white font-bold text-sm leading-none" data-target="12" data-suffix=" Anos">0 Anos</p>
               <p class="text-gray-500 text-xs mt-0.5">de Experiência</p>
             </div>
           </div>
@@ -540,7 +568,7 @@
               </svg>
             </div>
             <div>
-              <p class="text-white font-bold text-sm leading-none">5.0 ★</p>
+              <p class="hero-counter-rating text-white font-bold text-sm leading-none">0.0 ★</p>
               <p class="text-gray-500 text-xs mt-0.5">no Google</p>
             </div>
           </div>
@@ -551,7 +579,7 @@
               </svg>
             </div>
             <div>
-              <p class="text-white font-bold text-sm leading-none">90 Dias</p>
+              <p class="hero-counter text-white font-bold text-sm leading-none" data-target="90" data-suffix=" Dias">0 Dias</p>
               <p class="text-gray-500 text-xs mt-0.5">de Garantia</p>
             </div>
           </div>
@@ -559,11 +587,11 @@
       </div><!-- fim coluna texto -->
 
       <!-- Coluna ilustração (direita) -->
-      <div class="w-full lg:w-1/2 flex items-center justify-center animate-fade-in" style="animation-delay: 0.3s;">
-        <div class="relative w-full max-w-lg">
+      <div class="w-full lg:w-1/2 flex items-center justify-center hero-visual-stage">
+        <div class="relative w-full max-w-lg" style="transform-style: preserve-3d;">
 
           <!-- Card diagnóstico flutuante (topo esquerda) -->
-          <div class="absolute -top-4 -left-4 z-20 glass-card rounded-xl px-4 py-3 flex items-center gap-3 animate-float" style="animation-duration:3.5s; animation-delay:0s;">
+          <div class="hero-tag-system absolute -top-4 -left-4 z-20 glass-card rounded-xl px-4 py-3 flex items-center gap-3 animate-float" style="animation-duration:3.5s; animation-delay:0s;">
             <div class="w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center flex-shrink-0">
               <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -576,7 +604,7 @@
           </div>
 
           <!-- Card garantia (canto inferior direita) -->
-          <div class="absolute -bottom-4 -right-4 z-20 glass-card rounded-xl px-4 py-3 flex items-center gap-3 animate-float" style="animation-duration:4s; animation-delay:1s;">
+          <div class="hero-tag-warranty absolute -bottom-4 -right-4 z-20 glass-card rounded-xl px-4 py-3 flex items-center gap-3 animate-float" style="animation-duration:4s; animation-delay:1s;">
             <div class="w-8 h-8 rounded-lg bg-orange/20 flex items-center justify-center flex-shrink-0">
               <svg class="w-4 h-4 text-orange" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
@@ -589,7 +617,7 @@
           </div>
 
           <!-- Ilustração SVG principal -->
-          <div class="relative z-10 rounded-2xl overflow-hidden border border-white/8" style="background:#0D0D0D;">
+          <div class="hero-visual-card relative z-10 rounded-2xl overflow-hidden border border-white/8" style="background:#0D0D0D;">
             <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="display:block;">
               <rect width="520" height="380" fill="#0D0D0D" rx="16"/>
               <defs>
@@ -678,23 +706,23 @@
               </g>
 
               <!-- Painel diagnóstico OBD -->
-              <g transform="translate(340, 18)">
+              <g id="hero-obd-panel" transform="translate(340, 18)" class="hero-obd-glow">
                 <rect width="162" height="112" fill="rgba(18,18,18,0.97)" rx="12" stroke="#F97316" stroke-width="0.8" stroke-opacity="0.35"/>
                 <rect width="162" height="24" fill="#F97316" rx="12" fill-opacity="0.12"/>
                 <rect x="0" y="14" width="162" height="10" fill="#F97316" fill-opacity="0.12"/>
                 <circle cx="13" cy="12" r="4" fill="#F97316" opacity="0.8"/>
                 <text x="22" y="16" fill="#F97316" font-size="8.5" font-family="monospace" font-weight="bold" opacity="0.9">DIAGNÓSTICO OBD-II</text>
                 <g transform="translate(12, 34)">
-                  <circle cx="5" cy="5"  r="4" fill="#22c55e" class="blink-dot"/>
+                  <circle cx="5" cy="5"  r="4" fill="#22c55e" class="blink-dot hero-obd-led"/>
                   <text x="14" y="9"  fill="#bbb" font-size="8" font-family="monospace">Motor</text>
                   <text x="118" y="9"  fill="#22c55e" font-size="8" font-family="monospace" font-weight="bold">OK</text>
-                  <circle cx="5" cy="22" r="4" fill="#22c55e"/>
+                  <circle cx="5" cy="22" r="4" fill="#22c55e" class="hero-obd-led"/>
                   <text x="14" y="26" fill="#bbb" font-size="8" font-family="monospace">Freios</text>
                   <text x="118" y="26" fill="#22c55e" font-size="8" font-family="monospace" font-weight="bold">OK</text>
-                  <circle cx="5" cy="39" r="4" fill="#F97316" class="blink-dot" style="animation-delay:0.6s"/>
+                  <circle cx="5" cy="39" r="4" fill="#F97316" class="blink-dot hero-obd-led" style="animation-delay:0.6s"/>
                   <text x="14" y="43" fill="#bbb" font-size="8" font-family="monospace">Suspensão</text>
                   <text x="118" y="43" fill="#F97316" font-size="8" font-family="monospace" font-weight="bold">REV</text>
-                  <circle cx="5" cy="56" r="4" fill="#22c55e"/>
+                  <circle cx="5" cy="56" r="4" fill="#22c55e" class="hero-obd-led"/>
                   <text x="14" y="60" fill="#bbb" font-size="8" font-family="monospace">Elétrica</text>
                   <text x="118" y="60" fill="#22c55e" font-size="8" font-family="monospace" font-weight="bold">OK</text>
                 </g>
@@ -706,8 +734,8 @@
                 <rect width="142" height="68" fill="rgba(18,18,18,0.95)" rx="10" stroke="#F97316" stroke-width="0.8" stroke-opacity="0.25"/>
                 <text x="10" y="16" fill="#F97316" font-size="8" font-family="monospace" opacity="0.8">TEMP. MOTOR</text>
                 <rect x="10" y="24" width="122" height="10" fill="#1A1A1A" rx="5"/>
-                <rect x="10" y="24" width="84"  height="10" fill="url(#tempGrad)" rx="5"/>
-                <text x="10" y="52" fill="#F97316" font-size="18" font-family="monospace" font-weight="bold">87°C</text>
+                <rect id="hero-temp-bar" x="10" y="24" width="84"  height="10" fill="url(#tempGrad)" rx="5"/>
+                <text id="hero-temp-val" x="10" y="52" fill="#F97316" font-size="18" font-family="monospace" font-weight="bold">0°C</text>
                 <text x="85" y="52" fill="#22c55e" font-size="9"  font-family="monospace">Normal</text>
               </g>
 
@@ -751,8 +779,8 @@
               <g transform="translate(18, 338)">
                 <text x="0" y="0" fill="#555" font-size="7.5" font-family="monospace" letter-spacing="1">REVISÃO EM ANDAMENTO</text>
                 <rect x="0" y="6" width="484" height="6" fill="#1A1A1A" rx="3"/>
-                <rect x="0" y="6" width="315"  height="6" fill="#F97316" rx="3" opacity="0.85"/>
-                <text x="320" y="12" fill="#F97316" font-size="8" font-family="monospace" font-weight="bold">65%</text>
+                <rect id="hero-progress-bar" x="0" y="6" width="315"  height="6" fill="#F97316" rx="3" opacity="0.85"/>
+                <text id="hero-progress-val" x="320" y="12" fill="#F97316" font-size="8" font-family="monospace" font-weight="bold">0%</text>
               </g>
 
             </svg>
@@ -1613,6 +1641,233 @@
 
     // ── Footer year ────────────────────────────────────────────────────────
     document.getElementById('footerYear').textContent = new Date().getFullYear();
-  </script>
+  
+    // ══════════════════════════════════════════════════════════════════
+    // HERO EXCLUSIVE — GSAP 3D PERSPECTIVE, MOUSE-FOLLOW & TECH MOTION
+    // ══════════════════════════════════════════════════════════════════
+    if (typeof gsap !== 'undefined') {
+
+      // ── 1. Entrada Dramática da Ilustração/Card em Perspectiva 3D ───
+      gsap.from('.hero-visual-card', {
+        duration: 1.4,
+        y: 60,
+        rotationY: -12,
+        rotationX: 6,
+        opacity: 0,
+        transformPerspective: 1000,
+        ease: 'power3.out',
+        delay: 0.15,
+        clearProps: 'transformPerspective,rotationY,rotationX'
+      });
+
+      // Entrada suave com escala dos badges flutuantes
+      gsap.from('.hero-tag-system', {
+        duration: 1.1,
+        y: 35,
+        opacity: 0,
+        scale: 0.82,
+        ease: 'back.out(1.5)',
+        delay: 0.45,
+        clearProps: 'transform,scale'
+      });
+
+      gsap.from('.hero-tag-warranty', {
+        duration: 1.1,
+        y: 35,
+        opacity: 0,
+        scale: 0.82,
+        ease: 'back.out(1.5)',
+        delay: 0.65,
+        clearProps: 'transform,scale'
+      });
+
+      // ── 2. Efeito Parallax ao Mover o Mouse (Mouse-Follow 3D) ────────
+      const heroSection = document.getElementById('inicio');
+      const visualCard  = document.querySelector('.hero-visual-card');
+      const tagSystem   = document.querySelector('.hero-tag-system');
+      const tagWarranty = document.querySelector('.hero-tag-warranty');
+      const obdPanel    = document.getElementById('hero-obd-panel');
+      const glow1       = document.querySelector('.hero-glow-1');
+      const glow2       = document.querySelector('.hero-glow-2');
+
+      if (heroSection && visualCard) {
+        heroSection.addEventListener('mousemove', (e) => {
+          const rect = heroSection.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;   // -1 to 1
+          const y = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;  // -1 to 1
+
+          // Rotação 3D suave do card principal
+          gsap.to(visualCard, {
+            rotationY: x * 8,
+            rotationX: -y * 6,
+            transformPerspective: 1000,
+            duration: 0.75,
+            ease: 'power1.out',
+            overwrite: 'auto'
+          });
+
+          // Parallax na tag superior-esquerda
+          if (tagSystem) {
+            gsap.to(tagSystem, {
+              x: x * 22,
+              y: y * 18,
+              duration: 0.85,
+              ease: 'power1.out',
+              overwrite: 'auto'
+            });
+          }
+
+          // Parallax na tag inferior-direita (oposta)
+          if (tagWarranty) {
+            gsap.to(tagWarranty, {
+              x: -x * 20,
+              y: -y * 16,
+              duration: 0.85,
+              ease: 'power1.out',
+              overwrite: 'auto'
+            });
+          }
+
+          // Parallax interno no painel do scanner OBD
+          if (obdPanel) {
+            gsap.to(obdPanel, {
+              x: 340 + (x * 12),
+              y: 18 + (y * 8),
+              duration: 0.95,
+              ease: 'power1.out',
+              overwrite: 'auto'
+            });
+          }
+
+          // Parallax ambiental sutil nos orbs de fundo
+          if (glow1) {
+            gsap.to(glow1, {
+              x: -x * 35,
+              y: -y * 25,
+              duration: 1.2,
+              ease: 'power1.out',
+              overwrite: 'auto'
+            });
+          }
+          if (glow2) {
+            gsap.to(glow2, {
+              x: x * 25,
+              y: y * 20,
+              duration: 1.2,
+              ease: 'power1.out',
+              overwrite: 'auto'
+            });
+          }
+        });
+
+        // Retorno suave ao sair do mouse
+        heroSection.addEventListener('mouseleave', () => {
+          gsap.to(visualCard, {
+            rotationY: 0,
+            rotationX: 0,
+            duration: 1.2,
+            ease: 'power2.out'
+          });
+          if (tagSystem) {
+            gsap.to(tagSystem, { x: 0, y: 0, duration: 1.0, ease: 'power2.out' });
+          }
+          if (tagWarranty) {
+            gsap.to(tagWarranty, { x: 0, y: 0, duration: 1.0, ease: 'power2.out' });
+          }
+          if (obdPanel) {
+            gsap.to(obdPanel, { x: 340, y: 18, duration: 1.2, ease: 'power2.out' });
+          }
+          if (glow1) {
+            gsap.to(glow1, { x: 0, y: 0, duration: 1.5, ease: 'power2.out' });
+          }
+          if (glow2) {
+            gsap.to(glow2, { x: 0, y: 0, duration: 1.5, ease: 'power2.out' });
+          }
+        });
+      }
+
+      // ── 3. Animações Gráficas nos Elementos Técnicos do SVG ──────────
+      // 3a. Barra de Progresso da Revisão
+      const progressBar = document.getElementById('hero-progress-bar');
+      const progressVal = document.getElementById('hero-progress-val');
+      if (progressBar && progressVal) {
+        const progState = { val: 0 };
+        gsap.fromTo(progressBar, 
+          { attr: { width: 0 } }, 
+          {
+            attr: { width: 315 },
+            duration: 2.2,
+            delay: 0.5,
+            ease: 'power2.out'
+          }
+        );
+        gsap.to(progState, {
+          val: 65,
+          duration: 2.2,
+          delay: 0.5,
+          ease: 'power2.out',
+          onUpdate: () => {
+            progressVal.textContent = Math.round(progState.val) + '%';
+          }
+        });
+      }
+
+      // 3b. Indicador de Temperatura do Motor (20°C -> 87°C)
+      const tempBar = document.getElementById('hero-temp-bar');
+      const tempVal = document.getElementById('hero-temp-val');
+      if (tempBar && tempVal) {
+        const tempState = { val: 20 };
+        gsap.fromTo(tempBar,
+          { attr: { width: 0 } },
+          {
+            attr: { width: 84 },
+            duration: 1.9,
+            delay: 0.6,
+            ease: 'power2.out'
+          }
+        );
+        gsap.to(tempState, {
+          val: 87,
+          duration: 1.9,
+          delay: 0.6,
+          ease: 'power2.out',
+          onUpdate: () => {
+            tempVal.textContent = Math.round(tempState.val) + '°C';
+          }
+        });
+      }
+
+      // 3c. Indicadores Numéricos do Hero (Contagem Fluida)
+      document.querySelectorAll('.hero-counter').forEach(el => {
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || '';
+        const cState = { val: 0 };
+        gsap.to(cState, {
+          val: target,
+          duration: 1.8,
+          delay: 0.4,
+          ease: 'power2.out',
+          onUpdate: () => {
+            el.textContent = Math.round(cState.val) + suffix;
+          }
+        });
+      });
+
+      const ratingEl = document.querySelector('.hero-counter-rating');
+      if (ratingEl) {
+        const rState = { val: 1.0 };
+        gsap.to(rState, {
+          val: 5.0,
+          duration: 1.8,
+          delay: 0.4,
+          ease: 'power2.out',
+          onUpdate: () => {
+            ratingEl.textContent = rState.val.toFixed(1) + ' ★';
+          }
+        });
+      }
+
+    } // Fim if gsap
+</script>
 </body>
 </html>
