@@ -140,12 +140,9 @@
     .com-foto .pt .rot{position:static;width:auto;height:auto;clip:auto;overflow:visible}
     .com-foto .pt .anel{inset:0;border-radius:4px}
     .com-foto .pt:focus-visible{border-radius:4px;outline-offset:2px}
-    /* Selos: valor final já no HTML */
+    /* Selos: promessas de serviço, texto já no HTML */
     .selos{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;position:relative;z-index:2}
-    .selo{display:flex;align-items:baseline;gap:8px;padding-left:10px;border-left:2px solid var(--laranja)}
-    .selo b{font:800 30px/1 var(--display);color:var(--laranja)}
-    .selo span{font:700 13px/1.1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:#d7d3cb}
-    .selos .exemplo-tag{margin:0;color:var(--mudo);align-self:center}
+    .selo{padding-left:10px;border-left:2px solid var(--laranja);font:700 14px/1.1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:#e2dfd8}
 
     /* Diagnóstico interativo: carro em raio-X, sintomas e painel */
     .dx{background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),var(--bg);border-top:1px solid var(--linha);padding:64px 0 72px}
@@ -172,7 +169,6 @@
     .dx-conteudo h3{font-size:32px;padding-right:44px}
     .dx-conteudo .pode{margin:8px 0;color:#2c2b27;font-size:16px}
     .dx-conteudo .preco{font-weight:600;color:var(--laranja-esc)}
-    .dx-conteudo .preco .exemplo-tag{margin-left:6px}
     .dx-conteudo .desc{font-size:15px;color:#4a4842;margin:4px 0 14px}
     .dx-conteudo .btn{width:100%}
     .dx-painel .fecha{position:absolute;top:4px;right:4px;width:44px;height:44px;border:0;background:none;color:var(--tinta);font:700 28px/1 var(--display);cursor:pointer}
@@ -238,7 +234,6 @@
     .numeros ul{display:grid;gap:26px}
     .numeros b{display:block;font:800 clamp(56px,12vw,96px)/.9 var(--display)}
     .numeros span{font:700 17px/1.2 var(--display);letter-spacing:.12em;text-transform:uppercase}
-    .exemplo-tag{display:inline-block;margin-left:8px;padding:3px 7px;border:1.5px dashed currentColor;font:700 11px/1 var(--display);letter-spacing:.14em;vertical-align:middle}
 
     /* Avaliações */
     .aval-topo{display:grid;gap:22px;align-items:end}
@@ -249,7 +244,6 @@
     .aval{border:1px solid var(--linha);background:var(--bg2);padding:24px}
     .aval blockquote{margin:12px 0 18px;font-size:19px;line-height:1.45}
     .aval cite{font-style:normal;font:700 15px/1.2 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--mudo)}
-    .aviso-ex{margin-top:22px;padding:12px 14px;border:1.5px dashed var(--laranja);color:var(--laranja);font-weight:600;font-size:15px}
 
     /* Orçamento rápido */
     .orc{display:grid;gap:34px}
@@ -262,6 +256,14 @@
     textarea{min-height:90px;resize:vertical}
     input:focus,select:focus,textarea:focus{outline:3px solid var(--laranja);outline-offset:1px;border-color:var(--tinta)}
     .form-nota{font-size:14px;color:#55534d}
+
+    /* Como a gente trabalha (3 passos) e avaliação no Google */
+    .passos.tres{margin-top:40px}
+    .gav{display:grid;gap:18px;justify-items:start}
+    .gav-faixa{display:flex;align-items:center;gap:12px;color:var(--mudo);font-size:15px}
+    .gav-faixa .estrelas{font-size:18px}
+    .gav-bloco .intro{margin-top:12px}
+    .gav-bloco .btn{margin-top:22px}
 
     /* Localização */
     .loc{display:grid;gap:26px;margin-top:40px}
@@ -336,6 +338,7 @@
       .passo:nth-child(2){margin-top:28px}
       .passo:nth-child(3){margin-top:56px}
       .passo:nth-child(4){margin-top:84px}
+      .passos.tres{grid-template-columns:repeat(3,1fr)}
       .orc{grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start}
       .loc{grid-template-columns:1.2fr .8fr;gap:48px}
       .mapa{min-height:520px}
@@ -421,9 +424,9 @@
           </div>
         </div>
         <div class="selos" id="selos">
-          <div class="selo"><b>12</b><span>anos de oficina</span></div>
-          <div class="selo"><b>4.9</b><span>nota no Google</span></div>
-          <div class="selo"><b>90</b><span>dias de garantia</span></div>
+          <div class="selo">Orçamento antes de mexer</div>
+          <div class="selo">90 dias de garantia no serviço</div>
+          <div class="selo">Peças com nota fiscal</div>
         </div>
       </div>
     </section>
@@ -525,20 +528,23 @@
       </div>
     </section>
 
-    <section class="numeros" aria-label="A oficina em números">
+    <section class="numeros" id="numerosSec" aria-label="A oficina em números" hidden>
       <div class="wrap"><ul id="numeros"></ul></div>
     </section>
 
-    <section class="bloco" id="avaliacoes">
+    <section class="bloco" id="avaliacoes" hidden>
       <div class="wrap">
         <p class="rotulo" data-anim>04 · Quem já passou por aqui</p>
-        <div class="aval-topo" style="margin-top:16px">
-          <div class="nota" data-anim><b id="notaGoogle"></b><div><div class="estrelas" aria-hidden="true">★★★★★</div><p id="notaTexto" style="color:var(--mudo)"></p></div></div>
-          <h2 data-anim data-t="avaliacoes.titulo"></h2>
-        </div>
+        <h2 data-anim data-t="avaliacoes.titulo" style="margin-top:16px"></h2>
         <div class="avals" id="avals"></div>
-        <p class="aviso-ex" id="avisoEx" hidden>EXEMPLO: nota e avaliações abaixo são marcadores. Trocar por avaliações reais do Google da oficina (campo <code>avaliacoes</code> no topo do script).</p>
-        <p style="margin-top:26px"><a class="btn btn-s" id="verGoogle" target="_blank" rel="noopener" href="#">Ver todas no Google</a></p>
+      </div>
+    </section>
+
+    <section class="bloco" id="trabalho">
+      <div class="wrap">
+        <p class="rotulo" data-anim>04 · Como a gente trabalha</p>
+        <h2 data-anim data-t="trabalho.titulo">Do problema ao carro pronto, sem susto</h2>
+        <ol class="passos tres" id="passosTres" style="list-style:none;margin-bottom:0;padding:0"></ol>
       </div>
     </section>
 
@@ -580,12 +586,22 @@
         </div>
       </div>
     </section>
+    <section class="bloco" id="googleAval" aria-label="Avalie no Google" hidden>
+      <div class="wrap gav">
+        <p class="gav-faixa" id="gFaixa" hidden><span class="estrelas" id="gEstrelas" aria-hidden="true"></span><span id="gFaixaTxt"></span></p>
+        <div class="gav-bloco" id="gBloco" hidden>
+          <p class="rotulo">Sua opinião</p>
+          <h2>Gostou do serviço? Avalie a gente no Google</h2>
+          <p class="intro">Leva um minuto e ajuda quem está procurando oficina aqui no bairro.</p>
+          <a class="btn btn-p" id="gBotao" target="_blank" rel="noopener" href="#">Avaliar no Google</a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
     <div class="wrap">
       <p><b data-t="nome"></b> · <span data-t="endereco.completo"></span></p>
-      <p>CNPJ: <span data-t="cnpj"></span></p>
       <p>© <span id="ano"></span> <span data-t="nome"></span>. Todos os direitos reservados.</p>
     </div>
   </footer>
@@ -599,20 +615,19 @@
 <script>
 /* =====================================================================
    CONFIGURAÇÃO DA OFICINA: é aqui que se troca tudo para outro cliente.
-   Os dados abaixo são EXEMPLO (exemplo:true). Com dados reais, ponha
-   exemplo:false: some o aviso de "exemplo" e o JSON-LD passa a incluir nota.
+   Os dados abaixo são de MODELO (modelo:true, flag interna que não aparece na tela).
+   Com dados reais, ponha modelo:false. Lista do que trocar: docs/CHECKLIST-NOVA-OFICINA.md.
    Nome/endereço/telefone/WhatsApp, horários, serviços, passos, avaliações,
    fotos e textos de cada seção ficam todos neste objeto.
    ===================================================================== */
 const OFICINA = {
-  exemplo: true,
+  modelo: true,   // flag interna: dados de modelo. Trocar para false só com dados reais do cliente
   nome: "PitStop Centro Automotivo",
   nomeCurto: "PitStop",
   tipo: "Oficina mecânica",
   bairro: "Vila Industrial",
   cidade: "São Paulo",
   uf: "SP",
-  cnpj: "00.000.000/0001-00 (exemplo)",
   endereco: {
     rua: "Av. das Indústrias, 1247",
     cep: "04000-000",
@@ -629,7 +644,7 @@ const OFICINA = {
     { rotulo: "Sábado",          dow: [6],         abre: "08:00", fecha: "13:00" },
     { rotulo: "Domingo",         dow: [0],         abre: "",      fecha: "" }
   ],
-  // Coordenadas do mapa/JSON-LD. EXEMPLO: trocar pelas reais junto com o endereço.
+  // Coordenadas do mapa/JSON-LD (modelo): trocar pelas reais junto com o endereço.
   geo: { lat: -23.5505, lng: -46.6333 },
   seo: {
     titulo: "{nome} | Oficina mecânica na {bairro}, {cidade}",
@@ -653,13 +668,14 @@ const OFICINA = {
     destaque: "Traz que a gente olha.",
     sub: "Revisão, freio, suspensão, injeção e alinhamento aqui em {bairro}. Você acompanha o diagnóstico, recebe o orçamento antes de a gente abrir qualquer coisa e só paga o que aprovar.",
     selo: "Orçamento antes de mexer",
-    // x/y = posição do ponto sobre o carro, em % do palco. preco = "a partir de" (valores EXEMPLO).
+    selos: ["Orçamento antes de mexer", "90 dias de garantia no serviço", "Peças com nota fiscal"],
+    // x/y = posição do ponto sobre o carro, em % do palco. preco = "a partir de".
     pontos: [
       { nome: "Freios",          x: 75,   y: 73.5, preco: 180, desc: "Pastilha, disco e fluido, com a peça gasta mostrada antes." },
-      { nome: "Suspensão",       x: 30,   y: 61.8,   preco: 250, desc: "Amortecedor, bucha, pivô e terminal." },
+      { nome: "Suspensão",       x: 30,   y: 61.8,   preco: 290, desc: "Amortecedor, bucha, pivô e terminal." },
       { nome: "Motor e injeção", x: 85.6, y: 58.8,   preco: 150, desc: "Scanner e diagnóstico antes de trocar qualquer peça." },
       { nome: "Parte elétrica",  x: 50,   y: 36.8,   preco: 120, desc: "Bateria, alternador, luzes e chicote." },
-      { nome: "Óleo e filtros",  x: 52.5, y: 68.2, preco: 160, desc: "Óleo do tipo certo e filtro novo, com níveis conferidos." }
+      { nome: "Óleo e filtros",  x: 52.5, y: 68.2,   preco: 189, desc: "Óleo do tipo certo e filtro novo, com níveis conferidos." }
     ]
   },
   // Diagnóstico interativo. ref = índice em hero.pontos (nome, preço e descrição vêm de lá);
@@ -714,23 +730,22 @@ const OFICINA = {
     servico: { src: "", w: 1200, h: 750, alt: "Mecânico trabalhando num carro no elevador", legenda: "Serviço em andamento", foco: "50% 50%" },
     detalhe: { src: "", w: 1200, h: 750, alt: "Peça sendo conferida na bancada", legenda: "Bancada", foco: "50% 50%" }
   },
-  numeros: [
-    { valor: 12,   sufixo: "",  rotulo: "anos de oficina" },
-    { valor: 90,   sufixo: "",  rotulo: "dias de garantia no serviço" },
-    { valor: 8000, sufixo: "+", rotulo: "carros atendidos" }
-  ],
-  avaliacoes: {
-    titulo: "O que falam da gente",
-    nota: "4.9",
-    total: 0,                    // número real de avaliações no Google
-    link: "",                    // link do perfil no Google Meu Negócio
-    exemplo: true,
-    lista: [
-      { nome: "Nome do cliente",  texto: "[EXEMPLO] Aqui entra o texto de uma avaliação real do Google, copiado como está.", estrelas: 5 },
-      { nome: "Nome do cliente",  texto: "[EXEMPLO] Outra avaliação real do Google. Prefira as que citam o serviço feito.", estrelas: 5 },
-      { nome: "Nome do cliente",  texto: "[EXEMPLO] Terceira avaliação real. Troque os três blocos e o aviso some.", estrelas: 5 }
+  // Faixa de números (anos de oficina, carros atendidos...): só preencher com dados reais do cliente. Vazia = a faixa não aparece.
+  numeros: [],
+  // Avaliações: lista de { nome, texto, estrelas } com depoimentos reais. Vazia = a seção não aparece (aparece "Como a gente trabalha").
+  avaliacoes: { titulo: "O que falam da gente", lista: [] },
+  trabalho: {
+    titulo: "Do problema ao carro pronto, sem susto",
+    passos: [
+      { t: "Você conta o problema", p: "Chama no WhatsApp ou passa aqui. Pode explicar do seu jeito, sem nome difícil." },
+      { t: "A gente olha e passa o orçamento", p: "Olhamos o carro com você por perto e passamos o valor antes de mexer em qualquer coisa." },
+      { t: "Você aprova, a gente faz", p: "Só mexemos no que você aprovar. O serviço sai com garantia." }
     ]
   },
+  // Avaliação no Google: link de avaliação da oficina, nota e total reais. Link vazio = sem a seção; nota e total vazios = sem a faixa.
+  googleReviewUrl: "",
+  googleNota: "",
+  googleTotalAvaliacoes: "",
   orcamento: {
     titulo: "Orçamento em um minuto",
     intro: "Preencha, toque em enviar e a conversa abre no WhatsApp já com tudo escrito. A resposta vem no horário de atendimento.",
@@ -833,12 +848,7 @@ const OFICINA = {
   });
 
   // Selos do hero (valor final já no HTML; aqui só sincroniza com OFICINA) e título em palavras (a animação usa os spans)
-  var selos = document.querySelectorAll('#selos .selo');
-  var anos = O.numeros[0], garantia = O.numeros[1];
-  [[anos.valor + anos.sufixo, anos.rotulo], [O.avaliacoes.nota, 'nota no Google'], [garantia.valor + garantia.sufixo, garantia.rotulo]].forEach(function(d, i){
-    selos[i].querySelector('b').textContent = d[0]; selos[i].querySelector('span').textContent = d[1];
-  });
-  if(O.exemplo) document.getElementById('selos').appendChild(el('i', 'exemplo-tag', 'EXEMPLO'));
+  document.querySelectorAll('#selos .selo').forEach(function(n, i){ if(O.hero.selos[i]) n.textContent = O.hero.selos[i]; });
   document.querySelectorAll('.hero h1 span, .hero h1 em').forEach(function(n){
     var t = n.textContent; n.textContent = '';
     t.split(' ').forEach(function(w, i, a){
@@ -881,7 +891,6 @@ const OFICINA = {
     document.getElementById('dxNome').textContent = d.nome;
     document.getElementById('dxPode').textContent = 'Pode ser: ' + d.nome + '. Na oficina a gente confirma antes de mexer em qualquer coisa.';
     var pr = document.getElementById('dxPreco'); pr.textContent = 'a partir de ' + reais(d.preco);
-    if(O.exemplo) pr.appendChild(el('i', 'exemplo-tag', 'EXEMPLO'));
     document.getElementById('dxDesc').textContent = d.desc;
     var a = document.getElementById('dxAgendar'); a.textContent = 'Agendar ' + d.nome;
     var msg = sint ? O.mensagens.agendarSintoma.replace('{servico}', d.nome).replace('{sintoma}', sint) : O.mensagens.agendar.replace('{servico}', d.nome);
@@ -953,30 +962,56 @@ const OFICINA = {
     f.appendChild(el('figcaption', '', d.legenda));
   });
 
-  // Números
-  var ul = document.getElementById('numeros');
-  O.numeros.forEach(function(n){
-    var li = el('li'); var b = el('b', '', n.valor.toLocaleString('pt-BR') + n.sufixo);
-    b.setAttribute('data-contar', n.valor); b.setAttribute('data-sufixo', n.sufixo);
-    var s = el('span', '', n.rotulo);
-    if(O.exemplo) s.appendChild(el('i', 'exemplo-tag', 'EXEMPLO'));
-    li.appendChild(b); li.appendChild(s); ul.appendChild(li);
+  // Números (só com dados reais; vazio esconde a faixa)
+  if(O.numeros.length){
+    var ul = document.getElementById('numeros');
+    O.numeros.forEach(function(n){
+      var li = el('li'); var b = el('b', '', n.valor.toLocaleString('pt-BR') + n.sufixo);
+      b.setAttribute('data-contar', n.valor); b.setAttribute('data-sufixo', n.sufixo);
+      li.appendChild(b); li.appendChild(el('span', '', n.rotulo)); ul.appendChild(li);
+    });
+    document.getElementById('numerosSec').hidden = false;
+  }
+
+  // Avaliações reais: sem lista, a seção não existe e "Como a gente trabalha" ocupa o lugar
+  var A = O.avaliacoes;
+  if(A.lista.length){
+    var av = document.getElementById('avals');
+    A.lista.forEach(function(r){
+      var d = el('article', 'aval'); d.setAttribute('data-anim', '');
+      d.appendChild(el('div', 'estrelas', '★'.repeat(r.estrelas) + '☆'.repeat(5 - r.estrelas)));
+      d.appendChild(el('blockquote', '', r.texto)); d.appendChild(el('cite', '', r.nome));
+      av.appendChild(d);
+    });
+    document.getElementById('avaliacoes').hidden = false;
+    document.getElementById('trabalho').hidden = true;
+  } else {
+    document.querySelectorAll('a[href="#avaliacoes"]').forEach(function(a){ a.remove(); });
+  }
+  var pt = document.getElementById('passosTres');
+  O.trabalho.passos.forEach(function(p){
+    var li = el('li', 'passo'); li.setAttribute('data-anim', '');
+    li.appendChild(el('h3', '', p.t)); li.appendChild(el('p', '', p.p)); pt.appendChild(li);
   });
 
-  // Avaliações
-  var A = O.avaliacoes;
-  document.getElementById('notaGoogle').textContent = A.nota;
-  document.getElementById('notaTexto').textContent = A.total ? 'no Google · ' + A.total + ' avaliações' : 'nota no Google';
-  var av = document.getElementById('avals');
-  A.lista.forEach(function(r){
-    var d = el('article', 'aval'); d.setAttribute('data-anim', '');
-    d.appendChild(el('div', 'estrelas', '★'.repeat(r.estrelas) + '☆'.repeat(5 - r.estrelas)));
-    d.appendChild(el('blockquote', '', r.texto)); d.appendChild(el('cite', '', r.nome));
-    av.appendChild(d);
-  });
-  if(A.exemplo || O.exemplo) document.getElementById('avisoEx').hidden = false;
-  var vg = document.getElementById('verGoogle');
-  if(A.link) vg.href = A.link; else vg.hidden = true;
+  // Avaliação no Google: botão só com link; faixa só com nota e total
+  var gNota = parseFloat(String(O.googleNota).replace(',', '.')), gTotal = parseInt(O.googleTotalAvaliacoes, 10);
+  var temFaixa = gNota > 0 && gTotal > 0;
+  if(O.googleReviewUrl){ var gb = document.getElementById('gBotao'); gb.href = O.googleReviewUrl; document.getElementById('gBloco').hidden = false; }
+  if(temFaixa){
+    var n5 = Math.round(gNota);
+    document.getElementById('gEstrelas').textContent = '★'.repeat(n5) + '☆'.repeat(5 - n5);
+    document.getElementById('gFaixaTxt').textContent = String(O.googleNota) + ' no Google · ' + gTotal + ' avaliações';
+    document.getElementById('gFaixa').hidden = false;
+  }
+  if(O.googleReviewUrl || temFaixa) document.getElementById('googleAval').hidden = false;
+
+  // "A oficina": sem nenhuma foto real, a seção (e o link do menu) não aparece
+  var temFoto = Object.keys(O.fotos).some(function(k){ return O.fotos[k].src; });
+  if(!temFoto){
+    document.getElementById('oficina').hidden = true;
+    document.querySelectorAll('a[href="#oficina"]').forEach(function(a){ a.remove(); });
+  }
 
   // Promessas do orçamento
   O.orcamento.promessas.forEach(function(p){ document.getElementById('promessas').appendChild(el('li', '', p)); });
@@ -1048,7 +1083,7 @@ const OFICINA = {
     openingHoursSpecification: O.horarios.filter(function(h){ return h.abre; }).map(function(h){
       return { '@type': 'OpeningHoursSpecification', dayOfWeek: h.dow.map(function(d){ return ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d]; }), opens: h.abre, closes: h.fecha };
     }) };
-  if(!O.exemplo && !A.exemplo && A.total) ld.aggregateRating = { '@type': 'AggregateRating', ratingValue: A.nota, reviewCount: A.total, bestRating: '5' };
+  if(!O.modelo && temFaixa) ld.aggregateRating = { '@type': 'AggregateRating', ratingValue: gNota, reviewCount: gTotal, bestRating: '5' };
   var tag = document.createElement('script'); tag.type = 'application/ld+json'; tag.textContent = JSON.stringify(ld); document.head.appendChild(tag);
 })();
 
