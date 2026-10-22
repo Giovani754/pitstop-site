@@ -147,6 +147,36 @@
     .selo span{font:700 13px/1.1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:#d7d3cb}
     .selos .exemplo-tag{margin:0;color:var(--mudo);align-self:center}
 
+    /* Diagnóstico interativo: carro em raio-X, sintomas e painel */
+    .dx{background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),var(--bg);border-top:1px solid var(--linha);padding:64px 0 72px}
+    .dx-grade{display:grid;gap:22px;margin-top:34px}
+    .dx-grade>*{min-width:0}
+    .dx-palco{position:relative;margin-inline:-20px;aspect-ratio:800/340}
+    .dxcar{width:100%;height:100%}
+    .dxcar *{vector-effect:non-scaling-stroke}
+    .dxp{position:absolute;z-index:3;width:44px;height:44px;margin:-22px 0 0 -22px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center;-webkit-tap-highlight-color:transparent}
+    .dxp .dot{width:16px;height:16px;border-radius:50%;background:var(--laranja);border:3px solid #150a04;box-shadow:0 0 0 2px var(--laranja)}
+    .dxp .anel{position:absolute;inset:6px;border-radius:50%;border:2px solid var(--laranja);opacity:0;pointer-events:none}
+    .dxp .rot{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    .dxp.on .dot{background:#fff;box-shadow:0 0 0 3px var(--laranja),0 0 18px 4px rgba(255,90,31,.8)}
+    .dxp:focus-visible{outline-offset:-4px;border-radius:50%}
+    .dx-chips{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x proximity;margin-inline:-20px;padding:4px 20px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .dx-chips::-webkit-scrollbar{display:none}
+    .chip{flex:0 0 auto;scroll-snap-align:start;min-height:44px;padding:0 18px;border:1px solid rgba(255,255,255,.28);border-radius:22px;background:rgba(24,24,23,.9);color:var(--txt);font:600 16px/1 var(--corpo);cursor:pointer;white-space:nowrap}
+    .chip:hover{border-color:var(--laranja)}
+    .chip[aria-pressed=true]{background:var(--laranja);border-color:var(--laranja);color:#150a04}
+    .dx-painel{position:relative;scroll-margin-bottom:96px;min-height:236px;background:var(--papel);color:var(--tinta);border:2px solid var(--laranja);border-radius:4px;padding:20px 18px}
+    .dx-vazio{color:#4a4842;font-size:18px;max-width:16em}
+    .dx-conteudo[hidden]{display:none}
+    .dx-conteudo .sint{font:700 13px/1.2 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--laranja-esc);padding-right:44px;margin-bottom:6px}
+    .dx-conteudo h3{font-size:32px;padding-right:44px}
+    .dx-conteudo .pode{margin:8px 0;color:#2c2b27;font-size:16px}
+    .dx-conteudo .preco{font-weight:600;color:var(--laranja-esc)}
+    .dx-conteudo .preco .exemplo-tag{margin-left:6px}
+    .dx-conteudo .desc{font-size:15px;color:#4a4842;margin:4px 0 14px}
+    .dx-conteudo .btn{width:100%}
+    .dx-painel .fecha{position:absolute;top:4px;right:4px;width:44px;height:44px;border:0;background:none;color:var(--tinta);font:700 28px/1 var(--display);cursor:pointer}
+
     /* Faixa de informação rápida: endereço, horário, telefone sempre visíveis, parados */
     .faixa{background:var(--bg2);border-block:1px solid var(--linha)}
     .faixa .wrap{display:grid;gap:0}
@@ -286,6 +316,9 @@
       .hero-grade{grid-template-columns:1.1fr .9fr;gap:48px}
       .hero-cta{margin-top:28px}
       .selos{grid-column:1/-1}
+      .dx-grade{grid-template-columns:1.4fr .6fr;gap:44px;align-items:center}
+      .dx-palco{margin-inline:0}
+      .dx-chips{margin-inline:0;padding-inline:0;flex-wrap:wrap;overflow:visible}
       .com-foto{min-height:min(100vh,860px);padding-bottom:124px}
       .com-foto .hero-grade{grid-template-columns:1.2fr .8fr;align-items:end}
       .hero-vinheta{background:linear-gradient(90deg,rgba(15,15,14,.78) 0%,rgba(15,15,14,.5) 45%,rgba(15,15,14,.2) 100%),radial-gradient(ellipse 60% 55% at 100% 50%,rgba(255,90,31,.14),transparent 70%),linear-gradient(180deg,rgba(15,15,14,.55) 0%,rgba(15,15,14,.3) 30%,rgba(15,15,14,.82) 68%,var(--bg) 100%)}
@@ -391,6 +424,62 @@
           <div class="selo"><b>12</b><span>anos de oficina</span></div>
           <div class="selo"><b>4.9</b><span>nota no Google</span></div>
           <div class="selo"><b>90</b><span>dias de garantia</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dx" id="diagnostico" aria-labelledby="dxTitulo">
+      <div class="wrap">
+        <p class="rotulo">Raio-X do carro</p>
+        <h2 id="dxTitulo" data-t="diagnostico.titulo">O que o seu carro está dizendo?</h2>
+        <p class="intro" style="color:#cfcbc3" data-t="diagnostico.sub">Toque no sintoma ou na peça. A gente mostra onde olhar e o valor a partir de.</p>
+        <div class="dx-grade">
+          <div>
+            <div class="dx-palco" id="dxPalco">
+              <svg class="dxcar" viewBox="0 0 800 340" aria-hidden="true" focusable="false">
+                <defs>
+                  <radialGradient id="dxLuz" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ff5a1f" stop-opacity=".4"/><stop offset=".6" stop-color="#ff5a1f" stop-opacity=".1"/><stop offset="1" stop-color="#ff5a1f" stop-opacity="0"/></radialGradient>
+                  <linearGradient id="dxRaioG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff5a1f" stop-opacity="0"/><stop offset=".85" stop-color="#ff5a1f" stop-opacity=".4"/><stop offset="1" stop-color="#ffd2bd" stop-opacity=".95"/></linearGradient>
+                  <clipPath id="dxClip"><rect id="dxClipR" x="-800" y="0" width="800" height="340"/></clipPath>
+                  <path id="dxContorno" d="M112 236 L106 190 Q106 158 124 140 L192 96 Q204 88 224 86 L400 84 Q432 84 452 100 L532 160 L672 176 Q712 182 726 204 L732 236 Q733 250 720 250 L654 250 A54 54 0 0 0 546 250 L294 250 A54 54 0 0 0 186 250 L124 250 Q112 250 112 236 Z"/>
+                  <g id="dxPecas">
+                    <circle cx="600" cy="250" r="27"/><circle cx="600" cy="250" r="9"/>
+                    <circle cx="617" cy="250" r="2.5"/><circle cx="605" cy="266" r="2.5"/><circle cx="586" cy="260" r="2.5"/><circle cx="586" cy="240" r="2.5"/><circle cx="605" cy="234" r="2.5"/>
+                    <path d="M606 221 Q640 222 640 252 L626 252 Q626 236 606 235Z" fill="#ff5a1f" fill-opacity=".55"/>
+                    <rect x="235" y="186" width="10" height="34" rx="2"/><path d="M240 156V186"/><path d="M226 166L254 172L226 178L254 184L226 190L254 196L226 202L254 208"/>
+                    <path d="M622 190H700V232H622Z"/><path d="M628 178H694V190H628Z"/><path d="M642 190V232M660 190V232M678 190V232M646 178V168M676 178V168"/><circle cx="706" cy="214" r="9"/>
+                    <path d="M126 198H180V234H126Z"/><path d="M136 198v-6h8v6M162 198v-6h8v6"/><path d="M156 206L146 218H155L151 228L164 214H155Z" fill="#ff5a1f" fill-opacity=".6"/>
+                    <path d="M402 214H438V242H402Z"/><path d="M402 220H438M402 226H438" stroke-opacity=".5"/><path d="M408 214V208H432V214"/><path d="M372 244Q420 254 468 244"/>
+                  </g>
+                </defs>
+                <ellipse cx="410" cy="190" rx="400" ry="150" fill="url(#dxLuz)"/>
+                <g fill="none" stroke="#e9e6df" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round" stroke-opacity=".75">
+                  <path d="M20 296H780" stroke-opacity=".4"/>
+                  <use href="#dxContorno" fill="rgba(255,255,255,.035)"/>
+                  <path d="M208 100 L158 146 H300 V98Z M316 98 V146 H504 L446 104 Q440 98 430 98Z M110 178H724" stroke-opacity=".45"/>
+                  <circle cx="240" cy="250" r="46"/><circle cx="240" cy="250" r="31"/><circle cx="240" cy="250" r="9"/>
+                  <circle cx="600" cy="250" r="46"/><circle cx="600" cy="250" r="31"/>
+                  <path d="M106 322H732M106 315V329M732 315V329" stroke-opacity=".4" stroke-dasharray="4 5"/>
+                </g>
+                <g id="dxBase" fill="none" stroke="#ff8a5c" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"><use href="#dxPecas"/></g>
+                <g id="dxBrilho" opacity="0" clip-path="url(#dxClip)" fill="none" stroke="#ffd2bd" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"><use href="#dxPecas"/></g>
+                <g id="dxRaio" opacity="0"><rect x="-70" y="40" width="70" height="262" fill="url(#dxRaioG)"/></g>
+              </svg>
+            </div>
+            <div class="dx-chips" id="dxChips" role="group" aria-label="Sintomas"></div>
+          </div>
+          <div class="dx-painel" id="dxPainel" aria-live="polite">
+            <p class="dx-vazio" id="dxVazio">Escolha um sintoma ou toque numa peça do carro.</p>
+            <div class="dx-conteudo" id="dxConteudo" hidden>
+              <button class="fecha" id="dxFecha" type="button" aria-label="Fechar painel">&times;</button>
+              <p class="sint" id="dxSint" hidden></p>
+              <h3 id="dxNome"></h3>
+              <p class="pode" id="dxPode"></p>
+              <p class="preco" id="dxPreco"></p>
+              <p class="desc" id="dxDesc"></p>
+              <a class="btn btn-p" id="dxAgendar" target="_blank" rel="noopener" href="#"></a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -555,7 +644,8 @@ const OFICINA = {
   mensagens: {
     saudacao: "Olá! Vi o site da {nomeCurto} e queria falar com a oficina.",
     orcamento: "Olá! Quero um orçamento na {nomeCurto}.",
-    agendar: "Olá! Vim pelo site da {nomeCurto} e quero agendar: {servico}."
+    agendar: "Olá! Vim pelo site da {nomeCurto} e quero agendar: {servico}.",
+    agendarSintoma: "Olá! Vim pelo site da {nomeCurto} e quero agendar: {servico}. O que estou notando: {sintoma}."
   },
   hero: {
     eyebrow: "Oficina mecânica · {bairro}",
@@ -570,6 +660,26 @@ const OFICINA = {
       { nome: "Motor e injeção", x: 85.6, y: 58.8,   preco: 150, desc: "Scanner e diagnóstico antes de trocar qualquer peça." },
       { nome: "Parte elétrica",  x: 50,   y: 36.8,   preco: 120, desc: "Bateria, alternador, luzes e chicote." },
       { nome: "Óleo e filtros",  x: 52.5, y: 68.2, preco: 160, desc: "Óleo do tipo certo e filtro novo, com níveis conferidos." }
+    ]
+  },
+  // Diagnóstico interativo. ref = índice em hero.pontos (nome, preço e descrição vêm de lá);
+  // x/y = posição do ponto sobre o raio-X, em % do desenho. Cada sintoma aponta para um ponto.
+  diagnostico: {
+    titulo: "O que o seu carro está dizendo?",
+    sub: "Toque no sintoma ou na peça. A gente mostra onde olhar e o valor a partir de.",
+    pontos: [
+      { ref: 0, x: 75,   y: 73.5 },
+      { ref: 1, x: 30,   y: 58.8 },
+      { ref: 2, x: 84,   y: 57.6 },
+      { ref: 3, x: 17.5, y: 64 },
+      { ref: 4, x: 52.5, y: 67.1 }
+    ],
+    sintomas: [
+      { texto: "Barulho ao frear", ponto: 0 },
+      { texto: "Freio mole", ponto: 0 },
+      { texto: "Luz acesa no painel", ponto: 2 },
+      { texto: "Barulho ou balanço na suspensão", ponto: 1 },
+      { texto: "Troca de óleo e revisão", ponto: 4 }
     ]
   },
   servicos: {
@@ -735,6 +845,70 @@ const OFICINA = {
       var s = el('span', 'pal', w); s.style.display = 'inline-block'; n.appendChild(s);
       if(i < a.length - 1) n.appendChild(document.createTextNode(' '));
     });
+  });
+
+  // Diagnóstico interativo: pontos no raio-X, chips de sintoma e painel. Funciona sem GSAP; com GSAP o raio acompanha a escolha.
+  var DX = O.diagnostico, dxPalco = document.getElementById('dxPalco'), dxChips = document.getElementById('dxChips');
+  var dxVazio = document.getElementById('dxVazio'), dxConteudo = document.getElementById('dxConteudo');
+  var dxSel = null, dxBtns = [], dxChipBtns = [];
+  var dxMov = function(){ return window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches; };
+  DX.pontos.forEach(function(p, i){
+    var d = O.hero.pontos[p.ref], b = el('button', 'dxp'); b.type = 'button'; b.setAttribute('data-i', i);
+    b.style.left = p.x + '%'; b.style.top = p.y + '%';
+    b.setAttribute('aria-pressed', 'false'); b.setAttribute('aria-controls', 'dxPainel');
+    b.appendChild(el('i', 'anel')); b.appendChild(el('i', 'dot')); b.appendChild(el('span', 'rot', d.nome + ', ver onde olhar e o valor'));
+    dxPalco.appendChild(b); dxBtns.push(b);
+  });
+  DX.sintomas.forEach(function(sy, k){
+    var c = el('button', 'chip', sy.texto); c.type = 'button'; c.setAttribute('data-k', k); c.setAttribute('aria-pressed', 'false');
+    c.setAttribute('aria-controls', 'dxPainel'); dxChips.appendChild(c); dxChipBtns.push(c);
+  });
+  var dxFechar = function(){
+    if(!dxSel) return;
+    dxSel = null;
+    dxBtns.forEach(function(b){ b.classList.remove('on'); b.setAttribute('aria-pressed', 'false'); });
+    dxChipBtns.forEach(function(c){ c.setAttribute('aria-pressed', 'false'); });
+    dxConteudo.hidden = true; dxVazio.hidden = false;
+    if(dxMov()) gsap.to('#dxRaio', { opacity: 0, duration: .4, overwrite: 'auto' });
+  };
+  var dxAbrir = function(i, k, origem){
+    var p = DX.pontos[i], d = O.hero.pontos[p.ref], sint = k != null ? DX.sintomas[k].texto : null;
+    if(window.dxFim) window.dxFim();                       // se a varredura inicial ainda roda, termina já
+    dxSel = { i: i, k: k, origem: origem };
+    dxBtns.forEach(function(b, n){ b.classList.toggle('on', n === i); b.setAttribute('aria-pressed', n === i ? 'true' : 'false'); });
+    dxChipBtns.forEach(function(c, n){ c.setAttribute('aria-pressed', n === k ? 'true' : 'false'); });
+    var ss = document.getElementById('dxSint'); ss.hidden = !sint; ss.textContent = sint ? 'Você escolheu: ' + sint : '';
+    document.getElementById('dxNome').textContent = d.nome;
+    document.getElementById('dxPode').textContent = 'Pode ser: ' + d.nome + '. Na oficina a gente confirma antes de mexer em qualquer coisa.';
+    var pr = document.getElementById('dxPreco'); pr.textContent = 'a partir de ' + reais(d.preco);
+    if(O.exemplo) pr.appendChild(el('i', 'exemplo-tag', 'EXEMPLO'));
+    document.getElementById('dxDesc').textContent = d.desc;
+    var a = document.getElementById('dxAgendar'); a.textContent = 'Agendar ' + d.nome;
+    var msg = sint ? O.mensagens.agendarSintoma.replace('{servico}', d.nome).replace('{sintoma}', sint) : O.mensagens.agendar.replace('{servico}', d.nome);
+    a.href = waLink(interpola(msg));
+    dxVazio.hidden = true; dxConteudo.hidden = false;
+    if(dxMov()){
+      gsap.to('#dxRaio', { x: p.x / 100 * 800 + 10, opacity: .85, duration: .7, ease: 'power2.inOut', overwrite: 'auto' });
+      gsap.fromTo(dxConteudo, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .25, ease: 'power2.out', clearProps: 'all' });
+      gsap.fromTo(dxBtns[i].querySelector('.anel'), { scale: .6, opacity: .9 }, { scale: 2.4, opacity: 0, duration: .8, ease: 'power1.out' });
+    }
+    document.getElementById('dxPainel').scrollIntoView({ block: 'nearest' });
+  };
+  dxPalco.addEventListener('click', function(e){
+    var b = e.target.closest('.dxp'); if(!b) return;
+    var i = +b.getAttribute('data-i');
+    if(dxSel && dxSel.i === i && dxSel.k == null) dxFechar(); else dxAbrir(i, null, b);
+  });
+  dxChips.addEventListener('click', function(e){
+    var c = e.target.closest('.chip'); if(!c) return;
+    var k = +c.getAttribute('data-k');
+    if(dxSel && dxSel.k === k) dxFechar(); else dxAbrir(DX.sintomas[k].ponto, k, c);
+  });
+  document.getElementById('dxFecha').addEventListener('click', function(){ var o = dxSel && dxSel.origem; dxFechar(); if(o) o.focus(); });
+  document.addEventListener('keydown', function(e){
+    if(e.key !== 'Escape' || !dxSel) return;
+    var o = dxSel.origem, dentro = document.getElementById('diagnostico').contains(document.activeElement);
+    dxFechar(); if(dentro && o) o.focus();
   });
 
   // Serviços (também alimenta o select do orçamento)
@@ -906,6 +1080,32 @@ window.addEventListener('DOMContentLoaded', function(){
       gsap.to(o, { v: alvo, duration: 1.6, ease: 'power2.out', onUpdate: function(){ n.textContent = Math.round(o.v).toLocaleString('pt-BR') + suf; } });
     } });
   });
+
+  // Diagnóstico: varredura do raio-X uma única vez, ao entrar na tela (sem pin, sem travar a rolagem)
+  var dxDots = document.querySelectorAll('#dxPalco .dxp .dot'), dxRings = document.querySelectorAll('#dxPalco .dxp .anel');
+  var dxTl = null, dxPronto = false;
+  gsap.set('#dxBase', { opacity: .22 });
+  gsap.set(dxDots, { scale: 0, opacity: 0 });
+  window.dxFim = function(){
+    if(dxPronto) return;
+    dxPronto = true; if(dxTl) dxTl.kill();
+    gsap.set('#dxBase', { opacity: 1 }); gsap.set(dxDots, { scale: 1, opacity: 1 });
+    gsap.set('#dxBrilho', { opacity: 0 }); gsap.set('#dxRaio', { x: 0, opacity: 0 });
+  };
+  ScrollTrigger.create({ trigger: '#dxPalco', start: 'top 75%', once: true, onEnter: function(){
+    if(dxPronto) return;
+    var Wd = 870, Dd = 2;
+    dxTl = gsap.timeline();
+    dxTl.set(['#dxBrilho', '#dxRaio'], { opacity: 1 }).set('#dxRaio', { x: 0 })
+        .to(['#dxRaio', '#dxClipR'], { x: Wd, duration: Dd, ease: 'none' }, 0);
+    document.querySelectorAll('#dxPalco .dxp').forEach(function(b, n){
+      var xv = parseFloat(b.style.left) / 100 * 800;
+      dxTl.fromTo(dxDots[n], { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: .35, ease: 'back.out(2)' }, xv / Wd * Dd);
+    });
+    dxTl.to('#dxBase', { opacity: 1, duration: .5 }, Dd).to(['#dxRaio', '#dxBrilho'], { opacity: 0, duration: .5 }, Dd)
+        .fromTo(dxRings, { scale: .6, opacity: .7 }, { scale: 2.1, opacity: 0, duration: 1.1, ease: 'power1.out', repeat: 2, repeatDelay: 1.3, stagger: .15 }, Dd + .3)
+        .call(function(){ dxPronto = true; });
+  } });
 
   // Hero: raio de scanner (~2 s) passa pelo carro e acende os 5 pontos; depois um pulso discreto (3x) convida ao toque.
   // Com foto de fundo: só os botões entram em escada. Tudo em transform/opacity.
