@@ -1,1873 +1,712 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="scroll-smooth" style="overflow-x:hidden;max-width:100%">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>PitStop Centro Automotivo | Mecânica Especializada em São Paulo</title>
-  <meta name="description" content="PitStop Centro Automotivo – Mecânica especializada em São Paulo. Troca de óleo, revisão completa, freios, suspensão, elétrica e ar-condicionado. 12 anos de experiência, garantia em todos os serviços.">
-  <meta name="keywords" content="mecânica automotiva, troca de óleo, revisão completa, freios, suspensão, elétrica automotiva, São Paulo, PitStop">
-  <meta name="author" content="PitStop Centro Automotivo">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>PitStop Centro Automotivo | Mecânica de bairro em São Paulo</title>
+  <meta name="description" content="Revisão, freio, suspensão, injeção e alinhamento. Orçamento antes de abrir o carro, peça de volta se você quiser. Chame no WhatsApp.">
+  <meta name="theme-color" content="#0f0f0e">
   <meta name="robots" content="index, follow">
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="PitStop Centro Automotivo | Mecânica Especializada">
-  <meta property="og:description" content="Diagnóstico preciso, peças originais e garantia em todos os serviços. 12 anos cuidando do seu veículo.">
-  <meta property="og:url" content="https://pitstopcentroautomotivo.com.br">
-  <meta property="og:site_name" content="PitStop Centro Automotivo">
+  <meta property="og:title" content="PitStop Centro Automotivo">
+  <meta property="og:description" content="Revisão, freio, suspensão, injeção e alinhamento. Orçamento antes de abrir o carro.">
   <meta property="og:locale" content="pt_BR">
 
-  <!-- Schema.org LocalBusiness -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "AutoRepair",
-    "name": "PitStop Centro Automotivo",
-    "description": "Mecânica especializada com diagnóstico preciso, peças originais e garantia em todos os serviços.",
-    "url": "https://pitstopcentroautomotivo.com.br",
-    "telephone": "+5511999990000",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Av. das Indústrias, 1247",
-      "addressLocality": "São Paulo",
-      "addressRegion": "SP",
-      "postalCode": "04000-000",
-      "addressCountry": "BR"
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-        "opens": "08:00",
-        "closes": "18:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Saturday",
-        "opens": "08:00",
-        "closes": "13:00"
-      }
-    ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": "148",
-      "bestRating": "5"
-    }
-  }
-  </script>
+  <!-- Sinaliza JS cedo: o CSS só esconde itens de animação se o JS e o GSAP existirem -->
+  <script>document.documentElement.className = 'js';</script>
 
-  <!-- Google Fonts -->
-  <!-- Fundo preto antes do Tailwind carregar: evita flash branco no mobile -->
-  <style>html,body{background:#080808;overflow-x:hidden;max-width:100%;}    /* ── Hero 3D Stage & Motion Styles ── */
-    .hero-visual-stage {
-      perspective: 1200px;
-    }
-    .hero-visual-card {
-      transform-style: preserve-3d;
-      will-change: transform, box-shadow;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.85), 0 0 35px rgba(249,115,22,0.12), inset 0 1px 0 0 rgba(255,255,255,0.08);
-      transition: box-shadow 0.5s ease;
-    }
-    .hero-visual-card:hover {
-      box-shadow: 0 35px 80px rgba(0,0,0,0.95), 0 0 50px rgba(249,115,22,0.25), inset 0 1px 0 0 rgba(249,115,22,0.4);
-    }
-    .hero-obd-led {
-      filter: drop-shadow(0 0 4px currentColor);
-    }
-    @keyframes obdGlowPulse {
-      0%, 100% { filter: drop-shadow(0 0 2px rgba(249,115,22,0.3)); }
-      50%       { filter: drop-shadow(0 0 8px rgba(249,115,22,0.9)); }
-    }
-    .hero-obd-glow {
-      animation: obdGlowPulse 2.2s ease-in-out infinite;
-    }
-    .hero-tag-system, .hero-tag-warranty {
-      will-change: transform;
-    }
-</style>
-  <!-- Garante fundo preto antes do Tailwind carregar — evita flash branco no mobile -->
-  <style>html,body{background:#080808;}</style>
-
+  <!-- Fontes: Barlow Condensed (títulos, vem de placa/painel) + Barlow (texto). 4 pesos no total. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS CDN -->
-    <!-- GSAP CDN (GreenSock Core) -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'piano':       '#080808',
-            'dark':        '#111111',
-            'orange':      '#F97316',
-            'orangeDark':  '#EA6C00',
-            'orangeLight': '#FB923C',
-            'orangeGlow':  'rgba(249,115,22,0.15)',
-            'titanium':    'rgba(255,255,255,0.08)',
-            'titaniumLight':'rgba(255,255,255,0.12)',
-          },
-          fontFamily: {
-            'display': ['Rajdhani', 'sans-serif'],
-            'sans':    ['Inter', 'sans-serif'],
-          },
-          animation: {
-            'float':        'float 6s ease-in-out infinite',
-            'pulse-orange': 'pulseOrange 2s ease-in-out infinite',
-            'fade-in':      'fadeIn 0.8s ease-out forwards',
-            'slide-up':     'slideUp 0.8s ease-out forwards',
-            'shimmer':      'shimmer 3s linear infinite',
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%':      { transform: 'translateY(-8px)' },
-            },
-            pulseOrange: {
-              '0%, 100%': { boxShadow: '0 0 10px rgba(249,115,22,0.4), 0 0 30px rgba(249,115,22,0.15)' },
-              '50%':      { boxShadow: '0 0 20px rgba(249,115,22,0.7), 0 0 50px rgba(249,115,22,0.3)' },
-            },
-            fadeIn: {
-              '0%':   { opacity: '0' },
-              '100%': { opacity: '1' },
-            },
-            slideUp: {
-              '0%':   { opacity: '0', transform: 'translateY(40px)' },
-              '100%': { opacity: '1', transform: 'translateY(0)' },
-            },
-            shimmer: {
-              '0%':   { backgroundPosition: '-200% 0' },
-              '100%': { backgroundPosition: '200% 0' },
-            },
-          },
-        }
-      }
-    }
-  </script>
+  <!-- GSAP com versão fixa; defer para não bloquear a primeira pintura -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
   <style>
-    * { box-sizing: border-box; }
+    :root{
+      --bg:#0f0f0e; --bg2:#181817; --papel:#ece8df; --tinta:#161614;
+      --laranja:#ff5a1f; --laranja-esc:#b83700; --linha:rgba(255,255,255,.13); --linha-tinta:rgba(22,22,20,.16);
+      --txt:#e9e6df; --mudo:#a7a39a;
+      --display:'Barlow Condensed','Arial Narrow',Impact,sans-serif;
+      --corpo:'Barlow',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%}
+    body{margin:0;background:var(--bg);color:var(--txt);font:400 17px/1.55 var(--corpo);overflow-x:hidden;padding-bottom:76px}
+    img,svg{display:block;max-width:100%}
+    a{color:inherit;-webkit-tap-highlight-color:transparent}
+    h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.98;margin:0;text-transform:uppercase;letter-spacing:.005em}
+    p{margin:0}
+    ul{list-style:none;margin:0;padding:0}
+    :focus-visible{outline:3px solid var(--laranja);outline-offset:3px}
+    .wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+    .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-    /* Remove highlight azul de tap em links no mobile (iOS/Android) */
-    a { -webkit-tap-highlight-color: transparent; }
+    /* Rótulo técnico de seção: número + nome, com régua */
+    .rotulo{display:flex;align-items:center;gap:12px;font:700 14px/1 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--laranja)}
+    .rotulo::after{content:"";flex:0 0 56px;height:8px;background:repeating-linear-gradient(90deg,currentColor 0 1px,transparent 1px 7px);opacity:.7}
+    .claro .rotulo{color:var(--laranja-esc)}
+    .claro{background:var(--papel);color:var(--tinta)}
 
-    body {
-      background-color: #080808;
-      color: #e5e5e5;
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      max-width: 100%;
-      width: 100%;
-    }
+    /* Botões */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border:2px solid transparent;border-radius:4px;font:700 18px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:transform .2s,background .2s,color .2s,border-color .2s}
+    .btn-p{background:var(--laranja);color:#150a04}
+    .btn-p:hover{background:#ff7340}
+    .btn-s{border-color:rgba(255,255,255,.4);color:#fff;background:transparent}
+    .btn-s:hover{border-color:var(--laranja);color:var(--laranja)}
+    .claro .btn-s{border-color:var(--tinta);color:var(--tinta)}
+    .claro .btn-s:hover{border-color:var(--laranja-esc);color:var(--laranja-esc)}
+    .btn svg{width:20px;height:20px;fill:currentColor}
 
-    /* ── Seções: bloqueia overflow lateral no mobile ── */
-    section, footer { overflow-x: hidden; }
+    /* Cabeçalho */
+    .topo{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+    .topo.sol{background:rgba(15,15,14,.94);border-color:var(--linha)}
+    .topo .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+    .marca{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .marca svg{width:38px;height:38px}
+    .marca b{display:block;font:800 21px/1 var(--display);letter-spacing:.06em;text-transform:uppercase}
+    .marca small{display:block;font:600 11px/1.2 var(--corpo);letter-spacing:.16em;text-transform:uppercase;color:var(--mudo)}
+    .menu{display:none;gap:26px}
+    .menu a{font:700 15px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--txt);padding:8px 0}
+    .menu a:hover{color:var(--laranja)}
+    .topo-acoes{display:flex;align-items:center;gap:10px}
+    .topo-acoes .btn{min-height:44px;padding:0 18px;font-size:16px}
+    .hamb{background:none;border:1px solid var(--linha);color:#fff;width:44px;height:44px;border-radius:4px;display:grid;place-items:center;cursor:pointer}
+    .hamb svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2}
+    .gaveta{display:none;background:var(--bg);border-top:1px solid var(--linha);padding:8px 20px 20px}
+    .gaveta.aberta{display:block}
+    .gaveta a{display:block;padding:15px 0;border-bottom:1px solid var(--linha);font:700 19px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
 
-    /* ── Scrollbar ── */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: #080808; }
-    ::-webkit-scrollbar-thumb { background: #F97316; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: #FB923C; }
+    /* Hero: linhas técnicas ao fundo (papel milimetrado escuro) */
+    .hero{position:relative;padding:112px 0 56px;background:
+      linear-gradient(180deg,rgba(15,15,14,0) 60%,var(--bg) 100%),
+      repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),
+      repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),var(--bg);overflow:hidden}
+    .hero-grade{display:grid;gap:36px;align-items:center}
+    .hero h1{font-size:clamp(44px,10.5vw,84px);margin:18px 0 20px}
+    .hero h1 em{font-style:normal;color:var(--laranja);display:block}
+    .hero-sub{max-width:34em;font-size:clamp(17px,2.4vw,20px);color:#cfcbc3}
+    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+    .hero-foto{position:relative}
+    .hero-foto .foto{aspect-ratio:4/5;max-height:560px;width:100%}
+    .medidor{position:absolute;left:-14px;bottom:-26px;width:116px;filter:drop-shadow(0 10px 18px rgba(0,0,0,.55))}
+    .selo-hero{position:absolute;right:0;top:18px;background:var(--laranja);color:#150a04;font:800 15px/1.05 var(--display);letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;transform:rotate(3deg)}
 
-    /* ── Glassmorphism ── */
-    .glass-card {
-      background: rgba(255,255,255,0.04);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.10);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    }
-    .glass-card-hover:hover {
-      border-color: rgba(249,115,22,0.35);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 30px rgba(249,115,22,0.12);
-    }
+    /* Faixa de informação rápida: endereço, horário, telefone sempre visíveis, parados */
+    .faixa{background:var(--bg2);border-block:1px solid var(--linha)}
+    .faixa .wrap{display:grid;gap:0}
+    .faixa-item{padding:18px 0;border-bottom:1px solid var(--linha)}
+    .faixa-item:last-child{border:0}
+    .faixa small{display:block;font:700 12px/1 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--mudo);margin-bottom:6px}
+    .faixa b{font:700 20px/1.2 var(--corpo)}
+    .faixa a{text-decoration:none}
+    .status{display:inline-flex;align-items:center;gap:8px}
+    .status::before{content:"";width:9px;height:9px;border-radius:50%;background:#7c7a72}
+    .status.on::before{background:#3ddc84}
+    .status.off::before{background:#ff6b5a}
 
-    /* ── Orange Gradient Text ── */
-    .text-orange-gradient {
-      background: linear-gradient(135deg, #FB923C, #F97316, #EA6C00);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+    section{position:relative}
+    .bloco{padding:84px 0}
+    h2{font-size:clamp(38px,7.4vw,72px);margin:16px 0 0}
+    .intro{max-width:34em;margin-top:18px;color:var(--mudo);font-size:18px}
+    .claro .intro{color:#55534d}
 
-    /* ── Orange Shimmer Button ── */
-    .bg-orange-shimmer {
-      background: linear-gradient(90deg, #EA6C00 0%, #F97316 30%, #FFBB85 50%, #F97316 70%, #EA6C00 100%);
-      background-size: 200% auto;
-      animation: shimmer 3s linear infinite;
-      color: #080808;
-    }
-    .bg-orange-shimmer:hover {
-      box-shadow: 0 0 30px rgba(249,115,22,0.5);
-    }
+    /* Serviços: tabela de oficina, não grade de cards */
+    .serv-wrap{display:grid;gap:36px}
+    .serv-lista{border-top:2px solid var(--tinta)}
+    .serv{display:grid;grid-template-columns:52px 1fr;gap:4px 14px;padding:22px 8px;border-bottom:1px solid var(--linha-tinta);transition:background .25s}
+    .serv:hover{background:rgba(22,22,20,.05)}
+    .serv .n{font:800 30px/1 var(--display);color:var(--laranja-esc)}
+    .serv h3{font-size:clamp(26px,4.2vw,34px)}
+    .serv p{grid-column:2;color:#4a4842;max-width:36em}
+    .serv .sint{grid-column:2;font-size:14px;font-weight:600;color:var(--tinta);margin-top:6px}
+    .serv .sint::before{content:"Quando procurar: ";color:var(--laranja-esc);font-weight:600}
 
-    /* ── Hero background with pattern ── */
-    .hero-bg {
-      background:
-        linear-gradient(135deg, rgba(8,8,8,1) 0%, rgba(8,8,8,0.95) 45%, rgba(8,8,8,0.80) 100%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23F97316' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    }
+    /* Passo a passo */
+    .passos{display:grid;gap:0;margin-top:44px;counter-reset:p}
+    .passo{position:relative;padding:0 0 34px 54px;border-left:2px solid var(--linha);margin-left:16px}
+    .passo::before{counter-increment:p;content:counter(p);position:absolute;left:-17px;top:-4px;width:32px;height:32px;display:grid;place-items:center;background:var(--laranja);color:#150a04;font:800 18px/1 var(--display)}
+    .passo h3{font-size:30px;margin-bottom:8px}
+    .passo p{color:var(--mudo);max-width:26em}
 
-    /* ── Hero illustration animations ── */
-    @keyframes carFloat {
-      0%, 100% { transform: translateY(0px) rotate(-1deg); }
-      50%       { transform: translateY(-12px) rotate(1deg); }
-    }
-    @keyframes wheelSpin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-    @keyframes sparkle {
-      0%, 100% { opacity: 0; transform: scale(0.5) translate(0,0); }
-      50%       { opacity: 1; transform: scale(1) translate(var(--tx), var(--ty)); }
-    }
-    @keyframes scanLine {
-      0%   { transform: translateY(0); opacity: 0.8; }
-      100% { transform: translateY(180px); opacity: 0; }
-    }
-    @keyframes pulse-ring {
-      0%   { transform: scale(0.8); opacity: 0.6; }
-      100% { transform: scale(1.8); opacity: 0; }
-    }
-    @keyframes dash-flow {
-      from { stroke-dashoffset: 200; }
-      to   { stroke-dashoffset: 0; }
-    }
-    @keyframes gearRotate {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-    @keyframes gearRotateReverse {
-      from { transform: rotate(360deg); }
-      to   { transform: rotate(0deg); }
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0.2; }
-    }
-    @keyframes speedLine {
-      0%   { transform: translateX(60px); opacity: 0; }
-      30%  { opacity: 0.6; }
-      100% { transform: translateX(-200px); opacity: 0; }
-    }
+    /* Fotos reais: moldura com tratamento leve; sem foto vira placeholder neutro */
+    .foto{position:relative;overflow:hidden;background:#242422;border-radius:2px;margin:0}
+    .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.06) saturate(.9) brightness(.97)}
+    .foto::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 55%,rgba(15,15,14,.55)),linear-gradient(135deg,rgba(255,90,31,.12),transparent 40%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+    .foto .canto{position:absolute;z-index:2;width:22px;height:22px;border:3px solid var(--laranja)}
+    .foto .c1{left:10px;top:10px;border-right:0;border-bottom:0}
+    .foto .c2{right:10px;bottom:10px;border-left:0;border-top:0}
+    .foto figcaption{position:absolute;z-index:2;left:14px;bottom:12px;right:14px;font:700 13px/1.2 var(--display);letter-spacing:.14em;text-transform:uppercase;color:#fff}
+    .ph{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:10px;text-align:center;padding:24px;color:#8d897f;background:
+      repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 14px),#232321}
+    .ph svg{width:46px;height:46px;stroke:currentColor;fill:none;stroke-width:1.6}
+    .ph span{font:700 14px/1.3 var(--display);letter-spacing:.14em;text-transform:uppercase}
 
-    .car-float    { animation: carFloat 4s ease-in-out infinite; transform-origin: center; }
-    .wheel-spin   { animation: wheelSpin 1.8s linear infinite; transform-origin: center; }
-    .scan-line    { animation: scanLine 2.5s ease-in-out infinite; }
-    .pulse-ring   { animation: pulse-ring 1.8s ease-out infinite; }
-    .gear-cw      { animation: gearRotate 8s linear infinite; }
-    .gear-ccw     { animation: gearRotateReverse 6s linear infinite; }
-    .blink-dot    { animation: blink 1.2s ease-in-out infinite; }
+    .oficina-grade{display:grid;gap:14px;margin-top:40px}
+    .oficina-grade .foto{min-height:220px}
+    .f-equipe{aspect-ratio:4/3}
+    .f-servico{aspect-ratio:16/10}
+    .f-detalhe{aspect-ratio:16/10}
 
-    .spark {
-      animation: sparkle 2s ease-in-out infinite;
-    }
-    .spark:nth-child(1) { --tx:-8px; --ty:-12px; animation-delay: 0s;    }
-    .spark:nth-child(2) { --tx: 10px; --ty:-8px; animation-delay: 0.4s;  }
-    .spark:nth-child(3) { --tx:-5px; --ty: 10px; animation-delay: 0.8s;  }
-    .spark:nth-child(4) { --tx: 12px; --ty: 6px; animation-delay: 1.2s;  }
+    /* Números: faixa de cor forte, única do site */
+    .numeros{background:var(--laranja);color:#150a04;padding:54px 0}
+    .numeros ul{display:grid;gap:26px}
+    .numeros b{display:block;font:800 clamp(56px,12vw,96px)/.9 var(--display)}
+    .numeros span{font:700 17px/1.2 var(--display);letter-spacing:.12em;text-transform:uppercase}
+    .exemplo-tag{display:inline-block;margin-left:8px;padding:3px 7px;border:1.5px dashed currentColor;font:700 11px/1 var(--display);letter-spacing:.14em;vertical-align:middle}
 
-    .speed-line {
-      animation: speedLine 1.8s ease-in-out infinite;
-    }
-    .speed-line:nth-child(1) { animation-delay: 0s;    }
-    .speed-line:nth-child(2) { animation-delay: 0.3s;  }
-    .speed-line:nth-child(3) { animation-delay: 0.6s;  }
-    .speed-line:nth-child(4) { animation-delay: 0.9s;  }
-    .speed-line:nth-child(5) { animation-delay: 1.2s;  }
+    /* Avaliações */
+    .aval-topo{display:grid;gap:22px;align-items:end}
+    .nota{display:flex;align-items:baseline;gap:14px}
+    .nota b{font:800 clamp(80px,16vw,140px)/.8 var(--display);color:var(--laranja)}
+    .estrelas{color:var(--laranja);letter-spacing:.12em;font-size:22px}
+    .avals{display:grid;gap:16px;margin-top:40px}
+    .aval{border:1px solid var(--linha);background:var(--bg2);padding:24px}
+    .aval blockquote{margin:12px 0 18px;font-size:19px;line-height:1.45}
+    .aval cite{font-style:normal;font:700 15px/1.2 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--mudo)}
+    .aviso-ex{margin-top:22px;padding:12px 14px;border:1.5px dashed var(--laranja);color:var(--laranja);font-weight:600;font-size:15px}
 
-    /* ── Parallax section ── */
-    .parallax-bg {
-      background:
-        linear-gradient(to bottom, rgba(8,8,8,0.92) 0%, rgba(8,8,8,0.85) 100%),
-        url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23F97316' fill-opacity='0.06'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      background-attachment: scroll;
-    }
+    /* Orçamento rápido */
+    .orc{display:grid;gap:34px}
+    .orc ul{margin-top:22px;display:grid;gap:10px}
+    .orc li{padding-left:22px;position:relative;color:#4a4842}
+    .orc li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:3px;background:var(--laranja-esc)}
+    form{background:#fff;border:2px solid var(--tinta);padding:24px;display:grid;gap:16px}
+    label{display:grid;gap:6px;font:700 14px/1 var(--display);letter-spacing:.14em;text-transform:uppercase}
+    input,select,textarea{font:400 17px/1.3 var(--corpo);color:var(--tinta);background:#f7f5f0;border:1.5px solid #8b887f;border-radius:3px;padding:13px 12px;width:100%;min-height:50px}
+    textarea{min-height:90px;resize:vertical}
+    input:focus,select:focus,textarea:focus{outline:3px solid var(--laranja);outline-offset:1px;border-color:var(--tinta)}
+    .form-nota{font-size:14px;color:#55534d}
 
-    /* ── Section divider ── */
-    .section-divider {
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, #F97316, #EA6C00);
-      border-radius: 2px;
-      margin: 0 auto;
-    }
-    .section-divider-left {
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, #F97316, #EA6C00);
-      border-radius: 2px;
-    }
+    /* Localização */
+    .loc{display:grid;gap:26px;margin-top:40px}
+    .mapa{position:relative;min-height:340px;background:#232321;border:1px solid var(--linha)}
+    .mapa iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(.85) invert(.9) contrast(.9)}
+    .end-grande{font:800 clamp(30px,5.6vw,46px)/1 var(--display);text-transform:uppercase}
+    .horarios{margin:22px 0;border-top:1px solid var(--linha)}
+    .horarios li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--linha)}
+    .horarios li.hoje{color:var(--laranja);font-weight:600}
+    .loc-acoes{display:flex;flex-wrap:wrap;gap:12px}
+    .tel-grande{display:block;margin:6px 0 18px;font:800 clamp(30px,6vw,44px)/1 var(--display);text-decoration:none;letter-spacing:.02em}
 
-    /* ── Reveal Animations ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(35px);
-      transition: opacity 0.75s ease-out, transform 0.75s ease-out;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-45px);
-      transition: opacity 0.75s ease-out, transform 0.75s ease-out;
-    }
-    .reveal-left.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .reveal-right {
-      opacity: 0;
-      transform: translateX(45px);
-      transition: opacity 0.75s ease-out, transform 0.75s ease-out;
-    }
-    .reveal-right.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
+    footer{background:#0a0a09;border-top:1px solid var(--linha);padding:40px 0 28px;color:var(--mudo);font-size:15px}
+    footer .wrap{display:grid;gap:14px}
+    footer b{color:var(--txt)}
 
-    /* ── Stagger delays ── */
-    .delay-1 { transition-delay: 0.1s; }
-    .delay-2 { transition-delay: 0.2s; }
-    .delay-3 { transition-delay: 0.3s; }
-    .delay-4 { transition-delay: 0.4s; }
-    .delay-5 { transition-delay: 0.5s; }
-    .delay-6 { transition-delay: 0.6s; }
+    /* Botões fixos: WhatsApp + ligar sempre ao alcance do polegar */
+    .fixos{position:fixed;z-index:60;left:0;right:0;bottom:0;display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(15,15,14,.96);border-top:1px solid var(--linha)}
+    .fixos .btn{flex:1;min-height:52px}
+    .fixos .btn-zap{flex:2;background:#25d366;color:#04210f}
+    .fixos .btn-zap:hover{background:#3be37b}
 
-    /* ── Nav link underline ── */
-    .nav-link { position: relative; }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 50%;
-      width: 0; height: 2px;
-      background: linear-gradient(90deg, #F97316, #EA6C00);
-      transition: width 0.3s ease, left 0.3s ease;
+    /* Animação: só esconde se GSAP carregou (classe .gs) e o usuário não pediu menos movimento */
+    @media (prefers-reduced-motion:no-preference){
+      .js.gs [data-anim]{opacity:0;transform:translateY(26px)}
     }
-    .nav-link:hover::after,
-    .nav-link.active::after { width: 100%; left: 0; }
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 
-    /* ── Tooltip FAB ── */
-    .tooltip-fab {
-      opacity: 0;
-      transform: translateX(10px);
-      transition: opacity 0.3s, transform 0.3s;
-      pointer-events: none;
+    @media (min-width:720px){
+      .faixa .wrap{grid-template-columns:1.4fr 1fr 1fr}
+      .faixa-item{border-bottom:0;border-right:1px solid var(--linha);padding:22px 24px}
+      .faixa-item:first-child{padding-left:0}
+      .faixa-item:last-child{border:0}
+      .numeros ul{grid-template-columns:repeat(3,1fr)}
+      .oficina-grade{grid-template-columns:1.25fr 1fr;grid-template-rows:auto auto}
+      .f-equipe{grid-row:span 2;aspect-ratio:auto;min-height:480px}
+      .f-servico,.f-detalhe{aspect-ratio:auto}
+      .avals{grid-template-columns:repeat(3,1fr);align-items:start}
+      .avals .aval:nth-child(2){margin-top:44px}
+      .avals .aval:nth-child(3){margin-top:18px}
+      .aval-topo{grid-template-columns:auto 1fr}
     }
-    .fab-container:hover .tooltip-fab {
-      opacity: 1;
-      transform: translateX(0);
+    @media (min-width:980px){
+      body{padding-bottom:0}
+      .menu{display:flex}
+      .hamb,.gaveta{display:none!important}
+      .hero{padding:140px 0 84px}
+      .hero-grade{grid-template-columns:1.25fr .75fr;gap:64px}
+      .hero-foto{margin-right:-24px}
+      .serv-wrap{grid-template-columns:.8fr 1.4fr;gap:70px}
+      .serv-intro{position:sticky;top:110px;align-self:start}
+      .serv{grid-template-columns:64px 1fr 220px;gap:4px 22px;align-items:start}
+      .serv p{grid-column:2}
+      .serv .sint{grid-column:3;grid-row:1/span 2;margin-top:6px}
+      .passos{grid-template-columns:repeat(4,1fr);gap:26px;margin-top:64px}
+      .passo{border-left:0;border-top:2px solid var(--linha);margin:0;padding:28px 0 0}
+      .passo::before{left:0;top:-17px}
+      .passo:nth-child(2){margin-top:28px}
+      .passo:nth-child(3){margin-top:56px}
+      .passo:nth-child(4){margin-top:84px}
+      .orc{grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start}
+      .loc{grid-template-columns:1.2fr .8fr;gap:48px}
+      .mapa{min-height:520px}
+      .fixos{left:auto;right:24px;bottom:24px;width:auto;padding:0;background:none;border:0;flex-direction:column;align-items:flex-end}
+      .fixos .btn{flex:none;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+      .fixos .btn-lig{display:none}
     }
-
-    /* ── Card icon container ── */
-    .icon-box {
-      width: 56px; height: 56px;
-      border-radius: 14px;
-      background: rgba(249,115,22,0.10);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-      transition: background 0.3s;
-    }
-    .group:hover .icon-box { background: rgba(249,115,22,0.20); }
-
-    /* ── Star rating ── */
-    .star-filled { color: #F97316; }
-
-    /* ── Map iframe wrapper ── */
-    .map-wrapper {
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(249,115,22,0.20);
-    }
-
-    /* ── Print hide FAB ── */
-    @media print { .fab-container { display: none !important; } }
   </style>
 </head>
-<body class="antialiased">
+<body>
+  <a class="sr" href="#orcamento">Ir para o orçamento rápido</a>
 
-
-  <!-- ═══════════════════════════════════════════
-       NAVBAR
-       ═══════════════════════════════════════════ -->
-  <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
-    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-
-        <!-- Logo -->
-        <a href="#inicio" class="flex items-center gap-3 select-none group flex-shrink-0">
-          <!-- Logo SVG PitStop -->
-          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 transition-transform group-hover:scale-105 duration-300">
-            <rect width="44" height="44" rx="10" fill="#F97316"/>
-            <!-- Pistão (corpo) -->
-            <rect x="16" y="8" width="12" height="14" rx="3" fill="#080808"/>
-            <!-- Pistão pino -->
-            <rect x="13" y="19" width="18" height="4" rx="2" fill="#080808"/>
-            <!-- Biela -->
-            <rect x="20" y="23" width="4" height="9" rx="2" fill="#080808"/>
-            <!-- Virabrequim / círculo -->
-            <circle cx="22" cy="35" r="5" fill="none" stroke="#080808" stroke-width="3"/>
-            <circle cx="22" cy="35" r="1.5" fill="#080808"/>
-            <!-- Detalhes laterais pistão -->
-            <rect x="14" y="11" width="3" height="8" rx="1" fill="#080808" opacity="0.5"/>
-            <rect x="27" y="11" width="3" height="8" rx="1" fill="#080808" opacity="0.5"/>
-          </svg>
-          <!-- Texto logo -->
-          <div class="flex flex-col leading-tight">
-            <span class="font-display font-bold text-white text-base tracking-wider uppercase leading-none">PitStop</span>
-            <span class="font-sans text-gray-400 text-[10px] tracking-widest uppercase leading-none mt-0.5">Centro Automotivo</span>
-          </div>
-        </a>
-
-        <!-- Desktop Nav -->
-        <div class="hidden lg:flex items-center gap-7">
-          <a href="#inicio"       class="nav-link text-xs font-semibold text-gray-300 hover:text-orange transition-colors tracking-widest uppercase">Início</a>
-          <a href="#servicos"     class="nav-link text-xs font-semibold text-gray-300 hover:text-orange transition-colors tracking-widest uppercase">Serviços</a>
-          <a href="#diferenciais" class="nav-link text-xs font-semibold text-gray-300 hover:text-orange transition-colors tracking-widest uppercase">Diferenciais</a>
-          <a href="#numeros"      class="nav-link text-xs font-semibold text-gray-300 hover:text-orange transition-colors tracking-widest uppercase">Resultados</a>
-          <a href="#depoimentos"  class="nav-link text-xs font-semibold text-gray-300 hover:text-orange transition-colors tracking-widest uppercase">Avaliações</a>
-          <a href="#localizacao"  class="nav-link text-xs font-semibold text-gray-300 hover:text-orange transition-colors tracking-widest uppercase">Localização</a>
-        </div>
-
-        <!-- CTA + Hamburger -->
-        <div class="flex items-center gap-3">
-          <a href="https://wa.me/5511999990000?text=Olá!%20Gostaria%20de%20agendar%20um%20serviço%20no%20PitStop."
-             target="_blank" rel="noopener"
-             class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-orange-shimmer text-piano text-xs font-bold tracking-widest rounded-lg uppercase transition-all duration-300">
-            <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.37 0-4.567-.804-6.308-2.152l-.44-.348-2.847.954.954-2.847-.348-.44A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/>
-            </svg>
-            Agendar Agora
-          </a>
-          <!-- Hamburger -->
-          <button id="menuBtn" class="lg:hidden text-orange hover:text-orangeLight transition-colors p-1" aria-label="Abrir menu">
-            <svg id="menuIconOpen" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-            <svg id="menuIconClose" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-          </button>
-        </div>
+  <header class="topo" id="topo">
+    <div class="wrap">
+      <a class="marca" href="#inicio" aria-label="Início">
+        <svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="6" fill="#ff5a1f"/><rect x="16" y="8" width="12" height="14" rx="3" fill="#0f0f0e"/><rect x="13" y="19" width="18" height="4" rx="2" fill="#0f0f0e"/><rect x="20" y="23" width="4" height="9" rx="2" fill="#0f0f0e"/><circle cx="22" cy="35" r="5" fill="none" stroke="#0f0f0e" stroke-width="3"/></svg>
+        <span><b data-t="nomeCurto"></b><small data-t="tipo"></small></span>
+      </a>
+      <nav class="menu" aria-label="Principal">
+        <a href="#servicos">Serviços</a><a href="#como-funciona">Como funciona</a><a href="#oficina">A oficina</a><a href="#avaliacoes">Avaliações</a><a href="#orcamento">Orçamento</a><a href="#localizacao">Onde estamos</a>
+      </nav>
+      <div class="topo-acoes">
+        <a class="btn btn-p" data-wa data-wa-msg="saudacao" href="#">WhatsApp</a>
+        <button class="hamb" id="hamb" aria-label="Abrir menu" aria-expanded="false" aria-controls="gaveta"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>
-
-      <!-- Mobile Menu -->
-      <div id="mobileMenu" class="lg:hidden hidden glass-card rounded-xl mt-2 p-6 border border-white/10">
-        <div class="flex flex-col gap-1">
-          <a href="#inicio"       class="mobile-nav text-sm font-semibold text-gray-300 hover:text-orange transition-colors tracking-widest uppercase py-3 border-b border-white/08 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-orange/50"></span>Início
-          </a>
-          <a href="#servicos"     class="mobile-nav text-sm font-semibold text-gray-300 hover:text-orange transition-colors tracking-widest uppercase py-3 border-b border-white/08 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-orange/50"></span>Serviços
-          </a>
-          <a href="#diferenciais" class="mobile-nav text-sm font-semibold text-gray-300 hover:text-orange transition-colors tracking-widest uppercase py-3 border-b border-white/08 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-orange/50"></span>Diferenciais
-          </a>
-          <a href="#numeros"      class="mobile-nav text-sm font-semibold text-gray-300 hover:text-orange transition-colors tracking-widest uppercase py-3 border-b border-white/08 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-orange/50"></span>Resultados
-          </a>
-          <a href="#depoimentos"  class="mobile-nav text-sm font-semibold text-gray-300 hover:text-orange transition-colors tracking-widest uppercase py-3 border-b border-white/08 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-orange/50"></span>Avaliações
-          </a>
-          <a href="#localizacao"  class="mobile-nav text-sm font-semibold text-gray-300 hover:text-orange transition-colors tracking-widest uppercase py-3 flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-orange/50"></span>Localização
-          </a>
-          <a href="https://wa.me/5511999990000?text=Olá!%20Gostaria%20de%20agendar%20um%20serviço%20no%20PitStop."
-             target="_blank" rel="noopener"
-             class="mt-3 flex items-center justify-center gap-2 px-5 py-3 bg-orange-shimmer text-piano text-sm font-bold tracking-wider rounded-lg uppercase">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-            </svg>
-            Agendar Agora
-          </a>
-        </div>
-      </div>
-    </nav>
+    </div>
+    <div class="gaveta" id="gaveta">
+      <a href="#servicos">Serviços</a><a href="#como-funciona">Como funciona</a><a href="#oficina">A oficina</a><a href="#avaliacoes">Avaliações</a><a href="#orcamento">Orçamento rápido</a><a href="#localizacao">Onde estamos</a>
+    </div>
   </header>
 
-
-  <!-- ═══════════════════════════════════════════
-       HERO
-       ═══════════════════════════════════════════ -->
-  <section id="inicio" class="relative min-h-screen flex items-center hero-bg overflow-hidden">
-    <!-- Glow orbs — max-width evita overflow lateral no mobile -->
-    <div class="hero-glow-1 absolute top-1/3 right-0 w-64 h-64 md:w-96 md:h-96 bg-orange/6 rounded-full blur-[100px] pointer-events-none" style="max-width:70vw; will-change: transform;"></div>
-    <div class="hero-glow-2 absolute bottom-0 left-0 w-48 h-48 md:w-72 md:h-72 bg-orange/3 rounded-full blur-[80px] pointer-events-none" style="max-width:50vw; will-change: transform;"></div>
-
-    <!-- Linha decorativa esquerda -->
-    <div class="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-transparent via-orange/30 to-transparent hidden lg:block"></div>
-
-    <div class="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-8 sm:pb-12 lg:pt-36 lg:pb-24">
-      <!-- Split layout: texto esquerda + ilustração direita -->
-      <div class="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 lg:gap-8">
-
-      <!-- Coluna texto (esquerda) -->
-      <div class="w-full lg:w-1/2">
-
-        <!-- Eyebrow tag -->
-        <div class="inline-flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-4 lg:mb-6 animate-fade-in">
-          <span class="w-8 h-[2px] bg-orange"></span>
-          <span class="text-orange text-xs font-bold tracking-[0.35em] uppercase">São Paulo • Especialistas em Automóveis</span>
-        </div>
-
-        <!-- Headline principal -->
-        <h1 class="font-display font-bold text-white leading-tight mb-3 sm:mb-4 lg:mb-6 animate-slide-up" style="font-size: clamp(2.1rem, 5.5vw, 5rem); line-height: 1.05;">
-          Seu carro nas<br>
-          <span class="text-orange-gradient">mãos certas.</span>
-        </h1>
-
-        <!-- Subheadline -->
-        <p class="text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed mb-5 sm:mb-6 lg:mb-10 max-w-xl animate-slide-up" style="animation-delay: 0.2s;">
-          Diagnóstico preciso, peças originais e garantia real em todos os serviços. Há <strong class="text-white">12 anos</strong> cuidando do veículo de quem não abre mão de qualidade.
-        </p>
-
-        <!-- CTAs -->
-        <div class="flex flex-col sm:flex-row gap-2.5 sm:gap-4 mb-5 sm:mb-6 lg:mb-14 animate-slide-up" style="animation-delay: 0.35s;">
-          <a href="https://wa.me/5511999990000?text=Olá!%20Gostaria%20de%20agendar%20um%20serviço%20no%20PitStop."
-             target="_blank" rel="noopener"
-             class="inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-8 sm:py-4 bg-orange-shimmer text-piano font-bold text-xs sm:text-sm tracking-widest uppercase rounded-xl transition-all duration-300 shadow-lg shadow-orange/20">
-            <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.37 0-4.567-.804-6.308-2.152l-.44-.348-2.847.954.954-2.847-.348-.44A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/>
-            </svg>
-            Agendar Serviço
-          </a>
-          <a href="#servicos"
-             class="inline-flex items-center justify-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-transparent border border-white/20 text-white font-bold text-xs sm:text-sm tracking-widest uppercase rounded-xl hover:border-orange/50 hover:bg-orange/5 active:bg-orange/10 transition-all duration-300" style="-webkit-tap-highlight-color: transparent;">
-            Ver Serviços
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </a>
-        </div>
-
-        <!-- Métricas inline (linha horizontal compacta no mobile, expandida no desktop) -->
-        <div class="grid grid-cols-3 gap-2 sm:gap-4 lg:flex lg:flex-wrap lg:gap-10 animate-slide-up mb-2 lg:mb-0" style="animation-delay: 0.5s;">
-          <div class="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1.5 sm:gap-3">
-            <div class="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-orange/10 border border-orange/20 flex items-center justify-center flex-shrink-0">
-              <svg class="w-3.5 h-3.5 sm:w-5 sm:h-5 text-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="hero-counter text-white font-bold text-xs sm:text-sm leading-none" data-target="12" data-suffix=" Anos">0 Anos</p>
-              <p class="text-gray-500 text-[10px] sm:text-xs mt-0.5 leading-tight">Experiência</p>
-            </div>
-          </div>
-          <div class="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1.5 sm:gap-3">
-            <div class="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-orange/10 border border-orange/20 flex items-center justify-center flex-shrink-0">
-              <svg class="w-3.5 h-3.5 sm:w-5 sm:h-5 text-orange" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="hero-counter-rating text-white font-bold text-xs sm:text-sm leading-none">0.0 ★</p>
-              <p class="text-gray-500 text-[10px] sm:text-xs mt-0.5 leading-tight">no Google</p>
-            </div>
-          </div>
-          <div class="flex flex-col sm:flex-row items-center sm:items-center text-center sm:text-left gap-1.5 sm:gap-3">
-            <div class="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-orange/10 border border-orange/20 flex items-center justify-center flex-shrink-0">
-              <svg class="w-3.5 h-3.5 sm:w-5 sm:h-5 text-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="hero-counter text-white font-bold text-xs sm:text-sm leading-none" data-target="90" data-suffix=" Dias">0 Dias</p>
-              <p class="text-gray-500 text-[10px] sm:text-xs mt-0.5 leading-tight">Garantia</p>
-            </div>
+  <main>
+    <section class="hero" id="inicio">
+      <div class="wrap hero-grade">
+        <div>
+          <p class="rotulo" data-hero data-t="hero.eyebrow"></p>
+          <h1 data-hero><span data-t="hero.titulo"></span><em data-t="hero.destaque"></em></h1>
+          <p class="hero-sub" data-hero data-t="hero.sub"></p>
+          <div class="hero-cta" data-hero>
+            <a class="btn btn-p" data-wa data-wa-msg="saudacao" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12c0 2.6.8 5.1 2.3 7L.8 23.5a.5.5 0 00.6.6l4.5-1.5A12 12 0 0012 24c6.6 0 12-5.4 12-12S18.6 0 12 0zm5.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.2c-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4z"/></svg>Chamar no WhatsApp</a>
+            <a class="btn btn-s" data-tel href="#">Ligar agora</a>
           </div>
         </div>
-      </div><!-- fim coluna texto -->
-
-      <!-- Coluna ilustração (direita) -->
-      <div class="w-full lg:w-1/2 flex items-center justify-center hero-visual-stage mt-2 lg:mt-0">
-        <div class="relative w-full max-w-[340px] xs:max-w-[380px] sm:max-w-md lg:max-w-lg mx-auto" style="transform-style: preserve-3d;">
-
-          <!-- Card diagnóstico flutuante (topo esquerda, contido no mobile) -->
-          <div class="hero-tag-system absolute -top-3 left-1 sm:-top-4 sm:-left-4 z-20 glass-card rounded-lg sm:rounded-xl px-2.5 py-1.5 sm:px-4 sm:py-3 flex items-center gap-2 sm:gap-3 scale-90 sm:scale-100 origin-top-left animate-float" style="animation-duration:3.5s; animation-delay:0s;">
-            <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-md sm:rounded-lg bg-green-500/20 flex items-center justify-center flex-shrink-0">
-              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="text-white text-[11px] sm:text-xs font-bold leading-none">Sistema OK</p>
-              <p class="text-gray-400 text-[9px] sm:text-[10px] mt-0.5">Diagnóstico concluído</p>
-            </div>
-          </div>
-
-          <!-- Card garantia (canto inferior direita, contido no mobile) -->
-          <div class="hero-tag-warranty absolute -bottom-3 right-1 sm:-bottom-4 sm:-right-4 z-20 glass-card rounded-lg sm:rounded-xl px-2.5 py-1.5 sm:px-4 sm:py-3 flex items-center gap-2 sm:gap-3 scale-90 sm:scale-100 origin-bottom-right animate-float" style="animation-duration:4s; animation-delay:1s;">
-            <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-md sm:rounded-lg bg-orange/20 flex items-center justify-center flex-shrink-0">
-              <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="text-white text-[11px] sm:text-xs font-bold leading-none">Garantia 90 dias</p>
-              <p class="text-gray-400 text-[9px] sm:text-[10px] mt-0.5">Em todos os serviços</p>
-            </div>
-          </div>
-
-          <!-- Ilustração SVG principal -->
-          <div class="hero-visual-card relative z-10 rounded-2xl overflow-hidden border border-white/8" style="background:#0D0D0D;">
-            <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto" style="display:block;">
-              <rect width="520" height="380" fill="#0D0D0D" rx="16"/>
-              <defs>
-                <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
-                  <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#F97316" stroke-width="0.3" stroke-opacity="0.12"/>
-                </pattern>
-                <radialGradient id="glowCenter" cx="50%" cy="60%" r="50%">
-                  <stop offset="0%"   stop-color="#F97316" stop-opacity="0.10"/>
-                  <stop offset="100%" stop-color="#F97316" stop-opacity="0"/>
-                </radialGradient>
-                <linearGradient id="tempGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%"   stop-color="#22c55e"/>
-                  <stop offset="60%"  stop-color="#F97316"/>
-                  <stop offset="100%" stop-color="#ef4444"/>
-                </linearGradient>
-                <filter id="glow">
-                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                  <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-              </defs>
-
-              <rect width="520" height="380" fill="url(#grid)" rx="16"/>
-              <rect width="520" height="380" fill="url(#glowCenter)" rx="16"/>
-
-              <!-- Solo / estrada -->
-              <rect x="0" y="300" width="520" height="80" fill="#0A0A0A"/>
-              <rect x="0" y="298" width="520" height="2" fill="#F97316" opacity="0.20"/>
-
-              <!-- Speed lines -->
-              <g>
-                <rect class="speed-line" x="0" y="272" width="80" height="2"   fill="#F97316" rx="1" opacity="0.5"/>
-                <rect class="speed-line" x="0" y="262" width="55" height="1.5" fill="#F97316" rx="1" opacity="0.3"/>
-                <rect class="speed-line" x="0" y="282" width="65" height="1.5" fill="#F97316" rx="1" opacity="0.35"/>
-                <rect class="speed-line" x="0" y="255" width="40" height="1"   fill="#F97316" rx="1" opacity="0.2"/>
-                <rect class="speed-line" x="0" y="290" width="50" height="1"   fill="#F97316" rx="1" opacity="0.2"/>
-              </g>
-
-              <!-- ── CARRO animado ── -->
-              <g class="car-float" transform="translate(60, 130)">
-                <ellipse cx="200" cy="168" rx="160" ry="8" fill="#000" opacity="0.4"/>
-                <!-- Base carroceria -->
-                <rect x="30" y="115" width="340" height="48" fill="#1A1A1A" rx="4"/>
-                <rect x="340" y="120" width="28" height="38" fill="#252525" rx="4"/>
-                <rect x="30"  y="120" width="22" height="38" fill="#252525" rx="4"/>
-                <!-- Teto arredondado -->
-                <path d="M 80 115 Q 90 68 130 60 L 260 58 Q 305 58 335 78 L 348 115 Z" fill="#202020"/>
-                <!-- Vidros -->
-                <path d="M 133 62 Q 138 68 140 95 L 188 95 L 188 62 Z" fill="#1E3A5F" opacity="0.9"/>
-                <path d="M 192 62 L 258 62 L 258 95 L 192 95 Z"          fill="#1E3A5F" opacity="0.9"/>
-                <path d="M 262 62 L 270 62 Q 305 65 325 90 L 325 95 L 262 95 Z" fill="#1E3A5F" opacity="0.9"/>
-                <!-- Reflexo -->
-                <path d="M 138 68 L 142 90 L 146 90 L 144 68 Z" fill="#fff" opacity="0.10"/>
-                <path d="M 200 65 L 200 90 L 204 90 L 204 65 Z" fill="#fff" opacity="0.07"/>
-                <!-- Colunas -->
-                <line x1="133" y1="62" x2="133" y2="115" stroke="#2A2A2A" stroke-width="5"/>
-                <line x1="190" y1="60" x2="190" y2="115" stroke="#2A2A2A" stroke-width="4"/>
-                <line x1="260" y1="60" x2="260" y2="115" stroke="#2A2A2A" stroke-width="4"/>
-                <line x1="328" y1="80" x2="328" y2="115" stroke="#2A2A2A" stroke-width="5"/>
-                <!-- Friso laranja -->
-                <rect x="52" y="129" width="296" height="4" fill="#F97316" rx="2" opacity="0.7"/>
-                <!-- Faróis -->
-                <rect x="340" y="105" width="20" height="8" fill="#FFF5C0" rx="2" filter="url(#glow)" opacity="0.9"/>
-                <rect x="342" y="108" width="16" height="3" fill="#F97316" rx="1" opacity="0.8"/>
-                <rect x="38"  y="108" width="16" height="8" fill="#FF3300" rx="2" opacity="0.7"/>
-                <!-- Maçanetas -->
-                <rect x="155" y="118" width="22" height="5" fill="#333" rx="2"/>
-                <rect x="240" y="118" width="22" height="5" fill="#333" rx="2"/>
-                <!-- Roda traseira -->
-                <circle cx="95"  cy="155" r="32" fill="#111" stroke="#333" stroke-width="3"/>
-                <g class="wheel-spin" style="transform-origin: 155px 285px;">
-                  <line x1="95"  y1="131" x2="95"  y2="179" stroke="#F97316" stroke-width="2.5" opacity="0.85"/>
-                  <line x1="71"  y1="141" x2="119" y2="169" stroke="#F97316" stroke-width="2.5" opacity="0.85"/>
-                  <line x1="71"  y1="169" x2="119" y2="141" stroke="#F97316" stroke-width="2.5" opacity="0.85"/>
-                </g>
-                <circle cx="95"  cy="155" r="10" fill="#1A1A1A" stroke="#F97316" stroke-width="2"/>
-                <circle cx="95"  cy="155" r="4"  fill="#F97316"/>
-                <!-- Roda dianteira -->
-                <circle cx="305" cy="155" r="32" fill="#111" stroke="#333" stroke-width="3"/>
-                <g class="wheel-spin" style="transform-origin: 365px 285px;">
-                  <line x1="305" y1="131" x2="305" y2="179" stroke="#F97316" stroke-width="2.5" opacity="0.85"/>
-                  <line x1="281" y1="141" x2="329" y2="169" stroke="#F97316" stroke-width="2.5" opacity="0.85"/>
-                  <line x1="281" y1="169" x2="329" y2="141" stroke="#F97316" stroke-width="2.5" opacity="0.85"/>
-                </g>
-                <circle cx="305" cy="155" r="10" fill="#1A1A1A" stroke="#F97316" stroke-width="2"/>
-                <circle cx="305" cy="155" r="4"  fill="#F97316"/>
-              </g>
-
-              <!-- Painel diagnóstico OBD -->
-              <g id="hero-obd-panel" transform="translate(340, 18)" class="hero-obd-glow">
-                <rect width="162" height="112" fill="rgba(18,18,18,0.97)" rx="12" stroke="#F97316" stroke-width="0.8" stroke-opacity="0.35"/>
-                <rect width="162" height="24" fill="#F97316" rx="12" fill-opacity="0.12"/>
-                <rect x="0" y="14" width="162" height="10" fill="#F97316" fill-opacity="0.12"/>
-                <circle cx="13" cy="12" r="4" fill="#F97316" opacity="0.8"/>
-                <text x="22" y="16" fill="#F97316" font-size="8.5" font-family="monospace" font-weight="bold" opacity="0.9">DIAGNÓSTICO OBD-II</text>
-                <g transform="translate(12, 34)">
-                  <circle cx="5" cy="5"  r="4" fill="#22c55e" class="blink-dot hero-obd-led"/>
-                  <text x="14" y="9"  fill="#bbb" font-size="8" font-family="monospace">Motor</text>
-                  <text x="118" y="9"  fill="#22c55e" font-size="8" font-family="monospace" font-weight="bold">OK</text>
-                  <circle cx="5" cy="22" r="4" fill="#22c55e" class="hero-obd-led"/>
-                  <text x="14" y="26" fill="#bbb" font-size="8" font-family="monospace">Freios</text>
-                  <text x="118" y="26" fill="#22c55e" font-size="8" font-family="monospace" font-weight="bold">OK</text>
-                  <circle cx="5" cy="39" r="4" fill="#F97316" class="blink-dot hero-obd-led" style="animation-delay:0.6s"/>
-                  <text x="14" y="43" fill="#bbb" font-size="8" font-family="monospace">Suspensão</text>
-                  <text x="118" y="43" fill="#F97316" font-size="8" font-family="monospace" font-weight="bold">REV</text>
-                  <circle cx="5" cy="56" r="4" fill="#22c55e" class="hero-obd-led"/>
-                  <text x="14" y="60" fill="#bbb" font-size="8" font-family="monospace">Elétrica</text>
-                  <text x="118" y="60" fill="#22c55e" font-size="8" font-family="monospace" font-weight="bold">OK</text>
-                </g>
-                <rect class="scan-line" x="0" y="26" width="162" height="2" fill="#F97316" rx="1" opacity="0.35"/>
-              </g>
-
-              <!-- Indicador temperatura -->
-              <g transform="translate(18, 18)">
-                <rect width="142" height="68" fill="rgba(18,18,18,0.95)" rx="10" stroke="#F97316" stroke-width="0.8" stroke-opacity="0.25"/>
-                <text x="10" y="16" fill="#F97316" font-size="8" font-family="monospace" opacity="0.8">TEMP. MOTOR</text>
-                <rect x="10" y="24" width="122" height="10" fill="#1A1A1A" rx="5"/>
-                <rect id="hero-temp-bar" x="10" y="24" width="84"  height="10" fill="url(#tempGrad)" rx="5"/>
-                <text id="hero-temp-val" x="10" y="52" fill="#F97316" font-size="18" font-family="monospace" font-weight="bold">0°C</text>
-                <text x="85" y="52" fill="#22c55e" font-size="9"  font-family="monospace">Normal</text>
-              </g>
-
-              <!-- Engrenagem de fundo esquerda -->
-              <g transform="translate(20, 195)" opacity="0.15">
-                <g class="gear-cw" style="transform-origin: 40px 40px;">
-                  <circle cx="40" cy="40" r="28" fill="none" stroke="#F97316" stroke-width="4"/>
-                  <circle cx="40" cy="40" r="12" fill="none" stroke="#F97316" stroke-width="3"/>
-                  <rect x="37" y="6"  width="6" height="12" fill="#F97316" rx="2"/>
-                  <rect x="37" y="62" width="6" height="12" fill="#F97316" rx="2"/>
-                  <rect x="6"  y="37" width="12" height="6" fill="#F97316" rx="2"/>
-                  <rect x="62" y="37" width="12" height="6" fill="#F97316" rx="2"/>
-                  <rect x="14" y="14" width="8" height="12" fill="#F97316" rx="2" transform="rotate(45,18,20)"/>
-                  <rect x="14" y="54" width="8" height="12" fill="#F97316" rx="2" transform="rotate(-45,18,60)"/>
-                  <rect x="56" y="14" width="8" height="12" fill="#F97316" rx="2" transform="rotate(-45,60,20)"/>
-                  <rect x="56" y="54" width="8" height="12" fill="#F97316" rx="2" transform="rotate(45,60,60)"/>
-                </g>
-              </g>
-
-              <!-- Engrenagem de fundo direita menor -->
-              <g transform="translate(452, 268)" opacity="0.12">
-                <g class="gear-ccw" style="transform-origin: 28px 28px;">
-                  <circle cx="28" cy="28" r="20" fill="none" stroke="#F97316" stroke-width="3"/>
-                  <circle cx="28" cy="28" r="8"  fill="none" stroke="#F97316" stroke-width="2"/>
-                  <rect x="25" y="4"  width="6" height="10" fill="#F97316" rx="2"/>
-                  <rect x="25" y="42" width="6" height="10" fill="#F97316" rx="2"/>
-                  <rect x="4"  y="25" width="10" height="6" fill="#F97316" rx="2"/>
-                  <rect x="42" y="25" width="10" height="6" fill="#F97316" rx="2"/>
-                </g>
-              </g>
-
-              <!-- Faíscas animadas -->
-              <g transform="translate(205, 55)">
-                <circle class="spark" cx="0"  cy="0"  r="3"   fill="#F97316" filter="url(#glow)"/>
-                <circle class="spark" cx="10" cy="5"  r="2"   fill="#FB923C" filter="url(#glow)"/>
-                <circle class="spark" cx="-5" cy="8"  r="2.5" fill="#F97316" filter="url(#glow)"/>
-                <circle class="spark" cx="15" cy="-3" r="2"   fill="#FFBB85" filter="url(#glow)"/>
-              </g>
-
-              <!-- Barra de progresso da revisão -->
-              <g transform="translate(18, 338)">
-                <text x="0" y="0" fill="#555" font-size="7.5" font-family="monospace" letter-spacing="1">REVISÃO EM ANDAMENTO</text>
-                <rect x="0" y="6" width="484" height="6" fill="#1A1A1A" rx="3"/>
-                <rect id="hero-progress-bar" x="0" y="6" width="315"  height="6" fill="#F97316" rx="3" opacity="0.85"/>
-                <text id="hero-progress-val" x="320" y="12" fill="#F97316" font-size="8" font-family="monospace" font-weight="bold">0%</text>
-              </g>
-
-            </svg>
-          </div>
-        </div>
-      </div>
-      <!-- fim coluna ilustração -->
-
-      </div><!-- fim split flex -->
-    </div>
-
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float hidden md:flex flex-col items-center gap-2">
-      <div class="w-6 h-10 rounded-full border border-orange/25 flex items-start justify-center pt-2">
-        <div class="w-1 h-2 bg-orange/50 rounded-full animate-bounce"></div>
-      </div>
-      <span class="text-[9px] tracking-[0.4em] text-gray-600 uppercase">Role</span>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════
-       SERVIÇOS
-       ═══════════════════════════════════════════ -->
-  <section id="servicos" class="relative py-24 lg:py-32 bg-[#0A0A0A]">
-    <!-- Linha decorativa topo -->
-    <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-orange/20 to-transparent"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Header -->
-      <div class="text-center mb-16 reveal">
-        <span class="text-orange text-xs font-bold tracking-[0.35em] uppercase">O que fazemos</span>
-        <h2 class="font-display font-bold text-white mt-3 mb-4" style="font-size: clamp(2rem, 4vw, 3.5rem);">Nossos Serviços</h2>
-        <div class="section-divider mb-5"></div>
-        <p class="text-gray-400 text-base max-w-xl mx-auto leading-relaxed">
-          De revisões simples a diagnósticos complexos — resolvemos com precisão, rapidez e peças de procedência garantida.
-        </p>
-      </div>
-
-      <!-- Grid de serviços -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <!-- Serviço 1 — Troca de Óleo -->
-        <div class="glass-card glass-card-hover rounded-2xl p-7 group transition-all duration-500 reveal delay-1">
-          <div class="icon-box mb-5">
-            <svg class="w-6 h-6 text-orange" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-            </svg>
-          </div>
-          <h3 class="font-display font-bold text-white text-xl mb-2 group-hover:text-orange transition-colors">Troca de Óleo & Filtros</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Óleo correto para o motor certo. Utilizamos apenas lubrificantes recomendados pela montadora e filtros originais para garantir vida longa ao seu motor.
-          </p>
-          <div class="mt-5 pt-5 border-t border-white/06 flex items-center gap-2">
-            <span class="text-orange text-xs font-bold tracking-widest uppercase">A partir de R$ 89</span>
-          </div>
-        </div>
-
-        <!-- Serviço 2 — Revisão Completa -->
-        <div class="glass-card glass-card-hover rounded-2xl p-7 group transition-all duration-500 reveal delay-2">
-          <div class="icon-box mb-5">
-            <svg class="w-6 h-6 text-orange" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
-            </svg>
-          </div>
-          <h3 class="font-display font-bold text-white text-xl mb-2 group-hover:text-orange transition-colors">Revisão Completa</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Checklist detalhado com mais de 50 pontos de inspeção. Entregamos laudo completo do que foi feito, do que foi encontrado e do que precisa de atenção futura.
-          </p>
-          <div class="mt-5 pt-5 border-t border-white/06 flex items-center gap-2">
-            <span class="text-orange text-xs font-bold tracking-widest uppercase">Consultar valor</span>
-          </div>
-        </div>
-
-        <!-- Serviço 3 — Freios -->
-        <div class="glass-card glass-card-hover rounded-2xl p-7 group transition-all duration-500 reveal delay-3">
-          <div class="icon-box mb-5">
-            <svg class="w-6 h-6 text-orange" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
-            </svg>
-          </div>
-          <h3 class="font-display font-bold text-white text-xl mb-2 group-hover:text-orange transition-colors">Freios & ABS</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Pastilhas, discos, fluido e sistema ABS. Segurança não tem preço, mas tem garantia: 90 dias em todo serviço realizado no sistema de freios.
-          </p>
-          <div class="mt-5 pt-5 border-t border-white/06 flex items-center gap-2">
-            <span class="text-orange text-xs font-bold tracking-widest uppercase">A partir de R$ 180</span>
-          </div>
-        </div>
-
-        <!-- Serviço 4 — Suspensão -->
-        <div class="glass-card glass-card-hover rounded-2xl p-7 group transition-all duration-500 reveal delay-1">
-          <div class="icon-box mb-5">
-            <svg class="w-6 h-6 text-orange" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/>
-            </svg>
-          </div>
-          <h3 class="font-display font-bold text-white text-xl mb-2 group-hover:text-orange transition-colors">Suspensão & Direção</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Amortecedores, molas, buchas e geometria. Carro que treme, puxa de lado ou faz barulho no buraco tem solução precisa aqui, sem tentativa e erro.
-          </p>
-          <div class="mt-5 pt-5 border-t border-white/06 flex items-center gap-2">
-            <span class="text-orange text-xs font-bold tracking-widest uppercase">Consultar valor</span>
-          </div>
-        </div>
-
-        <!-- Serviço 5 — Elétrica -->
-        <div class="glass-card glass-card-hover rounded-2xl p-7 group transition-all duration-500 reveal delay-2">
-          <div class="icon-box mb-5">
-            <svg class="w-6 h-6 text-orange" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
-            </svg>
-          </div>
-          <h3 class="font-display font-bold text-white text-xl mb-2 group-hover:text-orange transition-colors">Sistema Elétrico</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Scanner automotivo, injeção eletrônica, bateria e alternador. Lemos o computador do seu carro e resolvemos na raiz — sem ficar trocando peça no escuro.
-          </p>
-          <div class="mt-5 pt-5 border-t border-white/06 flex items-center gap-2">
-            <span class="text-orange text-xs font-bold tracking-widest uppercase">Diagnóstico gratuito</span>
-          </div>
-        </div>
-
-        <!-- Serviço 6 — Ar-condicionado -->
-        <div class="glass-card glass-card-hover rounded-2xl p-7 group transition-all duration-500 reveal delay-3">
-          <div class="icon-box mb-5">
-            <svg class="w-6 h-6 text-orange" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/>
-            </svg>
-          </div>
-          <h3 class="font-display font-bold text-white text-xl mb-2 group-hover:text-orange transition-colors">Ar-Condicionado</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">
-            Higienização, recarga de gás, troca de filtro cabine e reparo de compressor. Ar gelado de verdade, sem cheiro ruim e sem mufar de volta em uma semana.
-          </p>
-          <div class="mt-5 pt-5 border-t border-white/06 flex items-center gap-2">
-            <span class="text-orange text-xs font-bold tracking-widest uppercase">A partir de R$ 120</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA abaixo do grid -->
-      <div class="text-center mt-14 reveal">
-        <a href="https://wa.me/5511999990000?text=Olá!%20Gostaria%20de%20agendar%20um%20serviço%20no%20PitStop."
-           target="_blank" rel="noopener"
-           class="inline-flex items-center gap-3 px-10 py-4 bg-orange-shimmer text-piano font-bold text-sm tracking-widest uppercase rounded-xl transition-all duration-300 shadow-lg shadow-orange/20">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.37 0-4.567-.804-6.308-2.152l-.44-.348-2.847.954.954-2.847-.348-.44A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/>
+        <div class="hero-foto" data-hero>
+          <figure class="foto" data-foto="fachada"></figure>
+          <span class="selo-hero" data-t="hero.selo"></span>
+          <!-- Medidor decorativo: um único SVG pequeno, ponteiro balança de leve (transform) -->
+          <svg class="medidor" id="medidor" viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="60" cy="60" r="56" fill="#0f0f0e" stroke="#ff5a1f" stroke-width="3"/>
+            <path d="M18 90 A50 50 0 1 1 102 90" fill="none" stroke="#3a3a37" stroke-width="6"/>
+            <path d="M82 22 A50 50 0 0 1 102 90" fill="none" stroke="#ff5a1f" stroke-width="6"/>
+            <g id="ponteiro"><path d="M57 62 L60 20 L63 62Z" fill="#fff"/></g>
+            <circle cx="60" cy="62" r="6" fill="#ff5a1f"/>
           </svg>
-          Agendar via WhatsApp
-        </a>
-        <p class="text-gray-600 text-xs mt-3 tracking-wide">Resposta em até 5 minutos • Segunda a Sábado</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="faixa" aria-label="Endereço, horário e telefone">
+      <div class="wrap">
+        <div class="faixa-item"><small>Endereço</small><b data-t="endereco.completo"></b></div>
+        <div class="faixa-item"><small>Horário</small><b class="status" id="status" data-t="statusInicial"></b></div>
+        <div class="faixa-item"><small>Telefone / WhatsApp</small><b><a data-tel data-t="telefone.exibe" href="#"></a></b></div>
       </div>
     </div>
-  </section>
 
+    <section class="bloco claro" id="servicos">
+      <div class="wrap serv-wrap">
+        <div class="serv-intro" data-anim>
+          <p class="rotulo">01 · O que a gente faz</p>
+          <h2 data-t="servicos.titulo"></h2>
+          <p class="intro" data-t="servicos.intro"></p>
+          <p style="margin-top:26px"><a class="btn btn-p" data-wa data-wa-msg="orcamento" href="#">Pedir orçamento</a></p>
+        </div>
+        <ul class="serv-lista" id="servLista"></ul>
+      </div>
+    </section>
 
-  <!-- ═══════════════════════════════════════════
-       DIFERENCIAIS
-       ═══════════════════════════════════════════ -->
-  <div class="relative parallax-bg overflow-hidden">
-    <div class="absolute inset-0 bg-black/80 pointer-events-none"></div>
-    <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-orange/25 to-transparent"></div>
+    <section class="bloco" id="como-funciona">
+      <div class="wrap">
+        <p class="rotulo" data-anim>02 · Como funciona</p>
+        <h2 data-anim data-t="processo.titulo"></h2>
+        <ol class="passos" id="passos" style="list-style:none;margin-bottom:0;padding:0"></ol>
+      </div>
+    </section>
 
-    <section id="diferenciais" class="relative z-10 py-24 lg:py-32">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+    <section class="bloco" id="oficina" style="background:var(--bg2);border-block:1px solid var(--linha)">
+      <div class="wrap">
+        <p class="rotulo" data-anim>03 · A oficina</p>
+        <h2 data-anim data-t="oficina.titulo"></h2>
+        <p class="intro" data-anim data-t="oficina.intro"></p>
+        <div class="oficina-grade">
+          <figure class="foto f-equipe" data-foto="equipe" data-anim></figure>
+          <figure class="foto f-servico" data-foto="servico" data-anim></figure>
+          <figure class="foto f-detalhe" data-foto="detalhe" data-anim></figure>
+        </div>
+      </div>
+    </section>
 
-          <!-- Coluna esquerda sticky -->
-          <div class="lg:col-span-5 lg:sticky lg:top-32 reveal-left">
-            <span class="text-orange text-xs font-bold tracking-[0.35em] uppercase">Por que nos escolher</span>
-            <h2 class="font-display font-bold text-white mt-3 mb-4" style="font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.05;">
-              Nossos<br>Diferenciais
-            </h2>
-            <div class="section-divider-left mb-6"></div>
-            <p class="text-white font-semibold text-lg leading-snug mb-4">
-              Mecânica séria. Resultado que você vê e sente.
-            </p>
-            <p class="text-gray-300 text-sm leading-relaxed mb-8">
-              Aqui não tem achismo, não tem tentativa e erro e não tem surpresa na hora de buscar o carro. Trabalhamos com transparência total do diagnóstico à entrega.
-            </p>
-            <a href="https://wa.me/5511999990000?text=Olá!%20Quero%20saber%20mais%20sobre%20os%20serviços%20do%20PitStop."
-               target="_blank" rel="noopener"
-               class="inline-flex items-center gap-3 px-7 py-3.5 bg-orange-shimmer text-piano font-bold text-xs tracking-widest uppercase rounded-xl transition-all duration-300 shadow-md shadow-orange/20">
-              Falar com um Mecânico
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
-              </svg>
-            </a>
-          </div>
+    <section class="numeros" aria-label="A oficina em números">
+      <div class="wrap"><ul id="numeros"></ul></div>
+    </section>
 
-          <!-- Coluna direita — cards empilhados -->
-          <div class="lg:col-span-7 space-y-5">
+    <section class="bloco" id="avaliacoes">
+      <div class="wrap">
+        <p class="rotulo" data-anim>04 · Quem já passou por aqui</p>
+        <div class="aval-topo" style="margin-top:16px">
+          <div class="nota" data-anim><b id="notaGoogle"></b><div><div class="estrelas" aria-hidden="true">★★★★★</div><p id="notaTexto" style="color:var(--mudo)"></p></div></div>
+          <h2 data-anim data-t="avaliacoes.titulo"></h2>
+        </div>
+        <div class="avals" id="avals"></div>
+        <p class="aviso-ex" id="avisoEx" hidden>EXEMPLO: nota e avaliações abaixo são marcadores. Trocar por avaliações reais do Google da oficina (campo <code>avaliacoes</code> no topo do script).</p>
+        <p style="margin-top:26px"><a class="btn btn-s" id="verGoogle" target="_blank" rel="noopener" href="#">Ver todas no Google</a></p>
+      </div>
+    </section>
 
-            <!-- Diferencial 1 -->
-            <div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-7 group transition-all duration-500 reveal-right delay-1">
-              <div class="flex items-start gap-5">
-                <div class="icon-box flex-shrink-0 mt-0.5">
-                  <svg class="w-6 h-6 text-orange" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-display font-bold text-white text-xl mb-2 group-hover:text-orange transition-colors">Diagnóstico Preciso</h3>
-                  <p class="text-gray-300 text-sm leading-relaxed">
-                    Scanner automotivo de última geração conectado ao computador do seu veículo. Identificamos a causa real do problema antes de abrir qualquer peça — sem achismo, sem custo desnecessário para você.
-                  </p>
-                </div>
-              </div>
-            </div>
+    <section class="bloco claro" id="orcamento">
+      <div class="wrap orc">
+        <div data-anim>
+          <p class="rotulo">05 · Orçamento rápido</p>
+          <h2 data-t="orcamento.titulo"></h2>
+          <p class="intro" data-t="orcamento.intro"></p>
+          <ul id="promessas"></ul>
+        </div>
+        <form id="formOrc" data-anim>
+          <label>Seu nome<input name="nome" autocomplete="name" required></label>
+          <label>Carro (modelo e ano)<input name="carro" placeholder="Ex.: Gol 2014" required></label>
+          <label>Do que você precisa<select name="servico" id="selServico"></select></label>
+          <label>Conta o problema (opcional)<textarea name="obs" placeholder="Ex.: barulho na roda dianteira ao virar"></textarea></label>
+          <button class="btn btn-p" type="submit">Enviar pelo WhatsApp</button>
+          <p class="form-nota">Abre o WhatsApp com a mensagem pronta. Nada é enviado até você tocar em enviar.</p>
+        </form>
+      </div>
+    </section>
 
-            <!-- Diferencial 2 -->
-            <div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-7 group transition-all duration-500 reveal-right delay-2">
-              <div class="flex items-start gap-5">
-                <div class="icon-box flex-shrink-0 mt-0.5">
-                  <svg class="w-6 h-6 text-orange" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-display font-bold text-white text-xl mb-2 group-hover:text-orange transition-colors">Peças Originais</h3>
-                  <p class="text-gray-300 text-sm leading-relaxed">
-                    Trabalhamos apenas com peças originais ou de primeira linha homologadas. Nota fiscal em tudo, procedência comprovada e rastreabilidade para você saber exatamente o que foi colocado no seu carro.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Diferencial 3 -->
-            <div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-7 group transition-all duration-500 reveal-right delay-3">
-              <div class="flex items-start gap-5">
-                <div class="icon-box flex-shrink-0 mt-0.5">
-                  <svg class="w-6 h-6 text-orange" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-display font-bold text-white text-xl mb-2 group-hover:text-orange transition-colors">Mecânicos Certificados</h3>
-                  <p class="text-gray-300 text-sm leading-relaxed">
-                    Equipe com mais de 10 anos de experiência cada, treinamento contínuo e especialização por sistema. Quem mexe no seu carro sabe o que está fazendo — e assina embaixo.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Diferencial 4 -->
-            <div class="glass-card glass-card-hover rounded-2xl p-6 sm:p-7 group transition-all duration-500 reveal-right delay-4">
-              <div class="flex items-start gap-5">
-                <div class="icon-box flex-shrink-0 mt-0.5">
-                  <svg class="w-6 h-6 text-orange" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-display font-bold text-white text-xl mb-2 group-hover:text-orange transition-colors">Garantia no Serviço</h3>
-                  <p class="text-gray-300 text-sm leading-relaxed">
-                    90 dias de garantia em mão de obra e peças em todos os serviços realizados. Se algo não ficar certo, voltamos a fazer sem custo adicional. Simples assim.
-                  </p>
-                </div>
-              </div>
+    <section class="bloco" id="localizacao">
+      <div class="wrap">
+        <p class="rotulo" data-anim>06 · Onde estamos</p>
+        <h2 data-anim data-t="localizacao.titulo"></h2>
+        <div class="loc">
+          <div class="mapa" id="mapa"></div>
+          <div>
+            <p class="end-grande" data-t="endereco.completo"></p>
+            <p style="color:var(--mudo);margin-top:8px" data-t="endereco.referencia"></p>
+            <ul class="horarios" id="horarios"></ul>
+            <a class="tel-grande" data-tel data-t="telefone.exibe" href="#"></a>
+            <div class="loc-acoes">
+              <a class="btn btn-p" id="comoChegar" target="_blank" rel="noopener" href="#">Como chegar</a>
+              <a class="btn btn-s" data-wa data-wa-msg="saudacao" href="#">WhatsApp</a>
             </div>
           </div>
         </div>
       </div>
     </section>
-  </div>
+  </main>
 
-
-  <!-- ═══════════════════════════════════════════
-       NÚMEROS / COUNTERS
-       ═══════════════════════════════════════════ -->
-  <section id="numeros" class="relative py-20 lg:py-24 bg-[#0D0D0D]">
-    <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-orange to-transparent"></div>
-    <div class="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-orange/20 to-transparent"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
-
-        <!-- Métrica 1 -->
-        <div class="text-center reveal delay-1">
-          <div class="flex items-end justify-center gap-1 mb-2">
-            <span class="font-display font-bold text-orange leading-none counter" data-target="12" data-suffix="+" style="font-size: clamp(3rem, 7vw, 5rem);">0</span>
-          </div>
-          <p class="text-gray-400 text-sm font-medium tracking-wide uppercase">Anos no Mercado</p>
-          <div class="w-8 h-[2px] bg-orange/40 mx-auto mt-3 rounded-full"></div>
-        </div>
-
-        <!-- Métrica 2 -->
-        <div class="text-center reveal delay-2">
-          <div class="flex items-end justify-center gap-1 mb-2">
-            <span class="font-display font-bold text-orange leading-none counter" data-target="500" data-suffix="+" style="font-size: clamp(3rem, 7vw, 5rem);">0</span>
-          </div>
-          <p class="text-gray-400 text-sm font-medium tracking-wide uppercase">Clientes Ativos</p>
-          <div class="w-8 h-[2px] bg-orange/40 mx-auto mt-3 rounded-full"></div>
-        </div>
-
-        <!-- Métrica 3 -->
-        <div class="text-center reveal delay-3">
-          <div class="flex items-end justify-center gap-1 mb-2">
-            <span class="font-display font-bold text-orange leading-none counter" data-target="8000" data-suffix="+" style="font-size: clamp(3rem, 7vw, 5rem);">0</span>
-          </div>
-          <p class="text-gray-400 text-sm font-medium tracking-wide uppercase">Carros Revisados</p>
-          <div class="w-8 h-[2px] bg-orange/40 mx-auto mt-3 rounded-full"></div>
-        </div>
-
-        <!-- Métrica 4 — estática com estrelas -->
-        <div class="text-center reveal delay-4">
-          <div class="flex items-end justify-center gap-1 mb-2">
-            <span class="font-display font-bold text-orange leading-none" style="font-size: clamp(3rem, 7vw, 5rem);">5.0</span>
-          </div>
-          <div class="flex justify-center gap-1 mb-1">
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          </div>
-          <p class="text-gray-400 text-sm font-medium tracking-wide uppercase">Google Reviews</p>
-          <div class="w-8 h-[2px] bg-orange/40 mx-auto mt-3 rounded-full"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════
-       DEPOIMENTOS
-       ═══════════════════════════════════════════ -->
-  <section id="depoimentos" class="relative py-24 lg:py-32 bg-[#080808]">
-    <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-orange/15 to-transparent"></div>
-    <!-- Glow sutil de fundo -->
-    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-40 md:w-96 bg-orange/4 rounded-full blur-[80px] pointer-events-none"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Header -->
-      <div class="text-center mb-14 reveal">
-        <span class="text-orange text-xs font-bold tracking-[0.35em] uppercase">O que dizem sobre nós</span>
-        <h2 class="font-display font-bold text-white mt-3 mb-4" style="font-size: clamp(2rem, 4vw, 3.5rem);">Avaliações Reais</h2>
-        <div class="section-divider mb-5"></div>
-        <p class="text-gray-400 text-base max-w-lg mx-auto">
-          Mais de 148 avaliações 5 estrelas no Google. Cada uma delas é de um cliente que voltou.
-        </p>
-      </div>
-
-      <!-- Grid de depoimentos -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-        <!-- Depoimento 1 -->
-        <div class="glass-card glass-card-hover rounded-2xl p-7 flex flex-col gap-5 transition-all duration-500 reveal-left delay-1">
-          <!-- Estrelas -->
-          <div class="flex gap-1">
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          </div>
-          <!-- Texto -->
-          <blockquote class="text-gray-300 text-sm leading-relaxed flex-1">
-            "Trouxe minha Hilux com um barulho estranho na suspensão que três outras oficinas não conseguiram resolver. O pessoal do PitStop identificou em menos de 30 minutos de diagnóstico. Serviço impecável, preço justo e carro ficou pronto no prazo combinado."
-          </blockquote>
-          <!-- Avatar + Nome -->
-          <div class="flex items-center gap-3 pt-2 border-t border-white/08">
-            <div class="w-10 h-10 rounded-full bg-orange/15 border border-orange/30 flex items-center justify-center flex-shrink-0">
-              <span class="font-display font-bold text-orange text-sm">CR</span>
-            </div>
-            <div>
-              <p class="text-white font-semibold text-sm">Carlos R.</p>
-              <p class="text-gray-500 text-xs">Cliente há 4 anos</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Depoimento 2 -->
-        <div class="glass-card glass-card-hover rounded-2xl p-7 flex flex-col gap-5 transition-all duration-500 reveal delay-2">
-          <div class="flex gap-1">
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          </div>
-          <blockquote class="text-gray-300 text-sm leading-relaxed flex-1">
-            "Fiz revisão completa antes de uma viagem longa. Me entregaram um laudo detalhado de tudo que foi verificado, com foto de cada item. Fiquei impressionada com o profissionalismo. Viagem feita com total tranquilidade. Com certeza voltarei sempre aqui."
-          </blockquote>
-          <div class="flex items-center gap-3 pt-2 border-t border-white/08">
-            <div class="w-10 h-10 rounded-full bg-orange/15 border border-orange/30 flex items-center justify-center flex-shrink-0">
-              <span class="font-display font-bold text-orange text-sm">FM</span>
-            </div>
-            <div>
-              <p class="text-white font-semibold text-sm">Fernanda M.</p>
-              <p class="text-gray-500 text-xs">Cliente há 2 anos</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Depoimento 3 -->
-        <div class="glass-card glass-card-hover rounded-2xl p-7 flex flex-col gap-5 transition-all duration-500 reveal-right delay-3">
-          <div class="flex gap-1">
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 star-filled" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          </div>
-          <blockquote class="text-gray-300 text-sm leading-relaxed flex-1">
-            "Já tentei outras oficinas aqui na região mas sempre voltei pro PitStop. A diferença é gritante no atendimento e na qualidade do serviço. Me explicam tudo antes de fazer, me mostram a peça antiga depois de trocar. Aqui eu confio de olhos fechados."
-          </blockquote>
-          <div class="flex items-center gap-3 pt-2 border-t border-white/08">
-            <div class="w-10 h-10 rounded-full bg-orange/15 border border-orange/30 flex items-center justify-center flex-shrink-0">
-              <span class="font-display font-bold text-orange text-sm">RS</span>
-            </div>
-            <div>
-              <p class="text-white font-semibold text-sm">Ricardo S.</p>
-              <p class="text-gray-500 text-xs">Cliente há 6 anos</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Badge Google -->
-      <div class="flex justify-center mt-10 reveal">
-        <div class="inline-flex items-center gap-3 px-6 py-3 glass-card rounded-full border border-orange/15">
-          <svg class="w-5 h-5 text-orange flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-          </svg>
-          <span class="text-white text-sm font-semibold">5.0</span>
-          <span class="text-gray-500 text-xs">•</span>
-          <span class="text-gray-400 text-sm">148 avaliações no Google</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════
-       LOCALIZAÇÃO
-       ═══════════════════════════════════════════ -->
-  <section id="localizacao" class="relative py-24 lg:py-32 bg-[#0A0A0A]">
-    <div class="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-orange/20 to-transparent"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Header -->
-      <div class="text-center mb-14 reveal">
-        <span class="text-orange text-xs font-bold tracking-[0.35em] uppercase">Onde estamos</span>
-        <h2 class="font-display font-bold text-white mt-3 mb-4" style="font-size: clamp(2rem, 4vw, 3.5rem);">Localização</h2>
-        <div class="section-divider mb-5"></div>
-        <p class="text-gray-400 text-base max-w-md mx-auto">Fácil acesso, estacionamento próprio e espaço de espera confortável.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-
-        <!-- Informações -->
-        <div class="space-y-6 reveal-left">
-
-          <!-- Endereço -->
-          <div class="glass-card rounded-2xl p-6 flex items-start gap-4">
-            <div class="icon-box flex-shrink-0 mt-0.5">
-              <svg class="w-5 h-5 text-orange" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="text-orange text-xs font-bold tracking-widest uppercase mb-1">Endereço</p>
-              <p class="text-white font-semibold text-sm">Av. das Indústrias, 1247</p>
-              <p class="text-gray-400 text-sm">Bairro Industrial — São Paulo, SP</p>
-              <p class="text-gray-500 text-xs mt-1">CEP: 04000-000</p>
-            </div>
-          </div>
-
-          <!-- Horários -->
-          <div class="glass-card rounded-2xl p-6">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="icon-box">
-                <svg class="w-5 h-5 text-orange" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-              </div>
-              <p class="text-orange text-xs font-bold tracking-widest uppercase">Horários de Atendimento</p>
-            </div>
-            <div class="space-y-2">
-              <div class="flex justify-between items-center py-2 border-b border-white/06">
-                <span class="text-gray-300 text-sm">Segunda — Sexta</span>
-                <span class="text-white font-semibold text-sm">08:00 – 18:00</span>
-              </div>
-              <div class="flex justify-between items-center py-2 border-b border-white/06">
-                <span class="text-gray-300 text-sm">Sábado</span>
-                <span class="text-white font-semibold text-sm">08:00 – 13:00</span>
-              </div>
-              <div class="flex justify-between items-center py-2">
-                <span class="text-gray-300 text-sm">Domingo</span>
-                <span class="text-gray-500 text-sm">Fechado</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Contato -->
-          <div class="grid grid-cols-2 gap-4">
-            <a href="tel:+5511999990000" class="glass-card glass-card-hover rounded-2xl p-5 flex items-center gap-3 transition-all duration-300 group">
-              <div class="icon-box flex-shrink-0">
-                <svg class="w-5 h-5 text-orange" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
-                </svg>
-              </div>
-              <div>
-                <p class="text-gray-500 text-xs uppercase tracking-wider">Telefone</p>
-                <p class="text-white text-sm font-semibold group-hover:text-orange transition-colors">(11) 9999-9000</p>
-              </div>
-            </a>
-            <a href="https://wa.me/5511999990000?text=Olá!%20Gostaria%20de%20agendar%20um%20serviço%20no%20PitStop."
-               target="_blank" rel="noopener"
-               class="glass-card glass-card-hover rounded-2xl p-5 flex items-center gap-3 transition-all duration-300 group">
-              <div class="icon-box flex-shrink-0">
-                <svg class="w-5 h-5 text-orange" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                  <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.37 0-4.567-.804-6.308-2.152l-.44-.348-2.847.954.954-2.847-.348-.44A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/>
-                </svg>
-              </div>
-              <div>
-                <p class="text-gray-500 text-xs uppercase tracking-wider">WhatsApp</p>
-                <p class="text-white text-sm font-semibold group-hover:text-orange transition-colors">(11) 99999-0000</p>
-              </div>
-            </a>
-          </div>
-        </div>
-
-        <!-- Mapa -->
-        <div class="reveal-right">
-          <div class="map-wrapper" style="height: 420px;">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.197!2d-46.6333!3d-23.5489!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1"
-              width="100%"
-              height="100%"
-              style="border:0; filter: grayscale(70%) invert(10%) hue-rotate(190deg);"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="Localização PitStop Centro Automotivo">
-            </iframe>
-          </div>
-          <div class="mt-4 flex items-center gap-3 glass-card rounded-xl px-4 py-3">
-            <div class="w-2 h-2 rounded-full bg-orange animate-pulse flex-shrink-0"></div>
-            <p class="text-gray-400 text-xs">
-              <strong class="text-white">PitStop Centro Automotivo</strong> · Av. das Indústrias, 1247 · São Paulo, SP
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ═══════════════════════════════════════════
-       CTA FINAL
-       ═══════════════════════════════════════════ -->
-  <section class="relative py-24 lg:py-32 overflow-hidden" style="background: linear-gradient(135deg, #080808 0%, #110800 50%, #1a0c00 100%);">
-    <!-- Glow laranja de fundo -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-48 md:w-96 md:h-64 bg-orange/8 rounded-full blur-[100px] pointer-events-none"></div>
-    <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-orange/50 to-transparent"></div>
-
-    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <!-- Badge -->
-      <div class="inline-flex items-center gap-3 mb-6 reveal">
-        <span class="w-10 h-[2px] bg-orange/50"></span>
-        <span class="text-orange text-xs font-bold tracking-[0.35em] uppercase">Agende agora</span>
-        <span class="w-10 h-[2px] bg-orange/50"></span>
-      </div>
-
-      <!-- Headline -->
-      <h2 class="font-display font-bold text-white mb-5 reveal" style="font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.05;">
-        Agende hoje.<br>
-        <span class="text-orange-gradient">Seu carro agradece.</span>
-      </h2>
-
-      <!-- Subheadline -->
-      <p class="text-gray-300 text-lg leading-relaxed mb-10 max-w-2xl mx-auto reveal">
-        Atendimento rápido, diagnóstico honesto e garantia real em todos os serviços. Sem enrolação, sem surpresa no orçamento.
-      </p>
-
-      <!-- CTA Button -->
-      <div class="reveal">
-        <a href="https://wa.me/5511999990000?text=Olá!%20Gostaria%20de%20agendar%20um%20serviço%20no%20PitStop."
-           target="_blank" rel="noopener"
-           class="inline-flex items-center gap-3 px-12 py-5 bg-orange-shimmer text-piano font-bold text-base tracking-widest uppercase rounded-xl transition-all duration-300 shadow-2xl shadow-orange/30 animate-pulse-orange">
-          <svg class="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.37 0-4.567-.804-6.308-2.152l-.44-.348-2.847.954.954-2.847-.348-.44A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/>
-          </svg>
-          Agendar pelo WhatsApp
-        </a>
-        <p class="text-gray-600 text-xs mt-4 tracking-wider">Segunda a Sábado &nbsp;•&nbsp; Resposta em até 5 minutos</p>
-      </div>
-
-      <!-- Trust badges -->
-      <div class="flex flex-wrap justify-center gap-6 mt-14 reveal">
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-          </svg>
-          <span class="text-gray-500 text-xs">90 dias de garantia</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
-          </svg>
-          <span class="text-gray-500 text-xs">Peças com nota fiscal</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-orange" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-          </svg>
-          <span class="text-gray-500 text-xs">5.0 no Google</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <svg class="w-4 h-4 text-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-          <span class="text-gray-500 text-xs">12 anos de experiência</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       FOOTER
-       ═══════════════════════════════════════════ -->
-  <footer class="bg-[#050505] border-t border-orange/10 pt-16 pb-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
-
-        <!-- Coluna 1 — Logo e descrição -->
-        <div>
-        <!-- Logo footer -->
-        <div class="flex items-center gap-3 mb-4">
-          <svg width="40" height="40" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0">
-            <rect width="44" height="44" rx="10" fill="#F97316"/>
-            <rect x="16" y="8"  width="12" height="14" rx="3" fill="#080808"/>
-            <rect x="13" y="19" width="18" height="4"  rx="2" fill="#080808"/>
-            <rect x="20" y="23" width="4"  height="9"  rx="2" fill="#080808"/>
-            <circle cx="22" cy="35" r="5"   fill="none" stroke="#080808" stroke-width="3"/>
-            <circle cx="22" cy="35" r="1.5" fill="#080808"/>
-            <rect x="14" y="11" width="3" height="8" rx="1" fill="#080808" opacity="0.5"/>
-            <rect x="27" y="11" width="3" height="8" rx="1" fill="#080808" opacity="0.5"/>
-          </svg>
-          <div>
-            <span class="font-display font-bold text-white text-base tracking-wider uppercase block leading-none">PitStop</span>
-            <span class="font-sans text-gray-500 text-[10px] tracking-widest uppercase leading-none">Centro Automotivo</span>
-          </div>
-        </div>
-        <p class="text-gray-500 text-sm leading-relaxed mb-5">
-            Há 12 anos cuidando do seu veículo com diagnóstico preciso, peças originais e garantia real em todos os serviços.
-          </p>
-          <!-- Redes sociais -->
-          <div class="flex items-center gap-3">
-            <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-gray-500 hover:text-orange hover:border-orange/30 transition-all duration-300">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-            <a href="#" aria-label="Facebook" class="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-gray-500 hover:text-orange hover:border-orange/30 transition-all duration-300">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
-            <a href="https://wa.me/5511999990000" target="_blank" rel="noopener" aria-label="WhatsApp" class="w-9 h-9 rounded-lg border border-white/10 flex items-center justify-center text-gray-500 hover:text-orange hover:border-orange/30 transition-all duration-300">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.37 0-4.567-.804-6.308-2.152l-.44-.348-2.847.954.954-2.847-.348-.44A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Coluna 2 — Links rápidos -->
-        <div>
-          <h4 class="font-display font-bold text-white text-base tracking-widest uppercase mb-5">Links Rápidos</h4>
-          <ul class="space-y-3">
-            <li><a href="#inicio"       class="text-gray-500 text-sm hover:text-orange transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-orange/40"></span>Início</a></li>
-            <li><a href="#servicos"     class="text-gray-500 text-sm hover:text-orange transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-orange/40"></span>Serviços</a></li>
-            <li><a href="#diferenciais" class="text-gray-500 text-sm hover:text-orange transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-orange/40"></span>Diferenciais</a></li>
-            <li><a href="#numeros"      class="text-gray-500 text-sm hover:text-orange transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-orange/40"></span>Resultados</a></li>
-            <li><a href="#depoimentos"  class="text-gray-500 text-sm hover:text-orange transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-orange/40"></span>Avaliações</a></li>
-            <li><a href="#localizacao"  class="text-gray-500 text-sm hover:text-orange transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-orange/40"></span>Localização</a></li>
-          </ul>
-        </div>
-
-        <!-- Coluna 3 — Contato -->
-        <div>
-          <h4 class="font-display font-bold text-white text-base tracking-widest uppercase mb-5">Contato</h4>
-          <ul class="space-y-4">
-            <li class="flex items-start gap-3">
-              <svg class="w-4 h-4 text-orange flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
-              </svg>
-              <span class="text-gray-500 text-sm">Av. das Indústrias, 1247<br>São Paulo, SP – 04000-000</span>
-            </li>
-            <li class="flex items-center gap-3">
-              <svg class="w-4 h-4 text-orange flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
-              </svg>
-              <a href="tel:+5511999990000" class="text-gray-500 text-sm hover:text-orange transition-colors">(11) 9999-9000</a>
-            </li>
-            <li class="flex items-center gap-3">
-              <svg class="w-4 h-4 text-orange flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-              <span class="text-gray-500 text-sm">Seg–Sex: 08h–18h | Sáb: 08h–13h</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Divider + copyright -->
-      <div class="border-t border-white/06 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p class="text-gray-600 text-xs">
-          © <span id="footerYear"></span> PitStop Centro Automotivo. Todos os direitos reservados.
-        </p>
-        <p class="text-gray-700 text-xs">
-          CNPJ: 00.000.000/0001-00 &nbsp;·&nbsp; São Paulo, SP
-        </p>
-      </div>
+  <footer>
+    <div class="wrap">
+      <p><b data-t="nome"></b> · <span data-t="endereco.completo"></span></p>
+      <p>CNPJ: <span data-t="cnpj"></span></p>
+      <p>© <span id="ano"></span> <span data-t="nome"></span>. Todos os direitos reservados.</p>
     </div>
   </footer>
 
-
-  <!-- ═══════════════════════════════════════════
-       FAB WHATSAPP
-       ═══════════════════════════════════════════ -->
-  <div class="fab-container fixed bottom-6 right-6 z-50 flex items-center gap-3">
-    <!-- Tooltip -->
-    <div class="tooltip-fab bg-[#111] border border-white/10 text-white text-xs font-medium px-3 py-2 rounded-lg whitespace-nowrap shadow-lg">
-      Falar no WhatsApp
-    </div>
-    <!-- Botão -->
-    <a href="https://wa.me/5511999990000?text=Olá!%20Gostaria%20de%20agendar%20um%20serviço%20no%20PitStop."
-       target="_blank" rel="noopener"
-       aria-label="Falar no WhatsApp"
-       class="w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg animate-pulse-orange transition-transform hover:scale-110 duration-300">
-      <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.37 0-4.567-.804-6.308-2.152l-.44-.348-2.847.954.954-2.847-.348-.44A9.953 9.953 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/>
-      </svg>
-    </a>
+  <!-- WhatsApp + ligar: fixos. No celular viram barra inferior; no desktop, botão flutuante -->
+  <div class="fixos">
+    <a class="btn btn-lig btn-s" data-tel href="#" aria-label="Ligar para a oficina">Ligar</a>
+    <a class="btn btn-zap" data-wa data-wa-msg="saudacao" href="#">WhatsApp</a>
   </div>
 
+<script>
+/* =====================================================================
+   CONFIGURAÇÃO DA OFICINA: é aqui que se troca tudo para outro cliente.
+   Os dados abaixo são EXEMPLO (exemplo:true). Com dados reais, ponha
+   exemplo:false: some o aviso de "exemplo" e o JSON-LD passa a incluir nota.
+   Nome/endereço/telefone/WhatsApp, horários, serviços, passos, avaliações,
+   fotos e textos de cada seção ficam todos neste objeto.
+   ===================================================================== */
+const OFICINA = {
+  exemplo: true,
+  nome: "PitStop Centro Automotivo",
+  nomeCurto: "PitStop",
+  tipo: "Oficina mecânica",
+  bairro: "Vila Industrial",
+  cidade: "São Paulo",
+  uf: "SP",
+  cnpj: "00.000.000/0001-00 (exemplo)",
+  endereco: {
+    rua: "Av. das Indústrias, 1247",
+    cep: "04000-000",
+    completo: "Av. das Indústrias, 1247 · Vila Industrial, São Paulo/SP",
+    referencia: "Ao lado do mercado, estacionamento próprio para clientes.",
+    // Texto que o Google Maps entende; troque pelo endereço certo
+    mapaBusca: "Av. das Indústrias, 1247, São Paulo, SP"
+  },
+  telefone: { exibe: "(11) 99999-0000", tel: "5511999990000" },   // tel: só dígitos com DDI
+  whatsapp: "5511999990000",                                       // só dígitos com DDI; placeholder até ter o real
+  // dow: 0=domingo ... 6=sábado. abre/fecha vazios = fechado.
+  horarios: [
+    { rotulo: "Segunda a sexta", dow: [1,2,3,4,5], abre: "08:00", fecha: "18:00" },
+    { rotulo: "Sábado",          dow: [6],         abre: "08:00", fecha: "13:00" },
+    { rotulo: "Domingo",         dow: [0],         abre: "",      fecha: "" }
+  ],
+  mensagens: {
+    saudacao: "Olá! Vi o site da {nomeCurto} e queria falar com a oficina.",
+    orcamento: "Olá! Quero um orçamento na {nomeCurto}."
+  },
+  hero: {
+    eyebrow: "Oficina mecânica · {bairro}",
+    titulo: "Barulho estranho, luz acesa, freio mole?",
+    destaque: "Traz que a gente olha.",
+    sub: "Revisão, freio, suspensão, injeção e alinhamento aqui em {bairro}. Você acompanha o diagnóstico, recebe o orçamento antes de a gente abrir qualquer coisa e só paga o que aprovar.",
+    selo: "Orçamento antes de mexer"
+  },
+  servicos: {
+    titulo: "O que o seu carro pode precisar",
+    intro: "Serviço de oficina de verdade, sem pacote enfeitado. Se não souber o nome do problema, conta o sintoma que a gente descobre.",
+    lista: [
+      { nome: "Revisão completa", texto: "Óleo, filtros, correias, velas, fluidos, bateria, luzes. Você recebe a lista do que está bom, do que dá pra esperar e do que não dá.", sintoma: "Antes de viajar ou a cada 10 mil km" },
+      { nome: "Freios", texto: "Pastilha, disco, fluido e cabo. Mostramos a peça gasta ao lado da nova antes de trocar.", sintoma: "Chiado, pedal baixo ou carro puxando ao frear" },
+      { nome: "Suspensão", texto: "Amortecedor, bucha, pivô, terminal e batente. Carro bom de estrada começa por aqui.", sintoma: "Batida seca em buraco, carro balançando em curva" },
+      { nome: "Injeção eletrônica", texto: "Scanner, limpeza de bico, sonda, velas e cabos. Achamos a causa antes de trocar peça.", sintoma: "Luz da injeção, falha, consumo alto ou engasgo" },
+      { nome: "Alinhamento e balanceamento", texto: "Máquina regulada e conferida na estrada depois do serviço. Pneu dura mais e o volante para de tremer.", sintoma: "Volante tremendo ou carro puxando pra um lado" },
+      { nome: "Troca de óleo e filtros", texto: "Óleo do tipo certo pro seu motor, filtro novo e conferência rápida dos níveis. Sai em pouco tempo.", sintoma: "Passou do prazo ou do km da troca" }
+    ]
+  },
+  processo: {
+    titulo: "Aqui ninguém mexe no seu carro sem você saber",
+    passos: [
+      { t: "Você chega", p: "Conta o que está acontecendo, do jeito que você sabe. Pode vir sem hora marcada ou chamar no WhatsApp antes." },
+      { t: "A gente olha", p: "O mecânico analisa o carro com você por perto e explica o que encontrou, sem palavra difícil." },
+      { t: "Orçamento na mão", p: "Valor de peça e de mão de obra separados. Aprovou, fazemos. Não aprovou, não paga nada além do que combinou." },
+      { t: "Entrega e garantia", p: "Peça trocada volta pra você se quiser. O serviço sai com garantia combinada por escrito." }
+    ]
+  },
+  oficina: {
+    titulo: "Quem cuida do seu carro",
+    intro: "Equipe do bairro, bancada à vista de quem passa. Aqui você vê o trabalho acontecendo."
+  },
+  // Fotos reais: coloque o caminho em src (ex.: "img/fachada.jpg", ideal 1200px de largura, JPG/WebP).
+  // Sem src, aparece um espaço neutro com o nome da foto. foco = object-position da foto.
+  fotos: {
+    fachada: { src: "", w: 960, h: 1200, alt: "Fachada da oficina", legenda: "Fachada", foco: "50% 50%" },
+    equipe:  { src: "", w: 1200, h: 1000, alt: "Equipe da oficina", legenda: "Equipe", foco: "50% 35%" },
+    servico: { src: "", w: 1200, h: 750, alt: "Mecânico trabalhando num carro no elevador", legenda: "Serviço em andamento", foco: "50% 50%" },
+    detalhe: { src: "", w: 1200, h: 750, alt: "Peça sendo conferida na bancada", legenda: "Bancada", foco: "50% 50%" }
+  },
+  numeros: [
+    { valor: 12,   sufixo: "",  rotulo: "anos de oficina" },
+    { valor: 90,   sufixo: "",  rotulo: "dias de garantia no serviço" },
+    { valor: 8000, sufixo: "+", rotulo: "carros atendidos" }
+  ],
+  avaliacoes: {
+    titulo: "O que falam da gente",
+    nota: "4.9",
+    total: 0,                    // número real de avaliações no Google
+    link: "",                    // link do perfil no Google Meu Negócio
+    exemplo: true,
+    lista: [
+      { nome: "Nome do cliente",  texto: "[EXEMPLO] Aqui entra o texto de uma avaliação real do Google, copiado como está.", estrelas: 5 },
+      { nome: "Nome do cliente",  texto: "[EXEMPLO] Outra avaliação real do Google. Prefira as que citam o serviço feito.", estrelas: 5 },
+      { nome: "Nome do cliente",  texto: "[EXEMPLO] Terceira avaliação real. Troque os três blocos e o aviso some.", estrelas: 5 }
+    ]
+  },
+  orcamento: {
+    titulo: "Orçamento em um minuto",
+    intro: "Preencha, toque em enviar e a conversa abre no WhatsApp já com tudo escrito. A resposta vem no horário de atendimento.",
+    promessas: ["Valor de peça e mão de obra separados", "Sem cobrar para olhar o carro", "Você aprova antes de qualquer serviço"]
+  },
+  localizacao: { titulo: "Vem tomar um café enquanto a gente olha" }
+};
 
-  <!-- ═══════════════════════════════════════════
-       JAVASCRIPT
-       ═══════════════════════════════════════════ -->
-  <script>
-    // ── Navbar scroll behavior ──────────────────────────────────────────────
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.style.background = 'rgba(8,8,8,0.92)';
-        header.style.backdropFilter = 'blur(20px)';
-        header.style.webkitBackdropFilter = 'blur(20px)';
-        header.style.borderBottom = '1px solid rgba(249,115,22,0.10)';
-        header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.5)';
-      } else {
-        header.style.background = 'transparent';
-        header.style.backdropFilter = 'none';
-        header.style.webkitBackdropFilter = 'none';
-        header.style.borderBottom = 'none';
-        header.style.boxShadow = 'none';
-      }
-    }, { passive: true });
+/* ===================== RENDER (não precisa mexer daqui pra baixo para trocar de cliente) ===================== */
+(function(){
+  var O = OFICINA;
+  var porCaminho = function(c){ return c.split('.').reduce(function(a,k){ return a == null ? a : a[k]; }, O); };
+  var interpola = function(s){ return String(s).replace(/\{(\w+)\}/g, function(_,k){ return O[k] != null ? O[k] : ''; }); };
+  var el = function(tag, cls, html){ var e = document.createElement(tag); if(cls) e.className = cls; if(html != null) e.textContent = html; return e; };
 
-    // ── Mobile menu toggle ──────────────────────────────────────────────────
-    const menuBtn        = document.getElementById('menuBtn');
-    const mobileMenu     = document.getElementById('mobileMenu');
-    const menuIconOpen   = document.getElementById('menuIconOpen');
-    const menuIconClose  = document.getElementById('menuIconClose');
-    let menuOpen = false;
+  // Textos
+  document.querySelectorAll('[data-t]').forEach(function(n){
+    var v = porCaminho(n.getAttribute('data-t'));
+    if(v != null) n.textContent = interpola(v);
+  });
+  document.title = O.nome + ' | Mecânica de bairro em ' + O.cidade;
+  document.getElementById('ano').textContent = new Date().getFullYear();
 
-    menuBtn.addEventListener('click', () => {
-      menuOpen = !menuOpen;
-      mobileMenu.classList.toggle('hidden', !menuOpen);
-      menuIconOpen.classList.toggle('hidden', menuOpen);
-      menuIconClose.classList.toggle('hidden', !menuOpen);
-    });
+  // Links de WhatsApp e telefone
+  var waLink = function(msg){ return 'https://wa.me/' + O.whatsapp + '?text=' + encodeURIComponent(msg); };
+  document.querySelectorAll('[data-wa]').forEach(function(a){
+    var k = a.getAttribute('data-wa-msg');
+    a.href = waLink(interpola(O.mensagens[k] || O.mensagens.saudacao));
+    a.target = '_blank'; a.rel = 'noopener';
+  });
+  document.querySelectorAll('[data-tel]').forEach(function(a){ a.href = 'tel:+' + O.telefone.tel; });
 
-    document.querySelectorAll('.mobile-nav').forEach(link => {
-      link.addEventListener('click', () => {
-        menuOpen = false;
-        mobileMenu.classList.add('hidden');
-        menuIconOpen.classList.remove('hidden');
-        menuIconClose.classList.add('hidden');
-      });
-    });
+  // Serviços (também alimenta o select do orçamento)
+  var lista = document.getElementById('servLista'), sel = document.getElementById('selServico');
+  O.servicos.lista.forEach(function(s, i){
+    var li = el('li', 'serv'); li.setAttribute('data-anim', '');
+    li.appendChild(el('span', 'n', String(i + 1).padStart(2, '0')));
+    li.appendChild(el('h3', '', s.nome));
+    li.appendChild(el('p', '', s.texto));
+    li.appendChild(el('p', 'sint', s.sintoma));
+    lista.appendChild(li);
+    var op = el('option', '', s.nome); op.value = s.nome; sel.appendChild(op);
+  });
+  var outro = el('option', '', 'Outro / não sei dizer'); outro.value = 'Outro'; sel.appendChild(outro);
 
-    // ── Reveal on scroll (IntersectionObserver) ────────────────────────────
-    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  // Passo a passo
+  var passos = document.getElementById('passos');
+  O.processo.passos.forEach(function(p){
+    var li = el('li', 'passo'); li.setAttribute('data-anim', '');
+    li.appendChild(el('h3', '', p.t)); li.appendChild(el('p', '', p.p));
+    passos.appendChild(li);
+  });
 
-    revealEls.forEach(el => revealObserver.observe(el));
+  // Fotos: com src vira <img> (lazy, com width/height); sem src ou com erro, placeholder neutro
+  var icone = '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 15h9l3-5h12l3 5h9v23H6z"/><circle cx="24" cy="26" r="7"/></svg>';
+  document.querySelectorAll('[data-foto]').forEach(function(f){
+    var nome = f.getAttribute('data-foto'), d = O.fotos[nome];
+    if(!d) return;
+    var ph = function(){
+      var b = el('div', 'ph'); b.innerHTML = icone; b.appendChild(el('span', '', 'Foto: ' + d.legenda)); f.insertBefore(b, f.firstChild);
+    };
+    if(d.src){
+      var img = new Image();
+      img.alt = d.alt; img.width = d.w; img.height = d.h; img.decoding = 'async';
+      img.loading = nome === 'fachada' ? 'eager' : 'lazy';
+      if(nome === 'fachada') img.fetchPriority = 'high';
+      img.style.objectPosition = d.foco;
+      img.onerror = function(){ img.remove(); ph(); };
+      img.src = d.src; f.appendChild(img);
+    } else { ph(); }
+    f.insertAdjacentHTML('beforeend', '<i class="canto c1"></i><i class="canto c2"></i>');
+    f.appendChild(el('figcaption', '', d.legenda));
+  });
 
-    // ── Counter animation ──────────────────────────────────────────────────
-    function animateCounter(el, target, duration) {
-      const suffix = el.dataset.suffix || '';
-      let startTime = null;
-      const startVal = 0;
+  // Números
+  var ul = document.getElementById('numeros');
+  O.numeros.forEach(function(n){
+    var li = el('li'); var b = el('b', '', n.valor.toLocaleString('pt-BR') + n.sufixo);
+    b.setAttribute('data-contar', n.valor); b.setAttribute('data-sufixo', n.sufixo);
+    var s = el('span', '', n.rotulo);
+    if(O.exemplo) s.appendChild(el('i', 'exemplo-tag', 'EXEMPLO'));
+    li.appendChild(b); li.appendChild(s); ul.appendChild(li);
+  });
 
-      function step(currentTime) {
-        if (!startTime) startTime = currentTime;
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        // Ease-out quadratic
-        const eased = 1 - (1 - progress) * (1 - progress);
-        const current = Math.round(eased * target);
-        el.textContent = current.toLocaleString('pt-BR') + suffix;
-        if (progress < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
+  // Avaliações
+  var A = O.avaliacoes;
+  document.getElementById('notaGoogle').textContent = A.nota;
+  document.getElementById('notaTexto').textContent = A.total ? 'no Google · ' + A.total + ' avaliações' : 'nota no Google';
+  var av = document.getElementById('avals');
+  A.lista.forEach(function(r){
+    var d = el('article', 'aval'); d.setAttribute('data-anim', '');
+    d.appendChild(el('div', 'estrelas', '★'.repeat(r.estrelas) + '☆'.repeat(5 - r.estrelas)));
+    d.appendChild(el('blockquote', '', r.texto)); d.appendChild(el('cite', '', r.nome));
+    av.appendChild(d);
+  });
+  if(A.exemplo || O.exemplo) document.getElementById('avisoEx').hidden = false;
+  var vg = document.getElementById('verGoogle');
+  if(A.link) vg.href = A.link; else vg.hidden = true;
 
-    const counterEls = document.querySelectorAll('.counter');
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const target = parseInt(el.dataset.target, 10);
-          animateCounter(el, target, 1800);
-          counterObserver.unobserve(el);
-        }
-      });
-    }, { threshold: 0.5 });
+  // Promessas do orçamento
+  O.orcamento.promessas.forEach(function(p){ document.getElementById('promessas').appendChild(el('li', '', p)); });
 
-    counterEls.forEach(el => counterObserver.observe(el));
+  // Horários + "aberto agora" (fuso de São Paulo, não o do aparelho)
+  var dias = ['dom','seg','ter','qua','qui','sex','sáb'];
+  var partes = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date());
+  var pega = function(t){ return partes.filter(function(p){ return p.type === t; })[0].value; };
+  var dow = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(pega('weekday'));
+  var minutos = (parseInt(pega('hour'), 10) % 24) * 60 + parseInt(pega('minute'), 10);
+  var paraMin = function(h){ var x = h.split(':'); return parseInt(x[0], 10) * 60 + parseInt(x[1], 10); };
+  var hoje = O.horarios.filter(function(h){ return h.dow.indexOf(dow) > -1; })[0];
+  var st = document.getElementById('status');
+  var abertoAgora = hoje && hoje.abre && minutos >= paraMin(hoje.abre) && minutos < paraMin(hoje.fecha);
+  st.textContent = abertoAgora ? 'Aberto agora · fecha às ' + hoje.fecha : (hoje && hoje.abre ? 'Fechado agora · hoje ' + hoje.abre + ' às ' + hoje.fecha : 'Fechado hoje');
+  st.className = 'status ' + (abertoAgora ? 'on' : 'off');
+  var hu = document.getElementById('horarios');
+  O.horarios.forEach(function(h){
+    var li = el('li', h.dow.indexOf(dow) > -1 ? 'hoje' : ''); li.appendChild(el('span', '', h.rotulo));
+    li.appendChild(el('span', '', h.abre ? h.abre + ' às ' + h.fecha : 'Fechado')); hu.appendChild(li);
+  });
 
-    // ── Active nav link (highlight seção visível) ──────────────────────────
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
+  // Mapa (iframe só cria quando chega perto; link de rota abre no app de mapas)
+  var busca = encodeURIComponent(O.endereco.mapaBusca);
+  document.getElementById('comoChegar').href = 'https://www.google.com/maps/dir/?api=1&destination=' + busca;
+  var mapa = document.getElementById('mapa');
+  var criaMapa = function(){
+    if(mapa.firstChild) return;
+    var i = document.createElement('iframe');
+    i.src = 'https://maps.google.com/maps?q=' + busca + '&z=16&output=embed';
+    i.loading = 'lazy'; i.title = 'Mapa: ' + O.endereco.completo; i.referrerPolicy = 'no-referrer-when-downgrade';
+    mapa.appendChild(i);
+  };
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es, ob){ if(es[0].isIntersecting){ criaMapa(); ob.disconnect(); } }, { rootMargin: '400px' }).observe(mapa);
+  } else { criaMapa(); }
 
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + id) {
-              link.classList.add('active');
-            }
-          });
-        }
-      });
-    }, { threshold: 0.4 });
+  // Formulário -> WhatsApp com os campos preenchidos
+  document.getElementById('formOrc').addEventListener('submit', function(e){
+    e.preventDefault();
+    var f = new FormData(e.target);
+    var m = 'Olá! Sou ' + f.get('nome') + '. Meu carro é ' + f.get('carro') + '. Preciso de: ' + f.get('servico') + '.';
+    if(String(f.get('obs')).trim()) m += ' Detalhe: ' + String(f.get('obs')).trim();
+    m += ' (pedido pelo site da ' + O.nomeCurto + ')';
+    window.open(waLink(m), '_blank', 'noopener');
+  });
 
-    sections.forEach(s => sectionObserver.observe(s));
+  // Menu mobile
+  var hamb = document.getElementById('hamb'), gaveta = document.getElementById('gaveta');
+  hamb.addEventListener('click', function(){
+    var a = gaveta.classList.toggle('aberta'); hamb.setAttribute('aria-expanded', a);
+  });
+  gaveta.addEventListener('click', function(e){ if(e.target.tagName === 'A'){ gaveta.classList.remove('aberta'); hamb.setAttribute('aria-expanded', 'false'); } });
+  var topo = document.getElementById('topo');
+  var sol = function(){ topo.classList.toggle('sol', window.scrollY > 20); };
+  sol(); window.addEventListener('scroll', sol, { passive: true });
 
-    // ── Footer year ────────────────────────────────────────────────────────
-    document.getElementById('footerYear').textContent = new Date().getFullYear();
-  
-    // ══════════════════════════════════════════════════════════════════
-    // HERO EXCLUSIVE — GSAP 3D PERSPECTIVE, MOUSE-FOLLOW & TECH MOTION
-    // ══════════════════════════════════════════════════════════════════
-    if (typeof gsap !== 'undefined') {
+  // JSON-LD gerado da configuração. Nota só entra com dados reais (nota inventada em dado estruturado viola política do Google).
+  var ld = { '@context': 'https://schema.org', '@type': 'AutoRepair', name: O.nome, telephone: '+' + O.telefone.tel,
+    address: { '@type': 'PostalAddress', streetAddress: O.endereco.rua, addressLocality: O.cidade, addressRegion: O.uf, postalCode: O.endereco.cep, addressCountry: 'BR' },
+    openingHoursSpecification: O.horarios.filter(function(h){ return h.abre; }).map(function(h){
+      return { '@type': 'OpeningHoursSpecification', dayOfWeek: h.dow.map(function(d){ return ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d]; }), opens: h.abre, closes: h.fecha };
+    }) };
+  if(!O.exemplo && !A.exemplo && A.total) ld.aggregateRating = { '@type': 'AggregateRating', ratingValue: A.nota, reviewCount: A.total, bestRating: '5' };
+  var tag = document.createElement('script'); tag.type = 'application/ld+json'; tag.textContent = JSON.stringify(ld); document.head.appendChild(tag);
+})();
 
-      // ── 1. Entrada Dramática da Ilustração/Card em Perspectiva 3D ───
-      gsap.from('.hero-visual-card', {
-        duration: 1.4,
-        y: 60,
-        rotationY: -12,
-        rotationX: 6,
-        opacity: 0,
-        transformPerspective: 1000,
-        ease: 'power3.out',
-        delay: 0.15,
-        clearProps: 'transformPerspective,rotationY,rotationX'
-      });
+/* ===================== ANIMAÇÕES (GSAP, só transform/opacity) ===================== */
+window.addEventListener('DOMContentLoaded', function(){
+  var html = document.documentElement;
+  var semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(semMovimento) return;                       // conteúdo já está visível; nada é escondido
+  if(!window.gsap || !window.ScrollTrigger){ return; }  // CDN falhou: site continua legível
+  gsap.registerPlugin(ScrollTrigger);
+  html.classList.add('gs');                      // agora [data-anim] pode começar escondido
 
-      // Entrada suave com escala dos badges flutuantes
-      gsap.from('.hero-tag-system', {
-        duration: 1.1,
-        y: 35,
-        opacity: 0,
-        scale: 0.82,
-        ease: 'back.out(1.5)',
-        delay: 0.45,
-        clearProps: 'transform,scale'
-      });
+  var mm = gsap.matchMedia();
+  // Hero: só desliza (sem opacity 0), para o título nunca ficar invisível e o LCP não atrasar
+  gsap.from('.hero-grade [data-hero]:not(.hero-foto)', { y: 22, duration: .7, ease: 'power3.out', stagger: .08, clearProps: 'transform' });
 
-      gsap.from('.hero-tag-warranty', {
-        duration: 1.1,
-        y: 35,
-        opacity: 0,
-        scale: 0.82,
-        ease: 'back.out(1.5)',
-        delay: 0.65,
-        clearProps: 'transform,scale'
-      });
+  // Entrada por scroll, em lote
+  ScrollTrigger.batch('[data-anim]', {
+    start: 'top 88%', once: true,
+    onEnter: function(b){ gsap.to(b, { opacity: 1, y: 0, duration: .7, ease: 'power2.out', stagger: .1, overwrite: true }); }
+  });
 
-      // ── 2. Efeito Parallax ao Mover o Mouse (Mouse-Follow 3D) ────────
-      const heroSection = document.getElementById('inicio');
-      const visualCard  = document.querySelector('.hero-visual-card');
-      const tagSystem   = document.querySelector('.hero-tag-system');
-      const tagWarranty = document.querySelector('.hero-tag-warranty');
-      const obdPanel    = document.getElementById('hero-obd-panel');
-      const glow1       = document.querySelector('.hero-glow-1');
-      const glow2       = document.querySelector('.hero-glow-2');
+  // Contadores: valor final já está no HTML; aqui só anima de 0 até ele
+  document.querySelectorAll('[data-contar]').forEach(function(n){
+    var alvo = +n.getAttribute('data-contar'), suf = n.getAttribute('data-sufixo') || '', o = { v: 0 };
+    ScrollTrigger.create({ trigger: n, start: 'top 90%', once: true, onEnter: function(){
+      gsap.to(o, { v: alvo, duration: 1.6, ease: 'power2.out', onUpdate: function(){ n.textContent = Math.round(o.v).toLocaleString('pt-BR') + suf; } });
+    } });
+  });
 
-      if (heroSection && visualCard && window.matchMedia("(pointer: fine)").matches && window.innerWidth >= 768) {
-        heroSection.addEventListener('mousemove', (e) => {
-          const rect = heroSection.getBoundingClientRect();
-          const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;   // -1 to 1
-          const y = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;  // -1 to 1
-
-          // Rotação 3D suave do card principal
-          gsap.to(visualCard, {
-            rotationY: x * 8,
-            rotationX: -y * 6,
-            transformPerspective: 1000,
-            duration: 0.75,
-            ease: 'power1.out',
-            overwrite: 'auto'
-          });
-
-          // Parallax na tag superior-esquerda
-          if (tagSystem) {
-            gsap.to(tagSystem, {
-              x: x * 22,
-              y: y * 18,
-              duration: 0.85,
-              ease: 'power1.out',
-              overwrite: 'auto'
-            });
-          }
-
-          // Parallax na tag inferior-direita (oposta)
-          if (tagWarranty) {
-            gsap.to(tagWarranty, {
-              x: -x * 20,
-              y: -y * 16,
-              duration: 0.85,
-              ease: 'power1.out',
-              overwrite: 'auto'
-            });
-          }
-
-          // Parallax interno no painel do scanner OBD
-          if (obdPanel) {
-            gsap.to(obdPanel, {
-              x: 340 + (x * 12),
-              y: 18 + (y * 8),
-              duration: 0.95,
-              ease: 'power1.out',
-              overwrite: 'auto'
-            });
-          }
-
-          // Parallax ambiental sutil nos orbs de fundo
-          if (glow1) {
-            gsap.to(glow1, {
-              x: -x * 35,
-              y: -y * 25,
-              duration: 1.2,
-              ease: 'power1.out',
-              overwrite: 'auto'
-            });
-          }
-          if (glow2) {
-            gsap.to(glow2, {
-              x: x * 25,
-              y: y * 20,
-              duration: 1.2,
-              ease: 'power1.out',
-              overwrite: 'auto'
-            });
-          }
-        });
-
-        // Retorno suave ao sair do mouse
-        heroSection.addEventListener('mouseleave', () => {
-          gsap.to(visualCard, {
-            rotationY: 0,
-            rotationX: 0,
-            duration: 1.2,
-            ease: 'power2.out'
-          });
-          if (tagSystem) {
-            gsap.to(tagSystem, { x: 0, y: 0, duration: 1.0, ease: 'power2.out' });
-          }
-          if (tagWarranty) {
-            gsap.to(tagWarranty, { x: 0, y: 0, duration: 1.0, ease: 'power2.out' });
-          }
-          if (obdPanel) {
-            gsap.to(obdPanel, { x: 340, y: 18, duration: 1.2, ease: 'power2.out' });
-          }
-          if (glow1) {
-            gsap.to(glow1, { x: 0, y: 0, duration: 1.5, ease: 'power2.out' });
-          }
-          if (glow2) {
-            gsap.to(glow2, { x: 0, y: 0, duration: 1.5, ease: 'power2.out' });
-          }
-        });
-      }
-
-      // ── 3. Animações Gráficas nos Elementos Técnicos do SVG ──────────
-      // 3a. Barra de Progresso da Revisão
-      const progressBar = document.getElementById('hero-progress-bar');
-      const progressVal = document.getElementById('hero-progress-val');
-      if (progressBar && progressVal) {
-        const progState = { val: 0 };
-        gsap.fromTo(progressBar, 
-          { attr: { width: 0 } }, 
-          {
-            attr: { width: 315 },
-            duration: 2.2,
-            delay: 0.5,
-            ease: 'power2.out'
-          }
-        );
-        gsap.to(progState, {
-          val: 65,
-          duration: 2.2,
-          delay: 0.5,
-          ease: 'power2.out',
-          onUpdate: () => {
-            progressVal.textContent = Math.round(progState.val) + '%';
-          }
-        });
-      }
-
-      // 3b. Indicador de Temperatura do Motor (20°C -> 87°C)
-      const tempBar = document.getElementById('hero-temp-bar');
-      const tempVal = document.getElementById('hero-temp-val');
-      if (tempBar && tempVal) {
-        const tempState = { val: 20 };
-        gsap.fromTo(tempBar,
-          { attr: { width: 0 } },
-          {
-            attr: { width: 84 },
-            duration: 1.9,
-            delay: 0.6,
-            ease: 'power2.out'
-          }
-        );
-        gsap.to(tempState, {
-          val: 87,
-          duration: 1.9,
-          delay: 0.6,
-          ease: 'power2.out',
-          onUpdate: () => {
-            tempVal.textContent = Math.round(tempState.val) + '°C';
-          }
-        });
-      }
-
-      // 3c. Indicadores Numéricos do Hero (Contagem Fluida)
-      document.querySelectorAll('.hero-counter').forEach(el => {
-        const target = parseInt(el.dataset.target, 10);
-        const suffix = el.dataset.suffix || '';
-        const cState = { val: 0 };
-        gsap.to(cState, {
-          val: target,
-          duration: 1.8,
-          delay: 0.4,
-          ease: 'power2.out',
-          onUpdate: () => {
-            el.textContent = Math.round(cState.val) + suffix;
-          }
-        });
-      });
-
-      const ratingEl = document.querySelector('.hero-counter-rating');
-      if (ratingEl) {
-        const rState = { val: 1.0 };
-        gsap.to(rState, {
-          val: 5.0,
-          duration: 1.8,
-          delay: 0.4,
-          ease: 'power2.out',
-          onUpdate: () => {
-            ratingEl.textContent = rState.val.toFixed(1) + ' ★';
-          }
-        });
-      }
-
-    } // Fim if gsap
+  // Só em tela grande: ponteiro balança e a foto do hero sobe um pouco mais devagar que a página
+  mm.add('(min-width: 980px)', function(){
+    gsap.to('#ponteiro', { rotation: 28, svgOrigin: '60 62', duration: 2.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    gsap.to('.hero-foto', { y: -36, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  });
+  // No celular, ponteiro só faz uma passada curta ao carregar
+  mm.add('(max-width: 979px)', function(){
+    gsap.fromTo('#ponteiro', { rotation: -40, svgOrigin: '60 62' }, { rotation: 20, svgOrigin: '60 62', duration: 1.4, ease: 'power2.out' });
+  });
+});
 </script>
+<noscript><p style="padding:20px;background:#fff;color:#000">Ative o JavaScript para ver os serviços e horários, ou chame no WhatsApp.</p></noscript>
 </body>
 </html>
