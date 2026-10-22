@@ -22,6 +22,10 @@
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
 
+  <!-- Foto do hero: preload da versão certa para cada tela (manter os caminhos iguais a OFICINA.heroFoto / heroFotoMobile) -->
+  <link rel="preload" as="image" href="img/hero-mobile.webp" type="image/webp" media="(max-width: 760px)" fetchpriority="high">
+  <link rel="preload" as="image" href="img/hero-desktop.webp" type="image/webp" media="(min-width: 761px)" fetchpriority="high">
+
   <!-- GSAP com versão fixa; defer para não bloquear a primeira pintura -->
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
@@ -117,7 +121,7 @@
     .hero-vinheta{position:absolute;inset:0;background:
       radial-gradient(ellipse 60% 55% at 0% 50%,rgba(255,90,31,.2),transparent 70%),
       radial-gradient(ellipse 60% 55% at 100% 50%,rgba(255,90,31,.16),transparent 70%),
-      linear-gradient(180deg,rgba(15,15,14,.5) 0%,rgba(15,15,14,.38) 28%,rgba(15,15,14,.82) 68%,var(--bg) 100%)}
+      linear-gradient(180deg,rgba(15,15,14,.68) 0%,rgba(15,15,14,.56) 28%,rgba(15,15,14,.86) 66%,var(--bg) 100%)}
     .com-foto .hud{display:block;position:absolute;left:0;right:0;top:0;height:2px;z-index:1;pointer-events:none;opacity:0}
     .hud i{position:absolute;left:0;right:0;display:block}
     .hud .linha{top:0;height:2px;background:var(--laranja);box-shadow:0 0 14px 2px rgba(255,90,31,.7)}
@@ -284,6 +288,7 @@
       .selos{grid-column:1/-1}
       .com-foto{min-height:min(100vh,860px);padding-bottom:124px}
       .com-foto .hero-grade{grid-template-columns:1.2fr .8fr;align-items:end}
+      .hero-vinheta{background:linear-gradient(90deg,rgba(15,15,14,.78) 0%,rgba(15,15,14,.5) 45%,rgba(15,15,14,.2) 100%),radial-gradient(ellipse 60% 55% at 100% 50%,rgba(255,90,31,.14),transparent 70%),linear-gradient(180deg,rgba(15,15,14,.55) 0%,rgba(15,15,14,.3) 30%,rgba(15,15,14,.82) 68%,var(--bg) 100%)}
       .com-foto h1{font-size:clamp(48px,5vw,68px)}
       .com-foto .palco{grid-template-columns:1fr;justify-self:end;width:min(340px,100%)}
       .palco{margin-inline:0;order:0}
@@ -543,10 +548,10 @@ const OFICINA = {
   },
   // Foto real do hero (ex.: "img/fachada.jpg"). Preenchida: vira fundo escurecido e o carro SVG some,
   // ficando só os pontos de serviço como botões. Vazia (ou foto que não carrega): usa o carro.
-  heroFoto: "",
-  heroFotoDim: { w: 1600, h: 900 },   // largura/altura reais do arquivo de desktop (reserva o tamanho)
+  heroFoto: "img/hero-desktop.webp",
+  heroFotoDim: { w: 1600, h: 880 },   // largura/altura reais do arquivo de desktop (reserva o tamanho)
   heroFotoFoco: "50% 50%",             // object-position do enquadramento
-  heroFotoMobile: "",   // opcional: versão vertical para celular (ex.: "img/fachada-vertical.jpg")
+  heroFotoMobile: "img/hero-mobile.webp",   // opcional: versão vertical para celular (ex.: "img/fachada-vertical.jpg")
   mensagens: {
     saudacao: "Olá! Vi o site da {nomeCurto} e queria falar com a oficina.",
     orcamento: "Olá! Quero um orçamento na {nomeCurto}.",
