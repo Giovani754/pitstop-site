@@ -12,6 +12,11 @@ Branch: `feat/skills-e-melhoria-1021`. Repo: Giovani754/pitstop-site.
 - Valores "a partir de", geo (lat/lng) e endereço são EXEMPLO. Trocar no objeto `OFICINA`.
 - Visto em Chrome headless (390, 360, 768, 1280). Lighthouse NÃO medido (não instalado).
 
+## Hero cinematográfica (21/10/2026)
+- `OFICINA.heroFoto` (e `heroFotoMobile`, opcional) liga o modo foto: fundo em tela cheia, Ken Burns, scanner HUD, serviços como botões grandes. Vazio ou foto quebrada: carro SVG.
+- Testado só com imagem sintética (não há foto real). Falta a foto real em `img/` (copiar também para `dist/img/`).
+- A prévia deployada ainda é a versão anterior (sem deploy nesta rodada).
+
 ## Prévia (deploy)
 O deploy sai da pasta `dist/` (só `index.html`; não há pasta de imagens ainda). Depois de mexer no `index.html`, copiar para `dist/` e rodar, nesta pasta, sem `--prod`:
 `cp index.html dist/index.html` e `npx netlify-cli deploy --dir dist --alias previa-oficina`

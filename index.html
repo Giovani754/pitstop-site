@@ -85,7 +85,6 @@
       linear-gradient(180deg,rgba(15,15,14,0) 60%,var(--bg) 100%),
       repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),
       repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),var(--bg)}
-    .hero.com-foto{background:linear-gradient(180deg,rgba(15,15,14,.8),rgba(15,15,14,.9)),var(--hero-foto) center/cover no-repeat,var(--bg)}
     .hero-grade{display:grid;gap:18px;align-items:center}
     .hero h1{font-size:clamp(44px,10.5vw,84px);margin:18px 0 20px}
     .hero h1 em{font-style:normal;color:var(--laranja);display:block}
@@ -110,12 +109,38 @@
     .balao .btn{width:100%}
     .balao .fecha{position:absolute;top:4px;right:4px;width:44px;height:44px;border:0;background:none;color:var(--tinta);font:700 28px/1 var(--display);cursor:pointer}
     .foto-pend .carro,.foto-pend .pt,.foto-pend .selo-hero{visibility:hidden}
+    /* Hero com foto: fundo em tela cheia, scanner HUD e serviços como botões grandes */
+    .hero-bg,.hud{display:none}
+    .com-foto .hero-bg{display:block;position:absolute;inset:0;overflow:hidden;z-index:0}
+    .hero-img{position:absolute;inset:-3%;background:var(--hero-foto) center/cover no-repeat;will-change:transform}
+    .hero-vinheta{position:absolute;inset:0;background:
+      radial-gradient(ellipse 60% 55% at 0% 50%,rgba(255,90,31,.2),transparent 70%),
+      radial-gradient(ellipse 60% 55% at 100% 50%,rgba(255,90,31,.16),transparent 70%),
+      linear-gradient(180deg,rgba(15,15,14,.5) 0%,rgba(15,15,14,.38) 28%,rgba(15,15,14,.82) 68%,var(--bg) 100%)}
+    .com-foto .hud{display:block;position:absolute;left:0;right:0;top:0;height:2px;z-index:1;pointer-events:none;opacity:0}
+    .hud i{position:absolute;left:0;right:0;display:block}
+    .hud .linha{top:0;height:2px;background:var(--laranja);box-shadow:0 0 14px 2px rgba(255,90,31,.7)}
+    .hud .rastro{bottom:2px;height:150px;background:linear-gradient(0deg,rgba(255,90,31,.3),transparent)}
+    .com-foto .wrap{position:relative;z-index:2}
+    .com-foto{display:flex;align-items:flex-end;min-height:100vh;min-height:100svh;padding-bottom:96px}
+    .com-foto .hero-grade{width:min(1180px,100% - 40px);min-width:0}
+    .com-foto h1{font-size:clamp(34px,9.6vw,84px);text-shadow:0 2px 24px rgba(0,0,0,.55)}
+    .com-foto .hero-sub{font-size:16px;line-height:1.45;color:#e2dfd8}
+    .com-foto .hero-cta .btn-s{display:none}
     .com-foto .carro{display:none}
-    .com-foto .palco{margin-inline:0;display:flex;flex-wrap:wrap;gap:10px;align-content:flex-end;align-items:flex-end}
-    .com-foto .selo-hero{position:static;transform:none;flex:0 0 100%;align-self:flex-start;width:max-content}
-    .com-foto .pt{position:relative;margin:0;width:auto;min-height:44px;padding:0 16px 0 10px;grid-auto-flow:column;gap:8px;background:rgba(15,15,14,.85);border:1px solid var(--linha);border-radius:4px;font:700 16px/1 var(--display);letter-spacing:.08em;text-transform:uppercase}
+    .com-foto .palco{order:0;margin-inline:0;aspect-ratio:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .com-foto .selo-hero{position:static;transform:none;grid-column:1/-1;justify-self:start}
+    .com-foto .pt{position:static;margin:0;width:auto;min-height:52px;padding:0 14px 0 12px;grid-auto-flow:column;justify-content:start;gap:10px;background:rgba(15,15,14,.78);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.22);border-radius:4px;font:700 17px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;min-width:0}
+    .com-foto .pt:nth-of-type(odd):last-of-type{grid-column:1/-1}
     .com-foto .pt .rot{position:static;width:auto;height:auto;clip:auto;overflow:visible}
+    .com-foto .pt .anel{inset:0;border-radius:4px}
     .com-foto .pt:focus-visible{border-radius:4px;outline-offset:2px}
+    /* Selos: valor final já no HTML */
+    .selos{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;position:relative;z-index:2}
+    .selo{display:flex;align-items:baseline;gap:8px;padding-left:10px;border-left:2px solid var(--laranja)}
+    .selo b{font:800 30px/1 var(--display);color:var(--laranja)}
+    .selo span{font:700 13px/1.1 var(--display);letter-spacing:.1em;text-transform:uppercase;color:#d7d3cb}
+    .selos .exemplo-tag{margin:0;color:var(--mudo);align-self:center}
 
     /* Faixa de informação rápida: endereço, horário, telefone sempre visíveis, parados */
     .faixa{background:var(--bg2);border-block:1px solid var(--linha)}
@@ -255,6 +280,11 @@
       .hero{padding:140px 0 84px}
       .hero-grade{grid-template-columns:1.1fr .9fr;gap:48px}
       .hero-cta{margin-top:28px}
+      .selos{grid-column:1/-1}
+      .com-foto{min-height:min(100vh,860px);padding-bottom:124px}
+      .com-foto .hero-grade{grid-template-columns:1.2fr .8fr;align-items:end}
+      .com-foto h1{font-size:clamp(48px,5vw,68px)}
+      .com-foto .palco{grid-template-columns:1fr;justify-self:end;width:min(340px,100%)}
       .palco{margin-inline:0;order:0}
       .serv-wrap{grid-template-columns:.8fr 1.4fr;gap:70px}
       .serv-intro{position:sticky;top:110px;align-self:start}
@@ -300,6 +330,8 @@
 
   <main>
     <section class="hero" id="inicio">
+      <div class="hero-bg" aria-hidden="true"><div class="hero-img"></div><div class="hero-vinheta"></div></div>
+      <div class="hud" id="hud" aria-hidden="true"><i class="rastro"></i><i class="linha"></i></div>
       <div class="wrap hero-grade">
         <div>
           <!-- Textos estáticos para SEO/primeira pintura; o JS regrava os mesmos a partir de OFICINA.hero -->
@@ -348,6 +380,11 @@
             <p class="desc" id="balaoDesc"></p>
             <a class="btn btn-p" id="balaoAgendar" target="_blank" rel="noopener" href="#"></a>
           </div>
+        </div>
+        <div class="selos" id="selos">
+          <div class="selo"><b>12</b><span>anos de oficina</span></div>
+          <div class="selo"><b>4.9</b><span>nota no Google</span></div>
+          <div class="selo"><b>90</b><span>dias de garantia</span></div>
         </div>
       </div>
     </section>
@@ -506,6 +543,7 @@ const OFICINA = {
   // Foto real do hero (ex.: "img/fachada.jpg"). Preenchida: vira fundo escurecido e o carro SVG some,
   // ficando só os pontos de serviço como botões. Vazia (ou foto que não carrega): usa o carro.
   heroFoto: "",
+  heroFotoMobile: "",   // opcional: versão vertical para celular (ex.: "img/fachada-vertical.jpg")
   mensagens: {
     saudacao: "Olá! Vi o site da {nomeCurto} e queria falar com a oficina.",
     orcamento: "Olá! Quero um orçamento na {nomeCurto}.",
@@ -636,7 +674,9 @@ const OFICINA = {
     balao.hidden = false; aberto = b; b.setAttribute('aria-expanded', 'true');
     var w = balao.offsetWidth, cx = b.offsetLeft + b.offsetWidth / 2;
     balao.style.left = Math.max(8, Math.min(cx - w / 2, palco.clientWidth - w - 8)) + 'px';
-    balao.style.top = (b.offsetTop + b.offsetHeight + 6) + 'px';
+    var h = balao.offsetHeight, r = b.getBoundingClientRect();
+    var acima = r.bottom + 6 + h > window.innerHeight - 90 && r.top - h - 6 > 76;
+    balao.style.top = (acima ? b.offsetTop - h - 6 : b.offsetTop + b.offsetHeight + 6) + 'px';
     if(window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) gsap.fromTo(balao, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .22, ease: 'power2.out' });
     balao.focus({ preventScroll: true });
     balao.scrollIntoView({ block: 'nearest' });
@@ -651,17 +691,40 @@ const OFICINA = {
   window.addEventListener('resize', function(){ fechar(true); });
   // Promessa lida pela animação: 'foto' ou 'carro'. Foto que não carrega nunca deixa buraco: cai no carro.
   window.heroPronto = new Promise(function(ok){
-    if(!O.heroFoto){ ok('carro'); return; }
+    var mobile = window.matchMedia('(max-width: 760px)').matches;
+    var fontes = (mobile ? [O.heroFotoMobile, O.heroFoto] : [O.heroFoto, O.heroFotoMobile]).filter(Boolean);
+    if(!fontes.length){ ok('carro'); return; }
     hero.classList.add('foto-pend');
-    var feito = false, im = new Image();
+    var feito = false, fonte = '';
     var fim = function(modo){
       if(feito) return; feito = true; hero.classList.remove('foto-pend');
-      if(modo === 'foto'){ hero.style.setProperty('--hero-foto', 'url("' + O.heroFoto.replace(/"/g, '%22') + '")'); hero.classList.add('com-foto'); }
+      if(modo === 'foto'){ hero.style.setProperty('--hero-foto', 'url("' + fonte.replace(/"/g, '%22') + '")'); hero.classList.add('com-foto'); }
       ok(modo);
     };
-    im.onload = function(){ fim('foto'); }; im.onerror = function(){ fim('carro'); };
+    // tenta a foto de celular e, se falhar, a outra; nenhuma carregou: carro SVG
+    var tenta = function(i){
+      if(i >= fontes.length){ fim('carro'); return; }
+      var im = new Image(); fonte = fontes[i];
+      im.onload = function(){ fim('foto'); }; im.onerror = function(){ tenta(i + 1); };
+      im.src = fonte;
+    };
     setTimeout(function(){ fim('carro'); }, 3000);
-    im.src = O.heroFoto;
+    tenta(0);
+  });
+
+  // Selos do hero (valor final já no HTML; aqui só sincroniza com OFICINA) e título em palavras (a animação usa os spans)
+  var selos = document.querySelectorAll('#selos .selo');
+  var anos = O.numeros[0], garantia = O.numeros[1];
+  [[anos.valor + anos.sufixo, anos.rotulo], [O.avaliacoes.nota, 'nota no Google'], [garantia.valor + garantia.sufixo, garantia.rotulo]].forEach(function(d, i){
+    selos[i].querySelector('b').textContent = d[0]; selos[i].querySelector('span').textContent = d[1];
+  });
+  if(O.exemplo) document.getElementById('selos').appendChild(el('i', 'exemplo-tag', 'EXEMPLO'));
+  document.querySelectorAll('.hero h1 span, .hero h1 em').forEach(function(n){
+    var t = n.textContent; n.textContent = '';
+    t.split(' ').forEach(function(w, i, a){
+      var s = el('span', 'pal', w); s.style.display = 'inline-block'; n.appendChild(s);
+      if(i < a.length - 1) n.appendChild(document.createTextNode(' '));
+    });
   });
 
   // Serviços (também alimenta o select do orçamento)
@@ -815,8 +878,10 @@ window.addEventListener('DOMContentLoaded', function(){
   html.classList.add('gs');                      // agora [data-anim] pode começar escondido
 
   var mm = gsap.matchMedia();
-  // Hero: só desliza (sem opacity 0), para o título nunca ficar invisível e o LCP não atrasar
-  gsap.from('.hero-grade [data-hero]:not(.hero-foto)', { y: 22, duration: .7, ease: 'power3.out', stagger: .08, clearProps: 'transform' });
+  // Hero: textos só deslizam (sem opacity 0). O título entra palavra por palavra; selos só entram (valor final já está no HTML).
+  gsap.from('.hero-grade [data-hero]:not(h1)', { y: 22, duration: .7, ease: 'power3.out', stagger: .08, clearProps: 'transform' });
+  gsap.from('.hero h1 .pal', { y: 26, opacity: 0, duration: .6, ease: 'power3.out', stagger: .08, delay: .1, clearProps: 'all' });
+  gsap.from('.selo', { y: 14, opacity: 0, duration: .6, ease: 'power2.out', stagger: .1, delay: 1, clearProps: 'all' });
 
   // Entrada por scroll, em lote
   ScrollTrigger.batch('[data-anim]', {
@@ -836,7 +901,35 @@ window.addEventListener('DOMContentLoaded', function(){
   // Com foto de fundo: só os botões entram em escada. Tudo em transform/opacity.
   window.heroPronto.then(function(modo){
     if(modo === 'foto'){
-      gsap.from('.pt', { y: 12, opacity: 0, duration: .5, ease: 'power2.out', stagger: .08, delay: .3, clearProps: 'all' });
+      // Ken Burns lento (só transform), pausado quando o hero sai da tela
+      var hero = document.getElementById('inicio'), hud = document.getElementById('hud');
+      var kb = gsap.fromTo('.hero-img', { scale: 1 }, { scale: 1.1, duration: 14, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+      ScrollTrigger.create({ trigger: hero, start: 'top bottom', end: 'bottom top', onToggle: function(st){ st.isActive ? kb.play() : kb.pause(); } });
+      // Linha do scanner varre a foto de cima para baixo (~2 s) e acende cada botão ao passar por ele
+      var Hh = hero.offsetHeight, topo = hero.getBoundingClientRect().top;
+      var bts = Array.prototype.slice.call(hero.querySelectorAll('.pt'));
+      gsap.set(bts, { opacity: 0, y: 10 });
+      var feitoSweep = false, tlf = gsap.timeline({ delay: .2 });
+      tlf.set(hud, { opacity: 1, y: -4 }).to(hud, { y: Hh, duration: 2, ease: 'none' }, 0);
+      bts.forEach(function(b){
+        var r = b.getBoundingClientRect();
+        tlf.to(b, { opacity: 1, y: 0, duration: .4, ease: 'power2.out' }, Math.max(0, (r.top + r.height / 2 - topo) / Hh * 2));
+      });
+      tlf.to(hud, { opacity: 0, duration: .5 }, 2).call(function(){ feitoSweep = true; });
+      gsap.fromTo('.pt .anel', { scale: 1, opacity: .6 }, { scale: 1.1, opacity: 0, duration: 1.4, ease: 'power1.out', repeat: -1, repeatDelay: 1.2, stagger: .2, delay: 2.5 });
+      // Depois da varredura, a linha acompanha o dedo/cursor na vertical, com suavidade, e some se ficar parado
+      var seguir = gsap.quickTo(hud, 'y', { duration: .6, ease: 'power3.out' }), sumir = null;
+      var mover = function(e){
+        if(!feitoSweep) return;
+        var r = hero.getBoundingClientRect();
+        if(e.clientY < r.top || e.clientY > r.bottom) return;
+        seguir(e.clientY - r.top);
+        gsap.to(hud, { opacity: .85, duration: .2, overwrite: 'auto' });
+        if(sumir) sumir.kill();
+        sumir = gsap.delayedCall(1.4, function(){ gsap.to(hud, { opacity: 0, duration: .8 }); });
+      };
+      hero.addEventListener('pointermove', mover, { passive: true });
+      hero.addEventListener('pointerdown', mover, { passive: true });
       return;
     }
     var D = 2, W = 870, pts = document.querySelectorAll('.pt');
