@@ -112,7 +112,8 @@
     /* Hero com foto: fundo em tela cheia, scanner HUD e serviços como botões grandes */
     .hero-bg,.hud{display:none}
     .com-foto .hero-bg{display:block;position:absolute;inset:0;overflow:hidden;z-index:0}
-    .hero-img{position:absolute;inset:-3%;background:var(--hero-foto) center/cover no-repeat;will-change:transform}
+    .hero-img{position:absolute;inset:-3%;display:block;will-change:transform}
+    .hero-img img{display:block;width:100%;height:100%;object-fit:cover;object-position:var(--hero-foco,50% 50%)}
     .hero-vinheta{position:absolute;inset:0;background:
       radial-gradient(ellipse 60% 55% at 0% 50%,rgba(255,90,31,.2),transparent 70%),
       radial-gradient(ellipse 60% 55% at 100% 50%,rgba(255,90,31,.16),transparent 70%),
@@ -330,7 +331,7 @@
 
   <main>
     <section class="hero" id="inicio">
-      <div class="hero-bg" aria-hidden="true"><div class="hero-img"></div><div class="hero-vinheta"></div></div>
+      <div class="hero-bg" id="heroBg" aria-hidden="true"><div class="hero-vinheta"></div></div>
       <div class="hud" id="hud" aria-hidden="true"><i class="rastro"></i><i class="linha"></i></div>
       <div class="wrap hero-grade">
         <div>
@@ -543,6 +544,8 @@ const OFICINA = {
   // Foto real do hero (ex.: "img/fachada.jpg"). Preenchida: vira fundo escurecido e o carro SVG some,
   // ficando só os pontos de serviço como botões. Vazia (ou foto que não carrega): usa o carro.
   heroFoto: "",
+  heroFotoDim: { w: 1600, h: 900 },   // largura/altura reais do arquivo de desktop (reserva o tamanho)
+  heroFotoFoco: "50% 50%",             // object-position do enquadramento
   heroFotoMobile: "",   // opcional: versão vertical para celular (ex.: "img/fachada-vertical.jpg")
   mensagens: {
     saudacao: "Olá! Vi o site da {nomeCurto} e queria falar com a oficina.",
@@ -691,25 +694,27 @@ const OFICINA = {
   window.addEventListener('resize', function(){ fechar(true); });
   // Promessa lida pela animação: 'foto' ou 'carro'. Foto que não carrega nunca deixa buraco: cai no carro.
   window.heroPronto = new Promise(function(ok){
-    var mobile = window.matchMedia('(max-width: 760px)').matches;
-    var fontes = (mobile ? [O.heroFotoMobile, O.heroFoto] : [O.heroFoto, O.heroFotoMobile]).filter(Boolean);
-    if(!fontes.length){ ok('carro'); return; }
+    var desk = O.heroFoto, mob = O.heroFotoMobile;
+    if(!desk && !mob){ ok('carro'); return; }
     hero.classList.add('foto-pend');
-    var feito = false, fonte = '';
+    // <picture>: celular usa a versão vertical (se houver). Dimensões em OFICINA.heroFotoDim reservam o tamanho.
+    var bg = document.getElementById('heroBg'), pic = document.createElement('picture'), so = null, im = new Image(), feito = false;
+    pic.className = 'hero-img';
+    if(mob && desk){ so = document.createElement('source'); so.media = '(max-width: 760px)'; so.srcset = mob; pic.appendChild(so); }
+    im.alt = ''; im.decoding = 'async'; im.fetchPriority = 'high';
+    if(O.heroFotoDim){ im.width = O.heroFotoDim.w; im.height = O.heroFotoDim.h; }
+    if(O.heroFotoFoco) hero.style.setProperty('--hero-foco', O.heroFotoFoco);
+    pic.appendChild(im); bg.insertBefore(pic, bg.firstChild);
     var fim = function(modo){
       if(feito) return; feito = true; hero.classList.remove('foto-pend');
-      if(modo === 'foto'){ hero.style.setProperty('--hero-foto', 'url("' + fonte.replace(/"/g, '%22') + '")'); hero.classList.add('com-foto'); }
+      if(modo === 'foto') hero.classList.add('com-foto'); else pic.remove();
       ok(modo);
     };
-    // tenta a foto de celular e, se falhar, a outra; nenhuma carregou: carro SVG
-    var tenta = function(i){
-      if(i >= fontes.length){ fim('carro'); return; }
-      var im = new Image(); fonte = fontes[i];
-      im.onload = function(){ fim('foto'); }; im.onerror = function(){ tenta(i + 1); };
-      im.src = fonte;
-    };
+    im.onload = function(){ fim('foto'); };
+    // foto de celular que falha tenta a de desktop; nenhuma carregou: carro SVG
+    im.onerror = function(){ if(so && so.parentNode){ so.remove(); im.src = desk; } else fim('carro'); };
     setTimeout(function(){ fim('carro'); }, 3000);
-    tenta(0);
+    im.src = desk || mob;
   });
 
   // Selos do hero (valor final já no HTML; aqui só sincroniza com OFICINA) e título em palavras (a animação usa os spans)
