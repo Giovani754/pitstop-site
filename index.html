@@ -6,6 +6,7 @@
   <title>PitStop Centro Automotivo | Oficina mecânica na Vila Industrial, São Paulo</title>
   <meta name="description" content="Oficina mecânica na Vila Industrial, São Paulo: revisão, freio, suspensão, injeção e alinhamento. Orçamento antes de abrir o carro. Chame no WhatsApp.">
   <meta name="theme-color" content="#0f0f0e">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Crect width='44' height='44' rx='6' fill='%23ff5a1f'/%3E%3C/svg%3E">
   <meta name="robots" content="index, follow">
   <meta property="og:type" content="website">
   <meta property="og:title" content="PitStop Centro Automotivo">
@@ -35,7 +36,7 @@
     }
     *,*::before,*::after{box-sizing:border-box}
     html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%}
-    body{margin:0;background:var(--bg);color:var(--txt);font:400 17px/1.55 var(--corpo);overflow-x:hidden;padding-bottom:76px}
+    body{margin:0;background:var(--bg);color:var(--txt);font:400 17px/1.55 var(--corpo);overflow-x:hidden;padding-bottom:calc(92px + env(safe-area-inset-bottom))}
     img,svg{display:block;max-width:100%}
     a{color:inherit;-webkit-tap-highlight-color:transparent}
     h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.98;margin:0;text-transform:uppercase;letter-spacing:.005em}
@@ -80,16 +81,16 @@
     .gaveta a{display:block;padding:15px 0;border-bottom:1px solid var(--linha);font:700 19px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
 
     /* Hero: linhas técnicas ao fundo (papel milimetrado escuro) */
-    .hero{position:relative;padding:96px 0 56px;background:
+    .hero{position:relative;padding:84px 0 56px;background:
       linear-gradient(180deg,rgba(15,15,14,0) 60%,var(--bg) 100%),
       repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),
       repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),var(--bg)}
     .hero.com-foto{background:linear-gradient(180deg,rgba(15,15,14,.8),rgba(15,15,14,.9)),var(--hero-foto) center/cover no-repeat,var(--bg)}
-    .hero-grade{display:grid;gap:36px;align-items:center}
+    .hero-grade{display:grid;gap:18px;align-items:center}
     .hero h1{font-size:clamp(44px,10.5vw,84px);margin:18px 0 20px}
     .hero h1 em{font-style:normal;color:var(--laranja);display:block}
     .hero-sub{max-width:34em;font-size:clamp(17px,2.4vw,20px);color:#cfcbc3}
-    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
     /* Palco do hero: carro em SVG com 5 pontos de serviço (ou lista de botões sobre a foto) */
     .palco{position:relative;margin-inline:-20px;aspect-ratio:800/340;order:-1}
     .carro{width:100%;height:100%}
@@ -253,6 +254,7 @@
       .topo-acoes .btn{display:inline-flex}
       .hero{padding:140px 0 84px}
       .hero-grade{grid-template-columns:1.1fr .9fr;gap:48px}
+      .hero-cta{margin-top:28px}
       .palco{margin-inline:0;order:0}
       .serv-wrap{grid-template-columns:.8fr 1.4fr;gap:70px}
       .serv-intro{position:sticky;top:110px;align-self:start}
@@ -317,21 +319,22 @@
               <linearGradient id="corpoG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#262624"/><stop offset="1" stop-color="#121211"/></linearGradient>
               <linearGradient id="raioG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff5a1f" stop-opacity="0"/><stop offset=".85" stop-color="#ff5a1f" stop-opacity=".4"/><stop offset="1" stop-color="#ffd2bd" stop-opacity=".95"/></linearGradient>
               <clipPath id="varreC"><rect id="varreR" x="-800" y="0" width="800" height="340"/></clipPath>
-              <path id="contorno" d="M70 240 L62 205 Q64 178 92 172 L215 160 L290 100 Q298 94 312 94 L490 94 Q506 94 516 102 L585 160 L700 180 Q745 188 756 212 L760 240 Q760 250 750 250 L656 250 A46 46 0 0 0 564 250 L246 250 A46 46 0 0 0 154 250 L78 250 Q70 250 70 240 Z"/>
-              <g id="roda"><circle r="40" fill="#0c0c0b"/><circle r="27"/><circle r="8" stroke="#ff5a1f"/><path d="M0 -27V-8M0 8V27M-27 0H-8M8 0H27M-19 -19L-6 -6M6 6L19 19M19 -19L6 -6M-6 6L-19 19" stroke="#ff5a1f" stroke-opacity=".7"/></g>
+              <path id="contorno" d="M112 236 L106 190 Q106 158 124 140 L192 96 Q204 88 224 86 L400 84 Q432 84 452 100 L532 160 L672 176 Q712 182 726 204 L732 236 Q733 250 720 250 L654 250 A54 54 0 0 0 546 250 L294 250 A54 54 0 0 0 186 250 L124 250 Q112 250 112 236 Z"/>
+              <g id="roda"><circle r="46" fill="#0c0c0b"/><circle r="31"/><circle r="9" stroke="#ff5a1f"/><path d="M0 -31V-9M0 9V31M-31 0H-9M9 0H31M-22 -22L-7 -7M7 7L22 22M22 -22L7 -7M-7 7L-22 22" stroke="#ff5a1f" stroke-opacity=".7"/></g>
             </defs>
             <ellipse cx="410" cy="190" rx="400" ry="150" fill="url(#luzG)"/>
-            <ellipse cx="410" cy="292" rx="360" ry="9" fill="#000" fill-opacity=".45"/>
+            <ellipse cx="410" cy="297" rx="340" ry="9" fill="#000" fill-opacity=".45"/>
             <g fill="none" stroke="#e9e6df" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round">
-              <path d="M20 290H780" stroke-opacity=".4"/>
+              <path d="M20 296H780" stroke-opacity=".4"/>
               <use href="#contorno" fill="url(#corpoG)"/>
-              <path d="M306 106 L240 156 H392 V106Z M408 106 V156 H560 L506 106Z"/>
-              <path d="M400 158V248M254 162V248M548 160V248M90 196H730" stroke-opacity=".4"/>
-              <path d="M360 178h28M508 178h28M700 180 L626 160" stroke="#ff5a1f"/>
-              <path d="M730 196 L752 204 L748 218 L722 212Z" fill="#ff5a1f" fill-opacity=".85" stroke="#ffb090"/>
-              <path d="M68 192 L84 190 V206 H66Z" fill="#ff5a1f" fill-opacity=".7" stroke="#ffb090"/>
-              <use href="#roda" x="200" y="250"/><use href="#roda" x="610" y="250"/>
-              <path d="M62 316H760M62 309V323M760 309V323" stroke-opacity=".4" stroke-dasharray="4 5"/>
+              <path d="M208 100 L158 146 H300 V98Z M316 98 V146 H504 L446 104 Q440 98 430 98Z"/>
+              <path d="M308 148V250M498 154V250M110 178H724M118 224H180M300 224H540M660 224H728" stroke-opacity=".4"/>
+              <path d="M262 176h22M330 176h22M502 140 L486 138 V148 L502 150Z" stroke="#ff5a1f"/>
+              <path d="M676 180 L712 190 L716 200 L670 192Z" fill="#ff5a1f" fill-opacity=".85" stroke="#ffb090"/>
+              <path d="M108 168 L118 160 V190 H108Z" fill="#ff5a1f" fill-opacity=".7" stroke="#ffb090"/>
+              <path d="M690 214H724" stroke-opacity=".5"/>
+              <use href="#roda" x="240" y="250"/><use href="#roda" x="600" y="250"/>
+              <path d="M106 322H732M106 315V329M732 315V329" stroke-opacity=".4" stroke-dasharray="4 5"/>
             </g>
             <!-- Varredura do scanner: ficam escondidas (opacity 0) e só o GSAP as mostra -->
             <g id="varreG" opacity="0" clip-path="url(#varreC)"><use href="#contorno" fill="none" stroke="#ff8a5c" stroke-width="2.4"/></g>
@@ -516,11 +519,11 @@ const OFICINA = {
     selo: "Orçamento antes de mexer",
     // x/y = posição do ponto sobre o carro, em % do palco. preco = "a partir de" (valores EXEMPLO).
     pontos: [
-      { nome: "Freios",          x: 76.5, y: 73.5, preco: 180, desc: "Pastilha, disco e fluido, com a peça gasta mostrada antes." },
-      { nome: "Suspensão",       x: 25,   y: 73.5, preco: 250, desc: "Amortecedor, bucha, pivô e terminal." },
-      { nome: "Motor e injeção", x: 85,   y: 54,   preco: 150, desc: "Scanner e diagnóstico antes de trocar qualquer peça." },
-      { nome: "Parte elétrica",  x: 56,   y: 38,   preco: 120, desc: "Bateria, alternador, luzes e chicote." },
-      { nome: "Óleo e filtros",  x: 45,   y: 68,   preco: 160, desc: "Óleo do tipo certo e filtro novo, com níveis conferidos." }
+      { nome: "Freios",          x: 75,   y: 73.5, preco: 180, desc: "Pastilha, disco e fluido, com a peça gasta mostrada antes." },
+      { nome: "Suspensão",       x: 30,   y: 61.8,   preco: 250, desc: "Amortecedor, bucha, pivô e terminal." },
+      { nome: "Motor e injeção", x: 85.6, y: 58.8,   preco: 150, desc: "Scanner e diagnóstico antes de trocar qualquer peça." },
+      { nome: "Parte elétrica",  x: 50,   y: 36.8,   preco: 120, desc: "Bateria, alternador, luzes e chicote." },
+      { nome: "Óleo e filtros",  x: 52.5, y: 68.2, preco: 160, desc: "Óleo do tipo certo e filtro novo, com níveis conferidos." }
     ]
   },
   servicos: {

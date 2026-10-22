@@ -13,7 +13,10 @@ Branch: `feat/skills-e-melhoria-1021`. Repo: Giovani754/pitstop-site.
 - Visto em Chrome headless (390, 360, 768, 1280). Lighthouse NÃO medido (não instalado).
 
 ## Prévia (deploy)
-PENDENTE (precisa de login do Giovani). Colar no terminal desta pasta: `npx netlify-cli deploy --dir . --alias previa-oficina`
+O deploy sai da pasta `dist/` (só `index.html`; não há pasta de imagens ainda). Depois de mexer no `index.html`, copiar para `dist/` e rodar, nesta pasta, sem `--prod`:
+`cp index.html dist/index.html` e `npx netlify-cli deploy --dir dist --alias previa-oficina`
+Prévia: https://previa-oficina--pitstop-previa.netlify.app
+Se passar a ter fotos, criar `dist/img/` e copiar junto.
 Antes: não há `netlify.toml` nem site Netlify ligado a este repo. Para criar prévia (precisa de login do Giovani):
 `npx netlify-cli deploy --dir . --alias previa-oficina` (sem `--prod`).
 Alternativa sem conta: abrir `index.html` direto no navegador.

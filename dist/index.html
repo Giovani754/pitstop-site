@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>PitStop Centro Automotivo | Oficina mecânica na Vila Industrial, São Paulo</title>
+  <meta name="description" content="Oficina mecânica na Vila Industrial, São Paulo: revisão, freio, suspensão, injeção e alinhamento. Orçamento antes de abrir o carro. Chame no WhatsApp.">
+  <meta name="theme-color" content="#0f0f0e">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Crect width='44' height='44' rx='6' fill='%23ff5a1f'/%3E%3C/svg%3E">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PitStop Centro Automotivo">
+  <meta property="og:description" content="Revisão, freio, suspensão, injeção e alinhamento. Orçamento antes de abrir o carro.">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Sinaliza JS cedo: o CSS só esconde itens de animação se o JS e o GSAP existirem -->
+  <script>document.documentElement.className = 'js';</script>
+
+  <!-- Fontes: Barlow Condensed (títulos, vem de placa/painel) + Barlow (texto). 4 pesos no total. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- GSAP com versão fixa; defer para não bloquear a primeira pintura -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#0f0f0e; --bg2:#181817; --papel:#ece8df; --tinta:#161614;
+      --laranja:#ff5a1f; --laranja-esc:#b83700; --linha:rgba(255,255,255,.13); --linha-tinta:rgba(22,22,20,.16);
+      --txt:#e9e6df; --mudo:#a7a39a;
+      --display:'Barlow Condensed','Arial Narrow',Impact,sans-serif;
+      --corpo:'Barlow',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:72px;-webkit-text-size-adjust:100%}
+    body{margin:0;background:var(--bg);color:var(--txt);font:400 17px/1.55 var(--corpo);overflow-x:hidden;padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+    img,svg{display:block;max-width:100%}
+    a{color:inherit;-webkit-tap-highlight-color:transparent}
+    h1,h2,h3{font-family:var(--display);font-weight:800;line-height:.98;margin:0;text-transform:uppercase;letter-spacing:.005em}
+    p{margin:0}
+    ul{list-style:none;margin:0;padding:0}
+    :focus-visible{outline:3px solid var(--laranja);outline-offset:3px}
+    .wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+    .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+    /* Rótulo técnico de seção: número + nome, com régua */
+    .rotulo{display:flex;align-items:center;gap:12px;font:700 14px/1 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--laranja)}
+    .rotulo::after{content:"";flex:0 0 56px;height:8px;background:repeating-linear-gradient(90deg,currentColor 0 1px,transparent 1px 7px);opacity:.7}
+    .claro .rotulo{color:var(--laranja-esc)}
+    .claro{background:var(--papel);color:var(--tinta)}
+
+    /* Botões */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border:2px solid transparent;border-radius:4px;font:700 18px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:transform .2s,background .2s,color .2s,border-color .2s}
+    .btn-p{background:var(--laranja);color:#150a04}
+    .btn-p:hover{background:#ff7340}
+    .btn-s{border-color:rgba(255,255,255,.4);color:#fff;background:transparent}
+    .btn-s:hover{border-color:var(--laranja);color:var(--laranja)}
+    .claro .btn-s{border-color:var(--tinta);color:var(--tinta)}
+    .claro .btn-s:hover{border-color:var(--laranja-esc);color:var(--laranja-esc)}
+    .btn svg{width:20px;height:20px;fill:currentColor}
+
+    /* Cabeçalho */
+    .topo{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(15,15,14,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--linha)}
+    .topo .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+    .marca{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .marca svg{width:38px;height:38px}
+    .marca b{display:block;font:800 21px/1 var(--display);letter-spacing:.06em;text-transform:uppercase}
+    .marca small{display:block;font:600 11px/1.2 var(--corpo);letter-spacing:.16em;text-transform:uppercase;color:var(--mudo)}
+    .menu{display:none;gap:26px}
+    .menu a{font:700 15px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--txt);padding:8px 0}
+    .menu a:hover{color:var(--laranja)}
+    .topo-acoes{display:flex;align-items:center;gap:10px}
+    .topo-acoes .btn{display:none;min-height:44px;padding:0 18px;font-size:16px}
+    .hamb{background:none;border:1px solid var(--linha);color:#fff;width:44px;height:44px;border-radius:4px;display:grid;place-items:center;cursor:pointer}
+    .hamb svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2}
+    .gaveta{display:none;background:var(--bg);border-top:1px solid var(--linha);padding:8px 20px 20px}
+    .gaveta.aberta{display:block}
+    .gaveta a{display:block;padding:15px 0;border-bottom:1px solid var(--linha);font:700 19px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
+
+    /* Hero: linhas técnicas ao fundo (papel milimetrado escuro) */
+    .hero{position:relative;padding:84px 0 56px;background:
+      linear-gradient(180deg,rgba(15,15,14,0) 60%,var(--bg) 100%),
+      repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),
+      repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),var(--bg)}
+    .hero.com-foto{background:linear-gradient(180deg,rgba(15,15,14,.8),rgba(15,15,14,.9)),var(--hero-foto) center/cover no-repeat,var(--bg)}
+    .hero-grade{display:grid;gap:18px;align-items:center}
+    .hero h1{font-size:clamp(44px,10.5vw,84px);margin:18px 0 20px}
+    .hero h1 em{font-style:normal;color:var(--laranja);display:block}
+    .hero-sub{max-width:34em;font-size:clamp(17px,2.4vw,20px);color:#cfcbc3}
+    .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+    /* Palco do hero: carro em SVG com 5 pontos de serviço (ou lista de botões sobre a foto) */
+    .palco{position:relative;margin-inline:-20px;aspect-ratio:800/340;order:-1}
+    .carro{width:100%;height:100%}
+    .carro *{vector-effect:non-scaling-stroke}
+    .selo-hero{position:absolute;z-index:2;right:20px;top:0;background:var(--laranja);color:#150a04;font:800 14px/1.05 var(--display);letter-spacing:.06em;text-transform:uppercase;padding:9px 12px;transform:rotate(3deg)}
+    .pt{position:absolute;z-index:3;width:44px;height:44px;margin:-22px 0 0 -22px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center;color:#fff;-webkit-tap-highlight-color:transparent}
+    .pt .dot{width:16px;height:16px;border-radius:50%;background:var(--laranja);border:3px solid #150a04;box-shadow:0 0 0 2px var(--laranja)}
+    .pt .anel{position:absolute;inset:6px;border-radius:50%;border:2px solid var(--laranja);opacity:0;pointer-events:none}
+    .pt .rot{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    .pt[aria-expanded=true] .dot{background:#fff}
+    .pt:focus-visible{outline-offset:-4px;border-radius:50%}
+    .balao{position:absolute;z-index:30;width:min(290px,calc(100vw - 32px));background:var(--papel);color:var(--tinta);border:2px solid var(--laranja);border-radius:4px;padding:16px 16px 18px;box-shadow:0 14px 34px rgba(0,0,0,.5);scroll-margin-bottom:96px}
+    .balao[hidden]{display:none}
+    .balao h3{font-size:30px;padding-right:44px}
+    .balao .preco{font-weight:600;margin:6px 0 4px;color:var(--laranja-esc)}
+    .balao .desc{font-size:15px;color:#4a4842;margin-bottom:14px}
+    .balao .btn{width:100%}
+    .balao .fecha{position:absolute;top:4px;right:4px;width:44px;height:44px;border:0;background:none;color:var(--tinta);font:700 28px/1 var(--display);cursor:pointer}
+    .foto-pend .carro,.foto-pend .pt,.foto-pend .selo-hero{visibility:hidden}
+    .com-foto .carro{display:none}
+    .com-foto .palco{margin-inline:0;display:flex;flex-wrap:wrap;gap:10px;align-content:flex-end;align-items:flex-end}
+    .com-foto .selo-hero{position:static;transform:none;flex:0 0 100%;align-self:flex-start;width:max-content}
+    .com-foto .pt{position:relative;margin:0;width:auto;min-height:44px;padding:0 16px 0 10px;grid-auto-flow:column;gap:8px;background:rgba(15,15,14,.85);border:1px solid var(--linha);border-radius:4px;font:700 16px/1 var(--display);letter-spacing:.08em;text-transform:uppercase}
+    .com-foto .pt .rot{position:static;width:auto;height:auto;clip:auto;overflow:visible}
+    .com-foto .pt:focus-visible{border-radius:4px;outline-offset:2px}
+
+    /* Faixa de informação rápida: endereço, horário, telefone sempre visíveis, parados */
+    .faixa{background:var(--bg2);border-block:1px solid var(--linha)}
+    .faixa .wrap{display:grid;gap:0}
+    .faixa-item{padding:18px 0;border-bottom:1px solid var(--linha)}
+    .faixa-item:last-child{border:0}
+    .faixa small{display:block;font:700 12px/1 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--mudo);margin-bottom:6px}
+    .faixa b{font:700 20px/1.2 var(--corpo)}
+    .faixa a{text-decoration:none}
+    .status{display:inline-flex;align-items:center;gap:8px}
+    .status::before{content:"";width:9px;height:9px;border-radius:50%;background:#7c7a72}
+    .status.on::before{background:#3ddc84}
+    .status.off::before{background:#ff6b5a}
+
+    section{position:relative}
+    .bloco{padding:84px 0}
+    h2{font-size:clamp(38px,7.4vw,72px);margin:16px 0 0}
+    .intro{max-width:34em;margin-top:18px;color:var(--mudo);font-size:18px}
+    .claro .intro{color:#55534d}
+
+    /* Serviços: tabela de oficina, não grade de cards */
+    .serv-wrap{display:grid;gap:36px}
+    .serv-lista{border-top:2px solid var(--tinta)}
+    .serv{display:grid;grid-template-columns:52px 1fr;gap:4px 14px;padding:22px 8px;border-bottom:1px solid var(--linha-tinta);transition:background .25s}
+    .serv:hover{background:rgba(22,22,20,.05)}
+    .serv .n{font:800 30px/1 var(--display);color:var(--laranja-esc)}
+    .serv h3{font-size:clamp(26px,4.2vw,34px)}
+    .serv p{grid-column:2;color:#4a4842;max-width:36em}
+    .serv .sint{grid-column:2;font-size:14px;font-weight:600;color:var(--tinta);margin-top:6px}
+    .serv .sint::before{content:"Quando procurar: ";color:var(--laranja-esc);font-weight:600}
+
+    /* Passo a passo */
+    .passos{display:grid;gap:0;margin-top:44px;counter-reset:p}
+    .passo{position:relative;padding:0 0 34px 54px;border-left:2px solid var(--linha);margin-left:16px}
+    .passo::before{counter-increment:p;content:counter(p);position:absolute;left:-17px;top:-4px;width:32px;height:32px;display:grid;place-items:center;background:var(--laranja);color:#150a04;font:800 18px/1 var(--display)}
+    .passo h3{font-size:30px;margin-bottom:8px}
+    .passo p{color:var(--mudo);max-width:26em}
+
+    /* Fotos reais: moldura com tratamento leve; sem foto vira placeholder neutro */
+    .foto{position:relative;overflow:hidden;background:#242422;border-radius:2px;margin:0}
+    .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.06) saturate(.9) brightness(.97)}
+    .foto::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 55%,rgba(15,15,14,.55)),linear-gradient(135deg,rgba(255,90,31,.12),transparent 40%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+    .foto .canto{position:absolute;z-index:2;width:22px;height:22px;border:3px solid var(--laranja)}
+    .foto .c1{left:10px;top:10px;border-right:0;border-bottom:0}
+    .foto .c2{right:10px;bottom:10px;border-left:0;border-top:0}
+    .foto figcaption{position:absolute;z-index:2;left:14px;bottom:12px;right:14px;font:700 13px/1.2 var(--display);letter-spacing:.14em;text-transform:uppercase;color:#fff}
+    .ph{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:10px;text-align:center;padding:24px;color:#8d897f;background:
+      repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 14px),#232321}
+    .ph svg{width:46px;height:46px;stroke:currentColor;fill:none;stroke-width:1.6}
+    .ph span{font:700 14px/1.3 var(--display);letter-spacing:.14em;text-transform:uppercase}
+
+    .oficina-grade{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-top:40px}
+    .oficina-grade .foto{min-width:0}
+    .f-equipe{aspect-ratio:4/3}
+    .f-servico{aspect-ratio:16/10}
+    .f-detalhe{aspect-ratio:16/10}
+
+    /* Números: faixa de cor forte, única do site */
+    .numeros{background:var(--laranja);color:#150a04;padding:54px 0}
+    .numeros ul{display:grid;gap:26px}
+    .numeros b{display:block;font:800 clamp(56px,12vw,96px)/.9 var(--display)}
+    .numeros span{font:700 17px/1.2 var(--display);letter-spacing:.12em;text-transform:uppercase}
+    .exemplo-tag{display:inline-block;margin-left:8px;padding:3px 7px;border:1.5px dashed currentColor;font:700 11px/1 var(--display);letter-spacing:.14em;vertical-align:middle}
+
+    /* Avaliações */
+    .aval-topo{display:grid;gap:22px;align-items:end}
+    .nota{display:flex;align-items:baseline;gap:14px}
+    .nota b{font:800 clamp(80px,16vw,140px)/.8 var(--display);color:var(--laranja)}
+    .estrelas{color:var(--laranja);letter-spacing:.12em;font-size:22px}
+    .avals{display:grid;gap:16px;margin-top:40px}
+    .aval{border:1px solid var(--linha);background:var(--bg2);padding:24px}
+    .aval blockquote{margin:12px 0 18px;font-size:19px;line-height:1.45}
+    .aval cite{font-style:normal;font:700 15px/1.2 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--mudo)}
+    .aviso-ex{margin-top:22px;padding:12px 14px;border:1.5px dashed var(--laranja);color:var(--laranja);font-weight:600;font-size:15px}
+
+    /* Orçamento rápido */
+    .orc{display:grid;gap:34px}
+    .orc ul{margin-top:22px;display:grid;gap:10px}
+    .orc li{padding-left:22px;position:relative;color:#4a4842}
+    .orc li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:3px;background:var(--laranja-esc)}
+    form{background:#fff;border:2px solid var(--tinta);padding:24px;display:grid;gap:16px}
+    label{display:grid;gap:6px;font:700 14px/1 var(--display);letter-spacing:.14em;text-transform:uppercase}
+    input,select,textarea{font:400 17px/1.3 var(--corpo);color:var(--tinta);background:#f7f5f0;border:1.5px solid #8b887f;border-radius:3px;padding:13px 12px;width:100%;min-height:50px}
+    textarea{min-height:90px;resize:vertical}
+    input:focus,select:focus,textarea:focus{outline:3px solid var(--laranja);outline-offset:1px;border-color:var(--tinta)}
+    .form-nota{font-size:14px;color:#55534d}
+
+    /* Localização */
+    .loc{display:grid;gap:26px;margin-top:40px}
+    .mapa{position:relative;min-height:340px;background:#232321;border:1px solid var(--linha)}
+    .mapa iframe{position:absolute;inset:0;z-index:1;width:100%;height:100%;border:0;filter:grayscale(.85) invert(.9) contrast(.9)}
+    .mapa-falha{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:16px;padding:24px;text-align:center;background:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 14px),#232321}
+    .mapa-falha p{font:800 clamp(24px,5vw,32px)/1.05 var(--display);text-transform:uppercase}
+    .end-grande{font:800 clamp(30px,5.6vw,46px)/1 var(--display);text-transform:uppercase}
+    .horarios{margin:22px 0;border-top:1px solid var(--linha)}
+    .horarios li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--linha)}
+    .horarios li.hoje{color:var(--laranja);font-weight:600}
+    .loc-acoes{display:flex;flex-wrap:wrap;gap:12px}
+    .tel-grande{display:block;margin:6px 0 18px;font:800 clamp(30px,6vw,44px)/1 var(--display);text-decoration:none;letter-spacing:.02em}
+
+    footer{background:#0a0a09;border-top:1px solid var(--linha);padding:40px 0 28px;color:var(--mudo);font-size:15px}
+    footer .wrap{display:grid;gap:14px}
+    footer b{color:var(--txt)}
+
+    /* Botões fixos: WhatsApp + ligar sempre ao alcance do polegar */
+    .fixos{position:fixed;z-index:60;left:0;right:0;bottom:0;display:flex;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(15,15,14,.96);border-top:1px solid var(--linha)}
+    .fixos .btn{flex:1;min-height:52px}
+    .fixos .btn-zap{flex:2;background:#25d366;color:#04210f}
+    .fixos .btn-zap:hover{background:#3be37b}
+
+    /* Animação: só esconde se GSAP carregou (classe .gs) e o usuário não pediu menos movimento */
+    @media (prefers-reduced-motion:no-preference){
+      .js.gs [data-anim]{opacity:0;transform:translateY(26px)}
+      .js.gs .hero:not(.com-foto) .pt .dot{opacity:0}
+    }
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+    @media (min-width:720px){
+      .faixa .wrap{grid-template-columns:1.4fr 1fr 1fr}
+      .faixa-item{border-bottom:0;border-right:1px solid var(--linha);padding:22px 24px}
+      .faixa-item:first-child{padding-left:0}
+      .faixa-item:last-child{border:0}
+      .numeros ul{grid-template-columns:repeat(3,1fr)}
+      .oficina-grade{grid-template-columns:1.25fr 1fr;grid-template-rows:auto auto}
+      .f-equipe{grid-row:span 2;aspect-ratio:auto;min-height:480px}
+      .f-servico,.f-detalhe{aspect-ratio:auto}
+      .avals{grid-template-columns:repeat(3,1fr);align-items:start}
+      .avals .aval:nth-child(2){margin-top:44px}
+      .avals .aval:nth-child(3){margin-top:18px}
+      .aval-topo{grid-template-columns:auto 1fr}
+    }
+    @media (min-width:980px){
+      body{padding-bottom:0}
+      .menu{display:flex}
+      .hamb,.gaveta{display:none!important}
+      .topo-acoes .btn{display:inline-flex}
+      .hero{padding:140px 0 84px}
+      .hero-grade{grid-template-columns:1.1fr .9fr;gap:48px}
+      .hero-cta{margin-top:28px}
+      .palco{margin-inline:0;order:0}
+      .serv-wrap{grid-template-columns:.8fr 1.4fr;gap:70px}
+      .serv-intro{position:sticky;top:110px;align-self:start}
+      .serv{grid-template-columns:64px 1fr 220px;gap:4px 22px;align-items:start}
+      .serv p{grid-column:2}
+      .serv .sint{grid-column:3;grid-row:1/span 2;margin-top:6px}
+      .passos{grid-template-columns:repeat(4,1fr);gap:26px;margin-top:64px}
+      .passo{border-left:0;border-top:2px solid var(--linha);margin:0;padding:28px 0 0}
+      .passo::before{left:0;top:-17px}
+      .passo:nth-child(2){margin-top:28px}
+      .passo:nth-child(3){margin-top:56px}
+      .passo:nth-child(4){margin-top:84px}
+      .orc{grid-template-columns:.9fr 1.1fr;gap:70px;align-items:start}
+      .loc{grid-template-columns:1.2fr .8fr;gap:48px}
+      .mapa{min-height:520px}
+      .fixos{left:auto;right:24px;bottom:24px;width:auto;padding:0;background:none;border:0;flex-direction:column;align-items:flex-end}
+      .fixos .btn{flex:none;box-shadow:0 8px 24px rgba(0,0,0,.45)}
+      .fixos .btn-lig{display:none}
+    }
+  </style>
+</head>
+<body>
+  <a class="sr" href="#orcamento">Ir para o orçamento rápido</a>
+
+  <header class="topo" id="topo">
+    <div class="wrap">
+      <a class="marca" href="#inicio" aria-label="Início">
+        <svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="6" fill="#ff5a1f"/><rect x="16" y="8" width="12" height="14" rx="3" fill="#0f0f0e"/><rect x="13" y="19" width="18" height="4" rx="2" fill="#0f0f0e"/><rect x="20" y="23" width="4" height="9" rx="2" fill="#0f0f0e"/><circle cx="22" cy="35" r="5" fill="none" stroke="#0f0f0e" stroke-width="3"/></svg>
+        <span><b data-t="nomeCurto"></b><small data-t="tipo"></small></span>
+      </a>
+      <nav class="menu" aria-label="Principal">
+        <a href="#servicos">Serviços</a><a href="#como-funciona">Como funciona</a><a href="#oficina">A oficina</a><a href="#avaliacoes">Avaliações</a><a href="#orcamento">Orçamento</a><a href="#localizacao">Onde estamos</a>
+      </nav>
+      <div class="topo-acoes">
+        <a class="btn btn-p" data-wa data-wa-msg="saudacao" href="#">WhatsApp</a>
+        <button class="hamb" id="hamb" aria-label="Abrir menu" aria-expanded="false" aria-controls="gaveta"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      </div>
+    </div>
+    <div class="gaveta" id="gaveta">
+      <a href="#servicos">Serviços</a><a href="#como-funciona">Como funciona</a><a href="#oficina">A oficina</a><a href="#avaliacoes">Avaliações</a><a href="#orcamento">Orçamento rápido</a><a href="#localizacao">Onde estamos</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="wrap hero-grade">
+        <div>
+          <!-- Textos estáticos para SEO/primeira pintura; o JS regrava os mesmos a partir de OFICINA.hero -->
+          <p class="rotulo" data-hero data-t="hero.eyebrow">Oficina mecânica · Vila Industrial</p>
+          <h1 data-hero><span data-t="hero.titulo">Barulho estranho, luz acesa, freio mole?</span><em data-t="hero.destaque">Traz que a gente olha.</em></h1>
+          <p class="hero-sub" data-hero data-t="hero.sub">Revisão, freio, suspensão, injeção e alinhamento aqui em Vila Industrial. Você acompanha o diagnóstico, recebe o orçamento antes de a gente abrir qualquer coisa e só paga o que aprovar.</p>
+          <div class="hero-cta" data-hero>
+            <a class="btn btn-p" data-wa data-wa-msg="saudacao" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12c0 2.6.8 5.1 2.3 7L.8 23.5a.5.5 0 00.6.6l4.5-1.5A12 12 0 0012 24c6.6 0 12-5.4 12-12S18.6 0 12 0zm5.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.2c-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4z"/></svg>Chamar no WhatsApp</a>
+            <a class="btn btn-s" data-tel href="#">Ligar agora</a>
+          </div>
+        </div>
+        <div class="palco" id="palco">
+          <!-- Carro em desenho técnico (decorativo). Os 5 pontos de serviço são botões criados a partir de OFICINA.hero.pontos -->
+          <svg class="carro" viewBox="0 0 800 340" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient id="luzG" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ff5a1f" stop-opacity=".42"/><stop offset=".6" stop-color="#ff5a1f" stop-opacity=".12"/><stop offset="1" stop-color="#ff5a1f" stop-opacity="0"/></radialGradient>
+              <linearGradient id="corpoG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#262624"/><stop offset="1" stop-color="#121211"/></linearGradient>
+              <linearGradient id="raioG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff5a1f" stop-opacity="0"/><stop offset=".85" stop-color="#ff5a1f" stop-opacity=".4"/><stop offset="1" stop-color="#ffd2bd" stop-opacity=".95"/></linearGradient>
+              <clipPath id="varreC"><rect id="varreR" x="-800" y="0" width="800" height="340"/></clipPath>
+              <path id="contorno" d="M112 236 L106 190 Q106 158 124 140 L192 96 Q204 88 224 86 L400 84 Q432 84 452 100 L532 160 L672 176 Q712 182 726 204 L732 236 Q733 250 720 250 L654 250 A54 54 0 0 0 546 250 L294 250 A54 54 0 0 0 186 250 L124 250 Q112 250 112 236 Z"/>
+              <g id="roda"><circle r="46" fill="#0c0c0b"/><circle r="31"/><circle r="9" stroke="#ff5a1f"/><path d="M0 -31V-9M0 9V31M-31 0H-9M9 0H31M-22 -22L-7 -7M7 7L22 22M22 -22L7 -7M-7 7L-22 22" stroke="#ff5a1f" stroke-opacity=".7"/></g>
+            </defs>
+            <ellipse cx="410" cy="190" rx="400" ry="150" fill="url(#luzG)"/>
+            <ellipse cx="410" cy="297" rx="340" ry="9" fill="#000" fill-opacity=".45"/>
+            <g fill="none" stroke="#e9e6df" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M20 296H780" stroke-opacity=".4"/>
+              <use href="#contorno" fill="url(#corpoG)"/>
+              <path d="M208 100 L158 146 H300 V98Z M316 98 V146 H504 L446 104 Q440 98 430 98Z"/>
+              <path d="M308 148V250M498 154V250M110 178H724M118 224H180M300 224H540M660 224H728" stroke-opacity=".4"/>
+              <path d="M262 176h22M330 176h22M502 140 L486 138 V148 L502 150Z" stroke="#ff5a1f"/>
+              <path d="M676 180 L712 190 L716 200 L670 192Z" fill="#ff5a1f" fill-opacity=".85" stroke="#ffb090"/>
+              <path d="M108 168 L118 160 V190 H108Z" fill="#ff5a1f" fill-opacity=".7" stroke="#ffb090"/>
+              <path d="M690 214H724" stroke-opacity=".5"/>
+              <use href="#roda" x="240" y="250"/><use href="#roda" x="600" y="250"/>
+              <path d="M106 322H732M106 315V329M732 315V329" stroke-opacity=".4" stroke-dasharray="4 5"/>
+            </g>
+            <!-- Varredura do scanner: ficam escondidas (opacity 0) e só o GSAP as mostra -->
+            <g id="varreG" opacity="0" clip-path="url(#varreC)"><use href="#contorno" fill="none" stroke="#ff8a5c" stroke-width="2.4"/></g>
+            <g id="raio" opacity="0"><rect x="-70" y="40" width="70" height="262" fill="url(#raioG)"/></g>
+          </svg>
+          <span class="selo-hero" data-t="hero.selo"></span>
+          <div class="balao" id="balao" role="dialog" aria-labelledby="balaoNome" tabindex="-1" hidden>
+            <button class="fecha" id="balaoFecha" type="button" aria-label="Fechar">&times;</button>
+            <h3 id="balaoNome"></h3>
+            <p class="preco" id="balaoPreco"></p>
+            <p class="desc" id="balaoDesc"></p>
+            <a class="btn btn-p" id="balaoAgendar" target="_blank" rel="noopener" href="#"></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="faixa" aria-label="Endereço, horário e telefone">
+      <div class="wrap">
+        <div class="faixa-item"><small>Endereço</small><b data-t="endereco.completo"></b></div>
+        <div class="faixa-item"><small>Horário</small><b class="status" id="status" data-t="statusInicial"></b></div>
+        <div class="faixa-item"><small>Telefone / WhatsApp</small><b><a data-tel data-t="telefone.exibe" href="#"></a></b></div>
+      </div>
+    </div>
+
+    <section class="bloco claro" id="servicos">
+      <div class="wrap serv-wrap">
+        <div class="serv-intro" data-anim>
+          <p class="rotulo">01 · O que a gente faz</p>
+          <h2 data-t="servicos.titulo"></h2>
+          <p class="intro" data-t="servicos.intro"></p>
+          <p style="margin-top:26px"><a class="btn btn-p" data-wa data-wa-msg="orcamento" href="#">Pedir orçamento</a></p>
+        </div>
+        <ul class="serv-lista" id="servLista"></ul>
+      </div>
+    </section>
+
+    <section class="bloco" id="como-funciona">
+      <div class="wrap">
+        <p class="rotulo" data-anim>02 · Como funciona</p>
+        <h2 data-anim data-t="processo.titulo"></h2>
+        <ol class="passos" id="passos" style="list-style:none;margin-bottom:0;padding:0"></ol>
+      </div>
+    </section>
+
+    <section class="bloco" id="oficina" style="background:var(--bg2);border-block:1px solid var(--linha)">
+      <div class="wrap">
+        <p class="rotulo" data-anim>03 · A oficina</p>
+        <h2 data-anim data-t="oficina.titulo"></h2>
+        <p class="intro" data-anim data-t="oficina.intro"></p>
+        <div class="oficina-grade">
+          <figure class="foto f-equipe" data-foto="equipe" data-anim></figure>
+          <figure class="foto f-servico" data-foto="servico" data-anim></figure>
+          <figure class="foto f-detalhe" data-foto="detalhe" data-anim></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="numeros" aria-label="A oficina em números">
+      <div class="wrap"><ul id="numeros"></ul></div>
+    </section>
+
+    <section class="bloco" id="avaliacoes">
+      <div class="wrap">
+        <p class="rotulo" data-anim>04 · Quem já passou por aqui</p>
+        <div class="aval-topo" style="margin-top:16px">
+          <div class="nota" data-anim><b id="notaGoogle"></b><div><div class="estrelas" aria-hidden="true">★★★★★</div><p id="notaTexto" style="color:var(--mudo)"></p></div></div>
+          <h2 data-anim data-t="avaliacoes.titulo"></h2>
+        </div>
+        <div class="avals" id="avals"></div>
+        <p class="aviso-ex" id="avisoEx" hidden>EXEMPLO: nota e avaliações abaixo são marcadores. Trocar por avaliações reais do Google da oficina (campo <code>avaliacoes</code> no topo do script).</p>
+        <p style="margin-top:26px"><a class="btn btn-s" id="verGoogle" target="_blank" rel="noopener" href="#">Ver todas no Google</a></p>
+      </div>
+    </section>
+
+    <section class="bloco claro" id="orcamento">
+      <div class="wrap orc">
+        <div data-anim>
+          <p class="rotulo">05 · Orçamento rápido</p>
+          <h2 data-t="orcamento.titulo"></h2>
+          <p class="intro" data-t="orcamento.intro"></p>
+          <ul id="promessas"></ul>
+        </div>
+        <form id="formOrc" data-anim>
+          <label>Seu nome<input name="nome" autocomplete="name" required></label>
+          <label>Carro (modelo e ano)<input name="carro" placeholder="Ex.: Gol 2014" required></label>
+          <label>Do que você precisa<select name="servico" id="selServico"></select></label>
+          <label>Conta o problema (opcional)<textarea name="obs" placeholder="Ex.: barulho na roda dianteira ao virar"></textarea></label>
+          <button class="btn btn-p" type="submit">Enviar pelo WhatsApp</button>
+          <p class="form-nota">Abre o WhatsApp com a mensagem pronta. Nada é enviado até você tocar em enviar.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="bloco" id="localizacao">
+      <div class="wrap">
+        <p class="rotulo" data-anim>06 · Onde estamos</p>
+        <h2 data-anim data-t="localizacao.titulo"></h2>
+        <div class="loc">
+          <div class="mapa" id="mapa"></div>
+          <div>
+            <p class="end-grande" data-t="endereco.completo"></p>
+            <p style="color:var(--mudo);margin-top:8px" data-t="endereco.referencia"></p>
+            <ul class="horarios" id="horarios"></ul>
+            <a class="tel-grande" data-tel data-t="telefone.exibe" href="#"></a>
+            <div class="loc-acoes">
+              <a class="btn btn-p" id="comoChegar" target="_blank" rel="noopener" href="#">Como chegar</a>
+              <a class="btn btn-s" data-wa data-wa-msg="saudacao" href="#">WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p><b data-t="nome"></b> · <span data-t="endereco.completo"></span></p>
+      <p>CNPJ: <span data-t="cnpj"></span></p>
+      <p>© <span id="ano"></span> <span data-t="nome"></span>. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp + ligar: fixos. No celular viram barra inferior; no desktop, botão flutuante -->
+  <div class="fixos">
+    <a class="btn btn-lig btn-s" data-tel href="#" aria-label="Ligar para a oficina">Ligar</a>
+    <a class="btn btn-zap" data-wa data-wa-msg="saudacao" href="#">WhatsApp</a>
+  </div>
+
+<script>
+/* =====================================================================
+   CONFIGURAÇÃO DA OFICINA: é aqui que se troca tudo para outro cliente.
+   Os dados abaixo são EXEMPLO (exemplo:true). Com dados reais, ponha
+   exemplo:false: some o aviso de "exemplo" e o JSON-LD passa a incluir nota.
+   Nome/endereço/telefone/WhatsApp, horários, serviços, passos, avaliações,
+   fotos e textos de cada seção ficam todos neste objeto.
+   ===================================================================== */
+const OFICINA = {
+  exemplo: true,
+  nome: "PitStop Centro Automotivo",
+  nomeCurto: "PitStop",
+  tipo: "Oficina mecânica",
+  bairro: "Vila Industrial",
+  cidade: "São Paulo",
+  uf: "SP",
+  cnpj: "00.000.000/0001-00 (exemplo)",
+  endereco: {
+    rua: "Av. das Indústrias, 1247",
+    cep: "04000-000",
+    completo: "Av. das Indústrias, 1247 · Vila Industrial, São Paulo/SP",
+    referencia: "Ao lado do mercado, estacionamento próprio para clientes.",
+    // Texto que o Google Maps entende; troque pelo endereço certo
+    mapaBusca: "Av. das Indústrias, 1247, São Paulo, SP"
+  },
+  telefone: { exibe: "(11) 99999-0000", tel: "5511999990000" },   // tel: só dígitos com DDI
+  whatsapp: "5511999990000",                                       // só dígitos com DDI; placeholder até ter o real
+  // dow: 0=domingo ... 6=sábado. abre/fecha vazios = fechado.
+  horarios: [
+    { rotulo: "Segunda a sexta", dow: [1,2,3,4,5], abre: "08:00", fecha: "18:00" },
+    { rotulo: "Sábado",          dow: [6],         abre: "08:00", fecha: "13:00" },
+    { rotulo: "Domingo",         dow: [0],         abre: "",      fecha: "" }
+  ],
+  // Coordenadas do mapa/JSON-LD. EXEMPLO: trocar pelas reais junto com o endereço.
+  geo: { lat: -23.5505, lng: -46.6333 },
+  seo: {
+    titulo: "{nome} | Oficina mecânica na {bairro}, {cidade}",
+    descricao: "Oficina mecânica na {bairro}, {cidade}: revisão, freio, suspensão, injeção e alinhamento. Orçamento antes de abrir o carro. Chame no WhatsApp."
+  },
+  // Foto real do hero (ex.: "img/fachada.jpg"). Preenchida: vira fundo escurecido e o carro SVG some,
+  // ficando só os pontos de serviço como botões. Vazia (ou foto que não carrega): usa o carro.
+  heroFoto: "",
+  mensagens: {
+    saudacao: "Olá! Vi o site da {nomeCurto} e queria falar com a oficina.",
+    orcamento: "Olá! Quero um orçamento na {nomeCurto}.",
+    agendar: "Olá! Vim pelo site da {nomeCurto} e quero agendar: {servico}."
+  },
+  hero: {
+    eyebrow: "Oficina mecânica · {bairro}",
+    titulo: "Barulho estranho, luz acesa, freio mole?",
+    destaque: "Traz que a gente olha.",
+    sub: "Revisão, freio, suspensão, injeção e alinhamento aqui em {bairro}. Você acompanha o diagnóstico, recebe o orçamento antes de a gente abrir qualquer coisa e só paga o que aprovar.",
+    selo: "Orçamento antes de mexer",
+    // x/y = posição do ponto sobre o carro, em % do palco. preco = "a partir de" (valores EXEMPLO).
+    pontos: [
+      { nome: "Freios",          x: 75,   y: 73.5, preco: 180, desc: "Pastilha, disco e fluido, com a peça gasta mostrada antes." },
+      { nome: "Suspensão",       x: 30,   y: 61.8,   preco: 250, desc: "Amortecedor, bucha, pivô e terminal." },
+      { nome: "Motor e injeção", x: 85.6, y: 58.8,   preco: 150, desc: "Scanner e diagnóstico antes de trocar qualquer peça." },
+      { nome: "Parte elétrica",  x: 50,   y: 36.8,   preco: 120, desc: "Bateria, alternador, luzes e chicote." },
+      { nome: "Óleo e filtros",  x: 52.5, y: 68.2, preco: 160, desc: "Óleo do tipo certo e filtro novo, com níveis conferidos." }
+    ]
+  },
+  servicos: {
+    titulo: "O que o seu carro pode precisar",
+    intro: "Serviço de oficina de verdade, sem pacote enfeitado. Se não souber o nome do problema, conta o sintoma que a gente descobre.",
+    lista: [
+      { nome: "Revisão completa", texto: "Óleo, filtros, correias, velas, fluidos, bateria, luzes. Você recebe a lista do que está bom, do que dá pra esperar e do que não dá.", sintoma: "Antes de viajar ou a cada 10 mil km" },
+      { nome: "Freios", texto: "Pastilha, disco, fluido e cabo. Mostramos a peça gasta ao lado da nova antes de trocar.", sintoma: "Chiado, pedal baixo ou carro puxando ao frear" },
+      { nome: "Suspensão", texto: "Amortecedor, bucha, pivô, terminal e batente. Carro bom de estrada começa por aqui.", sintoma: "Batida seca em buraco, carro balançando em curva" },
+      { nome: "Injeção eletrônica", texto: "Scanner, limpeza de bico, sonda, velas e cabos. Achamos a causa antes de trocar peça.", sintoma: "Luz da injeção, falha, consumo alto ou engasgo" },
+      { nome: "Alinhamento e balanceamento", texto: "Máquina regulada e conferida na estrada depois do serviço. Pneu dura mais e o volante para de tremer.", sintoma: "Volante tremendo ou carro puxando pra um lado" },
+      { nome: "Troca de óleo e filtros", texto: "Óleo do tipo certo pro seu motor, filtro novo e conferência rápida dos níveis. Sai em pouco tempo.", sintoma: "Passou do prazo ou do km da troca" }
+    ]
+  },
+  processo: {
+    titulo: "Aqui ninguém mexe no seu carro sem você saber",
+    passos: [
+      { t: "Você chega", p: "Conta o que está acontecendo, do jeito que você sabe. Pode vir sem hora marcada ou chamar no WhatsApp antes." },
+      { t: "A gente olha", p: "O mecânico analisa o carro com você por perto e explica o que encontrou, sem palavra difícil." },
+      { t: "Orçamento na mão", p: "Valor de peça e de mão de obra separados. Aprovou, fazemos. Não aprovou, não paga nada além do que combinou." },
+      { t: "Entrega e garantia", p: "Peça trocada volta pra você se quiser. O serviço sai com garantia combinada por escrito." }
+    ]
+  },
+  oficina: {
+    titulo: "Quem cuida do seu carro",
+    intro: "Equipe do bairro, bancada à vista de quem passa. Aqui você vê o trabalho acontecendo."
+  },
+  // Fotos reais: coloque o caminho em src (ex.: "img/fachada.jpg", ideal 1200px de largura, JPG/WebP).
+  // Sem src, aparece um espaço neutro com o nome da foto. foco = object-position da foto.
+  fotos: {
+    equipe:  { src: "", w: 1200, h: 1000, alt: "Equipe da oficina", legenda: "Equipe", foco: "50% 35%" },
+    servico: { src: "", w: 1200, h: 750, alt: "Mecânico trabalhando num carro no elevador", legenda: "Serviço em andamento", foco: "50% 50%" },
+    detalhe: { src: "", w: 1200, h: 750, alt: "Peça sendo conferida na bancada", legenda: "Bancada", foco: "50% 50%" }
+  },
+  numeros: [
+    { valor: 12,   sufixo: "",  rotulo: "anos de oficina" },
+    { valor: 90,   sufixo: "",  rotulo: "dias de garantia no serviço" },
+    { valor: 8000, sufixo: "+", rotulo: "carros atendidos" }
+  ],
+  avaliacoes: {
+    titulo: "O que falam da gente",
+    nota: "4.9",
+    total: 0,                    // número real de avaliações no Google
+    link: "",                    // link do perfil no Google Meu Negócio
+    exemplo: true,
+    lista: [
+      { nome: "Nome do cliente",  texto: "[EXEMPLO] Aqui entra o texto de uma avaliação real do Google, copiado como está.", estrelas: 5 },
+      { nome: "Nome do cliente",  texto: "[EXEMPLO] Outra avaliação real do Google. Prefira as que citam o serviço feito.", estrelas: 5 },
+      { nome: "Nome do cliente",  texto: "[EXEMPLO] Terceira avaliação real. Troque os três blocos e o aviso some.", estrelas: 5 }
+    ]
+  },
+  orcamento: {
+    titulo: "Orçamento em um minuto",
+    intro: "Preencha, toque em enviar e a conversa abre no WhatsApp já com tudo escrito. A resposta vem no horário de atendimento.",
+    promessas: ["Valor de peça e mão de obra separados", "Sem cobrar para olhar o carro", "Você aprova antes de qualquer serviço"]
+  },
+  localizacao: { titulo: "Vem tomar um café enquanto a gente olha" }
+};
+
+/* ===================== RENDER (não precisa mexer daqui pra baixo para trocar de cliente) ===================== */
+(function(){
+  var O = OFICINA;
+  var porCaminho = function(c){ return c.split('.').reduce(function(a,k){ return a == null ? a : a[k]; }, O); };
+  var interpola = function(s){ return String(s).replace(/\{(\w+)\}/g, function(_,k){ return O[k] != null ? O[k] : ''; }); };
+  var el = function(tag, cls, html){ var e = document.createElement(tag); if(cls) e.className = cls; if(html != null) e.textContent = html; return e; };
+
+  // Textos
+  document.querySelectorAll('[data-t]').forEach(function(n){
+    var v = porCaminho(n.getAttribute('data-t'));
+    if(v != null) n.textContent = interpola(v);
+  });
+  document.title = interpola(O.seo.titulo);
+  document.querySelector('meta[name="description"]').setAttribute('content', interpola(O.seo.descricao));
+  document.getElementById('ano').textContent = new Date().getFullYear();
+
+  // Links de WhatsApp e telefone
+  var waLink = function(msg){ return 'https://wa.me/' + O.whatsapp + '?text=' + encodeURIComponent(msg); };
+  document.querySelectorAll('[data-wa]').forEach(function(a){
+    var k = a.getAttribute('data-wa-msg');
+    a.href = waLink(interpola(O.mensagens[k] || O.mensagens.saudacao));
+    a.target = '_blank'; a.rel = 'noopener';
+  });
+  document.querySelectorAll('[data-tel]').forEach(function(a){ a.href = 'tel:+' + O.telefone.tel; });
+
+  // Hero: 5 pontos de serviço + balão. Com OFICINA.heroFoto carregada, a foto vira fundo e os pontos viram lista de botões.
+  var hero = document.getElementById('inicio'), palco = document.getElementById('palco'), balao = document.getElementById('balao');
+  var reais = function(v){ return 'R$ ' + Number(v).toLocaleString('pt-BR'); };
+  var aberto = null;
+  O.hero.pontos.forEach(function(p, i){
+    var b = el('button', 'pt'); b.type = 'button'; b.setAttribute('data-i', i);
+    b.style.left = p.x + '%'; b.style.top = p.y + '%';
+    b.setAttribute('aria-haspopup', 'dialog'); b.setAttribute('aria-expanded', 'false'); b.setAttribute('aria-controls', 'balao');
+    b.appendChild(el('i', 'anel')); b.appendChild(el('i', 'dot')); b.appendChild(el('span', 'rot', p.nome));
+    palco.insertBefore(b, balao);
+  });
+  var fechar = function(semFoco){
+    if(!aberto) return;
+    var b = aberto; aberto = null; balao.hidden = true; b.setAttribute('aria-expanded', 'false');
+    if(!semFoco) b.focus();
+  };
+  var abrir = function(b){
+    var p = O.hero.pontos[+b.getAttribute('data-i')];
+    fechar(true);
+    document.getElementById('balaoNome').textContent = p.nome;
+    document.getElementById('balaoPreco').textContent = 'a partir de ' + reais(p.preco);
+    document.getElementById('balaoDesc').textContent = p.desc;
+    var a = document.getElementById('balaoAgendar');
+    a.textContent = 'Agendar ' + p.nome;
+    a.href = waLink(interpola(O.mensagens.agendar.replace('{servico}', p.nome)));
+    balao.hidden = false; aberto = b; b.setAttribute('aria-expanded', 'true');
+    var w = balao.offsetWidth, cx = b.offsetLeft + b.offsetWidth / 2;
+    balao.style.left = Math.max(8, Math.min(cx - w / 2, palco.clientWidth - w - 8)) + 'px';
+    balao.style.top = (b.offsetTop + b.offsetHeight + 6) + 'px';
+    if(window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) gsap.fromTo(balao, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .22, ease: 'power2.out' });
+    balao.focus({ preventScroll: true });
+    balao.scrollIntoView({ block: 'nearest' });
+  };
+  palco.addEventListener('click', function(e){
+    var b = e.target.closest('.pt');
+    if(b) { if(aberto === b) fechar(); else abrir(b); }
+  });
+  document.getElementById('balaoFecha').addEventListener('click', function(){ fechar(); });
+  document.addEventListener('pointerdown', function(e){ if(aberto && !balao.contains(e.target) && !aberto.contains(e.target)) fechar(true); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') fechar(); });
+  window.addEventListener('resize', function(){ fechar(true); });
+  // Promessa lida pela animação: 'foto' ou 'carro'. Foto que não carrega nunca deixa buraco: cai no carro.
+  window.heroPronto = new Promise(function(ok){
+    if(!O.heroFoto){ ok('carro'); return; }
+    hero.classList.add('foto-pend');
+    var feito = false, im = new Image();
+    var fim = function(modo){
+      if(feito) return; feito = true; hero.classList.remove('foto-pend');
+      if(modo === 'foto'){ hero.style.setProperty('--hero-foto', 'url("' + O.heroFoto.replace(/"/g, '%22') + '")'); hero.classList.add('com-foto'); }
+      ok(modo);
+    };
+    im.onload = function(){ fim('foto'); }; im.onerror = function(){ fim('carro'); };
+    setTimeout(function(){ fim('carro'); }, 3000);
+    im.src = O.heroFoto;
+  });
+
+  // Serviços (também alimenta o select do orçamento)
+  var lista = document.getElementById('servLista'), sel = document.getElementById('selServico');
+  O.servicos.lista.forEach(function(s, i){
+    var li = el('li', 'serv'); li.setAttribute('data-anim', '');
+    li.appendChild(el('span', 'n', String(i + 1).padStart(2, '0')));
+    li.appendChild(el('h3', '', s.nome));
+    li.appendChild(el('p', '', s.texto));
+    li.appendChild(el('p', 'sint', s.sintoma));
+    lista.appendChild(li);
+    var op = el('option', '', s.nome); op.value = s.nome; sel.appendChild(op);
+  });
+  var outro = el('option', '', 'Outro / não sei dizer'); outro.value = 'Outro'; sel.appendChild(outro);
+
+  // Passo a passo
+  var passos = document.getElementById('passos');
+  O.processo.passos.forEach(function(p){
+    var li = el('li', 'passo'); li.setAttribute('data-anim', '');
+    li.appendChild(el('h3', '', p.t)); li.appendChild(el('p', '', p.p));
+    passos.appendChild(li);
+  });
+
+  // Fotos: com src vira <img> (lazy, com width/height); sem src ou com erro, placeholder neutro
+  var icone = '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 15h9l3-5h12l3 5h9v23H6z"/><circle cx="24" cy="26" r="7"/></svg>';
+  document.querySelectorAll('[data-foto]').forEach(function(f){
+    var nome = f.getAttribute('data-foto'), d = O.fotos[nome];
+    if(!d) return;
+    var ph = function(){
+      var b = el('div', 'ph'); b.innerHTML = icone; b.appendChild(el('span', '', 'Foto: ' + d.legenda)); f.insertBefore(b, f.firstChild);
+    };
+    if(d.src){
+      var img = new Image();
+      img.alt = d.alt; img.width = d.w; img.height = d.h; img.decoding = 'async';
+      img.loading = nome === 'fachada' ? 'eager' : 'lazy';
+      if(nome === 'fachada') img.fetchPriority = 'high';
+      img.style.objectPosition = d.foco;
+      img.onerror = function(){ img.remove(); ph(); };
+      img.src = d.src; f.appendChild(img);
+    } else { ph(); }
+    f.insertAdjacentHTML('beforeend', '<i class="canto c1"></i><i class="canto c2"></i>');
+    f.appendChild(el('figcaption', '', d.legenda));
+  });
+
+  // Números
+  var ul = document.getElementById('numeros');
+  O.numeros.forEach(function(n){
+    var li = el('li'); var b = el('b', '', n.valor.toLocaleString('pt-BR') + n.sufixo);
+    b.setAttribute('data-contar', n.valor); b.setAttribute('data-sufixo', n.sufixo);
+    var s = el('span', '', n.rotulo);
+    if(O.exemplo) s.appendChild(el('i', 'exemplo-tag', 'EXEMPLO'));
+    li.appendChild(b); li.appendChild(s); ul.appendChild(li);
+  });
+
+  // Avaliações
+  var A = O.avaliacoes;
+  document.getElementById('notaGoogle').textContent = A.nota;
+  document.getElementById('notaTexto').textContent = A.total ? 'no Google · ' + A.total + ' avaliações' : 'nota no Google';
+  var av = document.getElementById('avals');
+  A.lista.forEach(function(r){
+    var d = el('article', 'aval'); d.setAttribute('data-anim', '');
+    d.appendChild(el('div', 'estrelas', '★'.repeat(r.estrelas) + '☆'.repeat(5 - r.estrelas)));
+    d.appendChild(el('blockquote', '', r.texto)); d.appendChild(el('cite', '', r.nome));
+    av.appendChild(d);
+  });
+  if(A.exemplo || O.exemplo) document.getElementById('avisoEx').hidden = false;
+  var vg = document.getElementById('verGoogle');
+  if(A.link) vg.href = A.link; else vg.hidden = true;
+
+  // Promessas do orçamento
+  O.orcamento.promessas.forEach(function(p){ document.getElementById('promessas').appendChild(el('li', '', p)); });
+
+  // Horários + "aberto agora" (fuso de São Paulo, não o do aparelho)
+  var dias = ['dom','seg','ter','qua','qui','sex','sáb'];
+  var partes = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Sao_Paulo', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date());
+  var pega = function(t){ return partes.filter(function(p){ return p.type === t; })[0].value; };
+  var dow = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(pega('weekday'));
+  var minutos = (parseInt(pega('hour'), 10) % 24) * 60 + parseInt(pega('minute'), 10);
+  var paraMin = function(h){ var x = h.split(':'); return parseInt(x[0], 10) * 60 + parseInt(x[1], 10); };
+  var hoje = O.horarios.filter(function(h){ return h.dow.indexOf(dow) > -1; })[0];
+  var st = document.getElementById('status');
+  var abertoAgora = hoje && hoje.abre && minutos >= paraMin(hoje.abre) && minutos < paraMin(hoje.fecha);
+  st.textContent = abertoAgora ? 'Aberto agora · fecha às ' + hoje.fecha : (hoje && hoje.abre ? 'Fechado agora · hoje ' + hoje.abre + ' às ' + hoje.fecha : 'Fechado hoje');
+  st.className = 'status ' + (abertoAgora ? 'on' : 'off');
+  var hu = document.getElementById('horarios');
+  O.horarios.forEach(function(h){
+    var li = el('li', h.dow.indexOf(dow) > -1 ? 'hoje' : ''); li.appendChild(el('span', '', h.rotulo));
+    li.appendChild(el('span', '', h.abre ? h.abre + ' às ' + h.fecha : 'Fechado')); hu.appendChild(li);
+  });
+
+  // Mapa (iframe só cria quando chega perto; link de rota abre no app de mapas)
+  var busca = encodeURIComponent(O.endereco.mapaBusca);
+  document.getElementById('comoChegar').href = 'https://www.google.com/maps/dir/?api=1&destination=' + busca;
+  var mapa = document.getElementById('mapa');
+  // Bloco de endereço fica sempre por baixo do iframe: se o mapa não carregar, é ele que aparece.
+  var falha = el('div', 'mapa-falha');
+  falha.appendChild(el('p', '', O.endereco.completo));
+  var abrirMaps = el('a', 'btn btn-p', 'Abrir no Maps');
+  abrirMaps.href = 'https://www.google.com/maps/search/?api=1&query=' + busca; abrirMaps.target = '_blank'; abrirMaps.rel = 'noopener';
+  falha.appendChild(abrirMaps);
+  mapa.appendChild(falha);
+  var criaMapa = function(){
+    if(mapa.querySelector('iframe')) return;
+    var i = document.createElement('iframe'), ok = false;
+    i.title = 'Mapa: ' + O.endereco.completo; i.referrerPolicy = 'no-referrer-when-downgrade';
+    i.onload = function(){ ok = true; };
+    i.onerror = function(){ i.remove(); };
+    i.src = 'https://maps.google.com/maps?q=' + busca + '&z=16&output=embed';
+    mapa.appendChild(i);
+    setTimeout(function(){ if(!ok) i.remove(); }, 8000);
+  };
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es, ob){ if(es[0].isIntersecting){ criaMapa(); ob.disconnect(); } }, { rootMargin: '400px' }).observe(mapa);
+  } else { criaMapa(); }
+
+  // Formulário -> WhatsApp com os campos preenchidos
+  document.getElementById('formOrc').addEventListener('submit', function(e){
+    e.preventDefault();
+    var f = new FormData(e.target);
+    var m = 'Olá! Sou ' + f.get('nome') + '. Meu carro é ' + f.get('carro') + '. Preciso de: ' + f.get('servico') + '.';
+    if(String(f.get('obs')).trim()) m += ' Detalhe: ' + String(f.get('obs')).trim();
+    m += ' (pedido pelo site da ' + O.nomeCurto + ')';
+    window.open(waLink(m), '_blank', 'noopener');
+  });
+
+  // Menu mobile
+  var hamb = document.getElementById('hamb'), gaveta = document.getElementById('gaveta');
+  hamb.addEventListener('click', function(){
+    var a = gaveta.classList.toggle('aberta'); hamb.setAttribute('aria-expanded', a);
+  });
+  gaveta.addEventListener('click', function(e){ if(e.target.tagName === 'A'){ gaveta.classList.remove('aberta'); hamb.setAttribute('aria-expanded', 'false'); } });
+
+  // JSON-LD gerado da configuração. Nota só entra com dados reais (nota inventada em dado estruturado viola política do Google).
+  var ld = { '@context': 'https://schema.org', '@type': 'AutoRepair', name: O.nome, description: interpola(O.seo.descricao), telephone: '+' + O.telefone.tel,
+    geo: { '@type': 'GeoCoordinates', latitude: O.geo.lat, longitude: O.geo.lng },
+    address: { '@type': 'PostalAddress', streetAddress: O.endereco.rua, addressLocality: O.cidade, addressRegion: O.uf, postalCode: O.endereco.cep, addressCountry: 'BR' },
+    openingHoursSpecification: O.horarios.filter(function(h){ return h.abre; }).map(function(h){
+      return { '@type': 'OpeningHoursSpecification', dayOfWeek: h.dow.map(function(d){ return ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d]; }), opens: h.abre, closes: h.fecha };
+    }) };
+  if(!O.exemplo && !A.exemplo && A.total) ld.aggregateRating = { '@type': 'AggregateRating', ratingValue: A.nota, reviewCount: A.total, bestRating: '5' };
+  var tag = document.createElement('script'); tag.type = 'application/ld+json'; tag.textContent = JSON.stringify(ld); document.head.appendChild(tag);
+})();
+
+/* ===================== ANIMAÇÕES (GSAP, só transform/opacity) ===================== */
+window.addEventListener('DOMContentLoaded', function(){
+  var html = document.documentElement;
+  var semMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(semMovimento) return;                       // conteúdo já está visível; nada é escondido
+  if(!window.gsap || !window.ScrollTrigger){ return; }  // CDN falhou: site continua legível
+  gsap.registerPlugin(ScrollTrigger);
+  html.classList.add('gs');                      // agora [data-anim] pode começar escondido
+
+  var mm = gsap.matchMedia();
+  // Hero: só desliza (sem opacity 0), para o título nunca ficar invisível e o LCP não atrasar
+  gsap.from('.hero-grade [data-hero]:not(.hero-foto)', { y: 22, duration: .7, ease: 'power3.out', stagger: .08, clearProps: 'transform' });
+
+  // Entrada por scroll, em lote
+  ScrollTrigger.batch('[data-anim]', {
+    start: 'top 88%', once: true,
+    onEnter: function(b){ gsap.to(b, { opacity: 1, y: 0, duration: .7, ease: 'power2.out', stagger: .1, overwrite: true }); }
+  });
+
+  // Contadores: valor final já está no HTML; aqui só anima de 0 até ele
+  document.querySelectorAll('[data-contar]').forEach(function(n){
+    var alvo = +n.getAttribute('data-contar'), suf = n.getAttribute('data-sufixo') || '', o = { v: 0 };
+    ScrollTrigger.create({ trigger: n, start: 'top 90%', once: true, onEnter: function(){
+      gsap.to(o, { v: alvo, duration: 1.6, ease: 'power2.out', onUpdate: function(){ n.textContent = Math.round(o.v).toLocaleString('pt-BR') + suf; } });
+    } });
+  });
+
+  // Hero: raio de scanner (~2 s) passa pelo carro e acende os 5 pontos; depois um pulso discreto (3x) convida ao toque.
+  // Com foto de fundo: só os botões entram em escada. Tudo em transform/opacity.
+  window.heroPronto.then(function(modo){
+    if(modo === 'foto'){
+      gsap.from('.pt', { y: 12, opacity: 0, duration: .5, ease: 'power2.out', stagger: .08, delay: .3, clearProps: 'all' });
+      return;
+    }
+    var D = 2, W = 870, pts = document.querySelectorAll('.pt');
+    var tl = gsap.timeline({ delay: .3 });
+    tl.set(['#raio', '#varreG'], { opacity: 1 })
+      .to(['#raio', '#varreR'], { x: W, duration: D, ease: 'none' }, 0);
+    pts.forEach(function(b, i){
+      var xv = parseFloat(b.style.left) / 100 * 800;     // posição do ponto no desenho (viewBox 800)
+      tl.fromTo(b.querySelector('.dot'), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: .35, ease: 'back.out(2)' }, (xv / W) * D);
+    });
+    tl.to(['#raio', '#varreG'], { opacity: 0, duration: .5 }, D)
+      .fromTo('.pt .anel', { scale: .6, opacity: .7 }, { scale: 2.1, opacity: 0, duration: 1.1, ease: 'power1.out', repeat: 2, repeatDelay: 1.3, stagger: .15 }, D + .3);
+  });
+});
+</script>
+<noscript><p style="padding:20px;background:#fff;color:#000">Ative o JavaScript para ver os serviços e horários, ou chame no WhatsApp.</p></noscript>
+</body>
+</html>
