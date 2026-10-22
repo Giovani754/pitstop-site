@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>PitStop Centro Automotivo | Mecânica de bairro em São Paulo</title>
-  <meta name="description" content="Revisão, freio, suspensão, injeção e alinhamento. Orçamento antes de abrir o carro, peça de volta se você quiser. Chame no WhatsApp.">
+  <title>PitStop Centro Automotivo | Oficina mecânica na Vila Industrial, São Paulo</title>
+  <meta name="description" content="Oficina mecânica na Vila Industrial, São Paulo: revisão, freio, suspensão, injeção e alinhamento. Orçamento antes de abrir o carro. Chame no WhatsApp.">
   <meta name="theme-color" content="#0f0f0e">
   <meta name="robots" content="index, follow">
   <meta property="og:type" content="website">
@@ -62,8 +62,7 @@
     .btn svg{width:20px;height:20px;fill:currentColor}
 
     /* Cabeçalho */
-    .topo{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
-    .topo.sol{background:rgba(15,15,14,.94);border-color:var(--linha)}
+    .topo{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(15,15,14,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--linha)}
     .topo .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
     .marca{display:flex;align-items:center;gap:10px;text-decoration:none}
     .marca svg{width:38px;height:38px}
@@ -73,7 +72,7 @@
     .menu a{font:700 15px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--txt);padding:8px 0}
     .menu a:hover{color:var(--laranja)}
     .topo-acoes{display:flex;align-items:center;gap:10px}
-    .topo-acoes .btn{min-height:44px;padding:0 18px;font-size:16px}
+    .topo-acoes .btn{display:none;min-height:44px;padding:0 18px;font-size:16px}
     .hamb{background:none;border:1px solid var(--linha);color:#fff;width:44px;height:44px;border-radius:4px;display:grid;place-items:center;cursor:pointer}
     .hamb svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2}
     .gaveta{display:none;background:var(--bg);border-top:1px solid var(--linha);padding:8px 20px 20px}
@@ -81,19 +80,41 @@
     .gaveta a{display:block;padding:15px 0;border-bottom:1px solid var(--linha);font:700 19px/1 var(--display);letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
 
     /* Hero: linhas técnicas ao fundo (papel milimetrado escuro) */
-    .hero{position:relative;padding:112px 0 56px;background:
+    .hero{position:relative;padding:96px 0 56px;background:
       linear-gradient(180deg,rgba(15,15,14,0) 60%,var(--bg) 100%),
       repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),
-      repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),var(--bg);overflow:hidden}
+      repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 48px),var(--bg)}
+    .hero.com-foto{background:linear-gradient(180deg,rgba(15,15,14,.8),rgba(15,15,14,.9)),var(--hero-foto) center/cover no-repeat,var(--bg)}
     .hero-grade{display:grid;gap:36px;align-items:center}
     .hero h1{font-size:clamp(44px,10.5vw,84px);margin:18px 0 20px}
     .hero h1 em{font-style:normal;color:var(--laranja);display:block}
     .hero-sub{max-width:34em;font-size:clamp(17px,2.4vw,20px);color:#cfcbc3}
     .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-    .hero-foto{position:relative}
-    .hero-foto .foto{aspect-ratio:4/5;max-height:560px;width:100%}
-    .medidor{position:absolute;left:-14px;bottom:-26px;width:116px;filter:drop-shadow(0 10px 18px rgba(0,0,0,.55))}
-    .selo-hero{position:absolute;right:0;top:18px;background:var(--laranja);color:#150a04;font:800 15px/1.05 var(--display);letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;transform:rotate(3deg)}
+    /* Palco do hero: carro em SVG com 5 pontos de serviço (ou lista de botões sobre a foto) */
+    .palco{position:relative;margin-inline:-20px;aspect-ratio:800/340;order:-1}
+    .carro{width:100%;height:100%}
+    .carro *{vector-effect:non-scaling-stroke}
+    .selo-hero{position:absolute;z-index:2;right:20px;top:0;background:var(--laranja);color:#150a04;font:800 14px/1.05 var(--display);letter-spacing:.06em;text-transform:uppercase;padding:9px 12px;transform:rotate(3deg)}
+    .pt{position:absolute;z-index:3;width:44px;height:44px;margin:-22px 0 0 -22px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center;color:#fff;-webkit-tap-highlight-color:transparent}
+    .pt .dot{width:16px;height:16px;border-radius:50%;background:var(--laranja);border:3px solid #150a04;box-shadow:0 0 0 2px var(--laranja)}
+    .pt .anel{position:absolute;inset:6px;border-radius:50%;border:2px solid var(--laranja);opacity:0;pointer-events:none}
+    .pt .rot{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    .pt[aria-expanded=true] .dot{background:#fff}
+    .pt:focus-visible{outline-offset:-4px;border-radius:50%}
+    .balao{position:absolute;z-index:30;width:min(290px,calc(100vw - 32px));background:var(--papel);color:var(--tinta);border:2px solid var(--laranja);border-radius:4px;padding:16px 16px 18px;box-shadow:0 14px 34px rgba(0,0,0,.5);scroll-margin-bottom:96px}
+    .balao[hidden]{display:none}
+    .balao h3{font-size:30px;padding-right:44px}
+    .balao .preco{font-weight:600;margin:6px 0 4px;color:var(--laranja-esc)}
+    .balao .desc{font-size:15px;color:#4a4842;margin-bottom:14px}
+    .balao .btn{width:100%}
+    .balao .fecha{position:absolute;top:4px;right:4px;width:44px;height:44px;border:0;background:none;color:var(--tinta);font:700 28px/1 var(--display);cursor:pointer}
+    .foto-pend .carro,.foto-pend .pt,.foto-pend .selo-hero{visibility:hidden}
+    .com-foto .carro{display:none}
+    .com-foto .palco{margin-inline:0;display:flex;flex-wrap:wrap;gap:10px;align-content:flex-end;align-items:flex-end}
+    .com-foto .selo-hero{position:static;transform:none;flex:0 0 100%;align-self:flex-start;width:max-content}
+    .com-foto .pt{position:relative;margin:0;width:auto;min-height:44px;padding:0 16px 0 10px;grid-auto-flow:column;gap:8px;background:rgba(15,15,14,.85);border:1px solid var(--linha);border-radius:4px;font:700 16px/1 var(--display);letter-spacing:.08em;text-transform:uppercase}
+    .com-foto .pt .rot{position:static;width:auto;height:auto;clip:auto;overflow:visible}
+    .com-foto .pt:focus-visible{border-radius:4px;outline-offset:2px}
 
     /* Faixa de informação rápida: endereço, horário, telefone sempre visíveis, parados */
     .faixa{background:var(--bg2);border-block:1px solid var(--linha)}
@@ -145,8 +166,8 @@
     .ph svg{width:46px;height:46px;stroke:currentColor;fill:none;stroke-width:1.6}
     .ph span{font:700 14px/1.3 var(--display);letter-spacing:.14em;text-transform:uppercase}
 
-    .oficina-grade{display:grid;gap:14px;margin-top:40px}
-    .oficina-grade .foto{min-height:220px}
+    .oficina-grade{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-top:40px}
+    .oficina-grade .foto{min-width:0}
     .f-equipe{aspect-ratio:4/3}
     .f-servico{aspect-ratio:16/10}
     .f-detalhe{aspect-ratio:16/10}
@@ -184,7 +205,9 @@
     /* Localização */
     .loc{display:grid;gap:26px;margin-top:40px}
     .mapa{position:relative;min-height:340px;background:#232321;border:1px solid var(--linha)}
-    .mapa iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(.85) invert(.9) contrast(.9)}
+    .mapa iframe{position:absolute;inset:0;z-index:1;width:100%;height:100%;border:0;filter:grayscale(.85) invert(.9) contrast(.9)}
+    .mapa-falha{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:16px;padding:24px;text-align:center;background:repeating-linear-gradient(135deg,rgba(255,255,255,.04) 0 2px,transparent 2px 14px),#232321}
+    .mapa-falha p{font:800 clamp(24px,5vw,32px)/1.05 var(--display);text-transform:uppercase}
     .end-grande{font:800 clamp(30px,5.6vw,46px)/1 var(--display);text-transform:uppercase}
     .horarios{margin:22px 0;border-top:1px solid var(--linha)}
     .horarios li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--linha)}
@@ -205,6 +228,7 @@
     /* Animação: só esconde se GSAP carregou (classe .gs) e o usuário não pediu menos movimento */
     @media (prefers-reduced-motion:no-preference){
       .js.gs [data-anim]{opacity:0;transform:translateY(26px)}
+      .js.gs .hero:not(.com-foto) .pt .dot{opacity:0}
     }
     @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 
@@ -226,9 +250,10 @@
       body{padding-bottom:0}
       .menu{display:flex}
       .hamb,.gaveta{display:none!important}
+      .topo-acoes .btn{display:inline-flex}
       .hero{padding:140px 0 84px}
-      .hero-grade{grid-template-columns:1.25fr .75fr;gap:64px}
-      .hero-foto{margin-right:-24px}
+      .hero-grade{grid-template-columns:1.1fr .9fr;gap:48px}
+      .palco{margin-inline:0;order:0}
       .serv-wrap{grid-template-columns:.8fr 1.4fr;gap:70px}
       .serv-intro{position:sticky;top:110px;align-self:start}
       .serv{grid-template-columns:64px 1fr 220px;gap:4px 22px;align-items:start}
@@ -275,25 +300,51 @@
     <section class="hero" id="inicio">
       <div class="wrap hero-grade">
         <div>
-          <p class="rotulo" data-hero data-t="hero.eyebrow"></p>
-          <h1 data-hero><span data-t="hero.titulo"></span><em data-t="hero.destaque"></em></h1>
-          <p class="hero-sub" data-hero data-t="hero.sub"></p>
+          <!-- Textos estáticos para SEO/primeira pintura; o JS regrava os mesmos a partir de OFICINA.hero -->
+          <p class="rotulo" data-hero data-t="hero.eyebrow">Oficina mecânica · Vila Industrial</p>
+          <h1 data-hero><span data-t="hero.titulo">Barulho estranho, luz acesa, freio mole?</span><em data-t="hero.destaque">Traz que a gente olha.</em></h1>
+          <p class="hero-sub" data-hero data-t="hero.sub">Revisão, freio, suspensão, injeção e alinhamento aqui em Vila Industrial. Você acompanha o diagnóstico, recebe o orçamento antes de a gente abrir qualquer coisa e só paga o que aprovar.</p>
           <div class="hero-cta" data-hero>
             <a class="btn btn-p" data-wa data-wa-msg="saudacao" href="#"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12c0 2.6.8 5.1 2.3 7L.8 23.5a.5.5 0 00.6.6l4.5-1.5A12 12 0 0012 24c6.6 0 12-5.4 12-12S18.6 0 12 0zm5.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.2c-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.4z"/></svg>Chamar no WhatsApp</a>
             <a class="btn btn-s" data-tel href="#">Ligar agora</a>
           </div>
         </div>
-        <div class="hero-foto" data-hero>
-          <figure class="foto" data-foto="fachada"></figure>
-          <span class="selo-hero" data-t="hero.selo"></span>
-          <!-- Medidor decorativo: um único SVG pequeno, ponteiro balança de leve (transform) -->
-          <svg class="medidor" id="medidor" viewBox="0 0 120 120" aria-hidden="true">
-            <circle cx="60" cy="60" r="56" fill="#0f0f0e" stroke="#ff5a1f" stroke-width="3"/>
-            <path d="M18 90 A50 50 0 1 1 102 90" fill="none" stroke="#3a3a37" stroke-width="6"/>
-            <path d="M82 22 A50 50 0 0 1 102 90" fill="none" stroke="#ff5a1f" stroke-width="6"/>
-            <g id="ponteiro"><path d="M57 62 L60 20 L63 62Z" fill="#fff"/></g>
-            <circle cx="60" cy="62" r="6" fill="#ff5a1f"/>
+        <div class="palco" id="palco">
+          <!-- Carro em desenho técnico (decorativo). Os 5 pontos de serviço são botões criados a partir de OFICINA.hero.pontos -->
+          <svg class="carro" viewBox="0 0 800 340" aria-hidden="true" focusable="false">
+            <defs>
+              <radialGradient id="luzG" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ff5a1f" stop-opacity=".42"/><stop offset=".6" stop-color="#ff5a1f" stop-opacity=".12"/><stop offset="1" stop-color="#ff5a1f" stop-opacity="0"/></radialGradient>
+              <linearGradient id="corpoG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#262624"/><stop offset="1" stop-color="#121211"/></linearGradient>
+              <linearGradient id="raioG" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff5a1f" stop-opacity="0"/><stop offset=".85" stop-color="#ff5a1f" stop-opacity=".4"/><stop offset="1" stop-color="#ffd2bd" stop-opacity=".95"/></linearGradient>
+              <clipPath id="varreC"><rect id="varreR" x="-800" y="0" width="800" height="340"/></clipPath>
+              <path id="contorno" d="M70 240 L62 205 Q64 178 92 172 L215 160 L290 100 Q298 94 312 94 L490 94 Q506 94 516 102 L585 160 L700 180 Q745 188 756 212 L760 240 Q760 250 750 250 L656 250 A46 46 0 0 0 564 250 L246 250 A46 46 0 0 0 154 250 L78 250 Q70 250 70 240 Z"/>
+              <g id="roda"><circle r="40" fill="#0c0c0b"/><circle r="27"/><circle r="8" stroke="#ff5a1f"/><path d="M0 -27V-8M0 8V27M-27 0H-8M8 0H27M-19 -19L-6 -6M6 6L19 19M19 -19L6 -6M-6 6L-19 19" stroke="#ff5a1f" stroke-opacity=".7"/></g>
+            </defs>
+            <ellipse cx="410" cy="190" rx="400" ry="150" fill="url(#luzG)"/>
+            <ellipse cx="410" cy="292" rx="360" ry="9" fill="#000" fill-opacity=".45"/>
+            <g fill="none" stroke="#e9e6df" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M20 290H780" stroke-opacity=".4"/>
+              <use href="#contorno" fill="url(#corpoG)"/>
+              <path d="M306 106 L240 156 H392 V106Z M408 106 V156 H560 L506 106Z"/>
+              <path d="M400 158V248M254 162V248M548 160V248M90 196H730" stroke-opacity=".4"/>
+              <path d="M360 178h28M508 178h28M700 180 L626 160" stroke="#ff5a1f"/>
+              <path d="M730 196 L752 204 L748 218 L722 212Z" fill="#ff5a1f" fill-opacity=".85" stroke="#ffb090"/>
+              <path d="M68 192 L84 190 V206 H66Z" fill="#ff5a1f" fill-opacity=".7" stroke="#ffb090"/>
+              <use href="#roda" x="200" y="250"/><use href="#roda" x="610" y="250"/>
+              <path d="M62 316H760M62 309V323M760 309V323" stroke-opacity=".4" stroke-dasharray="4 5"/>
+            </g>
+            <!-- Varredura do scanner: ficam escondidas (opacity 0) e só o GSAP as mostra -->
+            <g id="varreG" opacity="0" clip-path="url(#varreC)"><use href="#contorno" fill="none" stroke="#ff8a5c" stroke-width="2.4"/></g>
+            <g id="raio" opacity="0"><rect x="-70" y="40" width="70" height="262" fill="url(#raioG)"/></g>
           </svg>
+          <span class="selo-hero" data-t="hero.selo"></span>
+          <div class="balao" id="balao" role="dialog" aria-labelledby="balaoNome" tabindex="-1" hidden>
+            <button class="fecha" id="balaoFecha" type="button" aria-label="Fechar">&times;</button>
+            <h3 id="balaoNome"></h3>
+            <p class="preco" id="balaoPreco"></p>
+            <p class="desc" id="balaoDesc"></p>
+            <a class="btn btn-p" id="balaoAgendar" target="_blank" rel="noopener" href="#"></a>
+          </div>
         </div>
       </div>
     </section>
@@ -443,16 +494,34 @@ const OFICINA = {
     { rotulo: "Sábado",          dow: [6],         abre: "08:00", fecha: "13:00" },
     { rotulo: "Domingo",         dow: [0],         abre: "",      fecha: "" }
   ],
+  // Coordenadas do mapa/JSON-LD. EXEMPLO: trocar pelas reais junto com o endereço.
+  geo: { lat: -23.5505, lng: -46.6333 },
+  seo: {
+    titulo: "{nome} | Oficina mecânica na {bairro}, {cidade}",
+    descricao: "Oficina mecânica na {bairro}, {cidade}: revisão, freio, suspensão, injeção e alinhamento. Orçamento antes de abrir o carro. Chame no WhatsApp."
+  },
+  // Foto real do hero (ex.: "img/fachada.jpg"). Preenchida: vira fundo escurecido e o carro SVG some,
+  // ficando só os pontos de serviço como botões. Vazia (ou foto que não carrega): usa o carro.
+  heroFoto: "",
   mensagens: {
     saudacao: "Olá! Vi o site da {nomeCurto} e queria falar com a oficina.",
-    orcamento: "Olá! Quero um orçamento na {nomeCurto}."
+    orcamento: "Olá! Quero um orçamento na {nomeCurto}.",
+    agendar: "Olá! Vim pelo site da {nomeCurto} e quero agendar: {servico}."
   },
   hero: {
     eyebrow: "Oficina mecânica · {bairro}",
     titulo: "Barulho estranho, luz acesa, freio mole?",
     destaque: "Traz que a gente olha.",
     sub: "Revisão, freio, suspensão, injeção e alinhamento aqui em {bairro}. Você acompanha o diagnóstico, recebe o orçamento antes de a gente abrir qualquer coisa e só paga o que aprovar.",
-    selo: "Orçamento antes de mexer"
+    selo: "Orçamento antes de mexer",
+    // x/y = posição do ponto sobre o carro, em % do palco. preco = "a partir de" (valores EXEMPLO).
+    pontos: [
+      { nome: "Freios",          x: 76.5, y: 73.5, preco: 180, desc: "Pastilha, disco e fluido, com a peça gasta mostrada antes." },
+      { nome: "Suspensão",       x: 25,   y: 73.5, preco: 250, desc: "Amortecedor, bucha, pivô e terminal." },
+      { nome: "Motor e injeção", x: 85,   y: 54,   preco: 150, desc: "Scanner e diagnóstico antes de trocar qualquer peça." },
+      { nome: "Parte elétrica",  x: 56,   y: 38,   preco: 120, desc: "Bateria, alternador, luzes e chicote." },
+      { nome: "Óleo e filtros",  x: 45,   y: 68,   preco: 160, desc: "Óleo do tipo certo e filtro novo, com níveis conferidos." }
+    ]
   },
   servicos: {
     titulo: "O que o seu carro pode precisar",
@@ -482,7 +551,6 @@ const OFICINA = {
   // Fotos reais: coloque o caminho em src (ex.: "img/fachada.jpg", ideal 1200px de largura, JPG/WebP).
   // Sem src, aparece um espaço neutro com o nome da foto. foco = object-position da foto.
   fotos: {
-    fachada: { src: "", w: 960, h: 1200, alt: "Fachada da oficina", legenda: "Fachada", foco: "50% 50%" },
     equipe:  { src: "", w: 1200, h: 1000, alt: "Equipe da oficina", legenda: "Equipe", foco: "50% 35%" },
     servico: { src: "", w: 1200, h: 750, alt: "Mecânico trabalhando num carro no elevador", legenda: "Serviço em andamento", foco: "50% 50%" },
     detalhe: { src: "", w: 1200, h: 750, alt: "Peça sendo conferida na bancada", legenda: "Bancada", foco: "50% 50%" }
@@ -524,7 +592,8 @@ const OFICINA = {
     var v = porCaminho(n.getAttribute('data-t'));
     if(v != null) n.textContent = interpola(v);
   });
-  document.title = O.nome + ' | Mecânica de bairro em ' + O.cidade;
+  document.title = interpola(O.seo.titulo);
+  document.querySelector('meta[name="description"]').setAttribute('content', interpola(O.seo.descricao));
   document.getElementById('ano').textContent = new Date().getFullYear();
 
   // Links de WhatsApp e telefone
@@ -535,6 +604,62 @@ const OFICINA = {
     a.target = '_blank'; a.rel = 'noopener';
   });
   document.querySelectorAll('[data-tel]').forEach(function(a){ a.href = 'tel:+' + O.telefone.tel; });
+
+  // Hero: 5 pontos de serviço + balão. Com OFICINA.heroFoto carregada, a foto vira fundo e os pontos viram lista de botões.
+  var hero = document.getElementById('inicio'), palco = document.getElementById('palco'), balao = document.getElementById('balao');
+  var reais = function(v){ return 'R$ ' + Number(v).toLocaleString('pt-BR'); };
+  var aberto = null;
+  O.hero.pontos.forEach(function(p, i){
+    var b = el('button', 'pt'); b.type = 'button'; b.setAttribute('data-i', i);
+    b.style.left = p.x + '%'; b.style.top = p.y + '%';
+    b.setAttribute('aria-haspopup', 'dialog'); b.setAttribute('aria-expanded', 'false'); b.setAttribute('aria-controls', 'balao');
+    b.appendChild(el('i', 'anel')); b.appendChild(el('i', 'dot')); b.appendChild(el('span', 'rot', p.nome));
+    palco.insertBefore(b, balao);
+  });
+  var fechar = function(semFoco){
+    if(!aberto) return;
+    var b = aberto; aberto = null; balao.hidden = true; b.setAttribute('aria-expanded', 'false');
+    if(!semFoco) b.focus();
+  };
+  var abrir = function(b){
+    var p = O.hero.pontos[+b.getAttribute('data-i')];
+    fechar(true);
+    document.getElementById('balaoNome').textContent = p.nome;
+    document.getElementById('balaoPreco').textContent = 'a partir de ' + reais(p.preco);
+    document.getElementById('balaoDesc').textContent = p.desc;
+    var a = document.getElementById('balaoAgendar');
+    a.textContent = 'Agendar ' + p.nome;
+    a.href = waLink(interpola(O.mensagens.agendar.replace('{servico}', p.nome)));
+    balao.hidden = false; aberto = b; b.setAttribute('aria-expanded', 'true');
+    var w = balao.offsetWidth, cx = b.offsetLeft + b.offsetWidth / 2;
+    balao.style.left = Math.max(8, Math.min(cx - w / 2, palco.clientWidth - w - 8)) + 'px';
+    balao.style.top = (b.offsetTop + b.offsetHeight + 6) + 'px';
+    if(window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) gsap.fromTo(balao, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .22, ease: 'power2.out' });
+    balao.focus({ preventScroll: true });
+    balao.scrollIntoView({ block: 'nearest' });
+  };
+  palco.addEventListener('click', function(e){
+    var b = e.target.closest('.pt');
+    if(b) { if(aberto === b) fechar(); else abrir(b); }
+  });
+  document.getElementById('balaoFecha').addEventListener('click', function(){ fechar(); });
+  document.addEventListener('pointerdown', function(e){ if(aberto && !balao.contains(e.target) && !aberto.contains(e.target)) fechar(true); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') fechar(); });
+  window.addEventListener('resize', function(){ fechar(true); });
+  // Promessa lida pela animação: 'foto' ou 'carro'. Foto que não carrega nunca deixa buraco: cai no carro.
+  window.heroPronto = new Promise(function(ok){
+    if(!O.heroFoto){ ok('carro'); return; }
+    hero.classList.add('foto-pend');
+    var feito = false, im = new Image();
+    var fim = function(modo){
+      if(feito) return; feito = true; hero.classList.remove('foto-pend');
+      if(modo === 'foto'){ hero.style.setProperty('--hero-foto', 'url("' + O.heroFoto.replace(/"/g, '%22') + '")'); hero.classList.add('com-foto'); }
+      ok(modo);
+    };
+    im.onload = function(){ fim('foto'); }; im.onerror = function(){ fim('carro'); };
+    setTimeout(function(){ fim('carro'); }, 3000);
+    im.src = O.heroFoto;
+  });
 
   // Serviços (também alimenta o select do orçamento)
   var lista = document.getElementById('servLista'), sel = document.getElementById('selServico');
@@ -628,12 +753,22 @@ const OFICINA = {
   var busca = encodeURIComponent(O.endereco.mapaBusca);
   document.getElementById('comoChegar').href = 'https://www.google.com/maps/dir/?api=1&destination=' + busca;
   var mapa = document.getElementById('mapa');
+  // Bloco de endereço fica sempre por baixo do iframe: se o mapa não carregar, é ele que aparece.
+  var falha = el('div', 'mapa-falha');
+  falha.appendChild(el('p', '', O.endereco.completo));
+  var abrirMaps = el('a', 'btn btn-p', 'Abrir no Maps');
+  abrirMaps.href = 'https://www.google.com/maps/search/?api=1&query=' + busca; abrirMaps.target = '_blank'; abrirMaps.rel = 'noopener';
+  falha.appendChild(abrirMaps);
+  mapa.appendChild(falha);
   var criaMapa = function(){
-    if(mapa.firstChild) return;
-    var i = document.createElement('iframe');
+    if(mapa.querySelector('iframe')) return;
+    var i = document.createElement('iframe'), ok = false;
+    i.title = 'Mapa: ' + O.endereco.completo; i.referrerPolicy = 'no-referrer-when-downgrade';
+    i.onload = function(){ ok = true; };
+    i.onerror = function(){ i.remove(); };
     i.src = 'https://maps.google.com/maps?q=' + busca + '&z=16&output=embed';
-    i.loading = 'lazy'; i.title = 'Mapa: ' + O.endereco.completo; i.referrerPolicy = 'no-referrer-when-downgrade';
     mapa.appendChild(i);
+    setTimeout(function(){ if(!ok) i.remove(); }, 8000);
   };
   if('IntersectionObserver' in window){
     new IntersectionObserver(function(es, ob){ if(es[0].isIntersecting){ criaMapa(); ob.disconnect(); } }, { rootMargin: '400px' }).observe(mapa);
@@ -655,12 +790,10 @@ const OFICINA = {
     var a = gaveta.classList.toggle('aberta'); hamb.setAttribute('aria-expanded', a);
   });
   gaveta.addEventListener('click', function(e){ if(e.target.tagName === 'A'){ gaveta.classList.remove('aberta'); hamb.setAttribute('aria-expanded', 'false'); } });
-  var topo = document.getElementById('topo');
-  var sol = function(){ topo.classList.toggle('sol', window.scrollY > 20); };
-  sol(); window.addEventListener('scroll', sol, { passive: true });
 
   // JSON-LD gerado da configuração. Nota só entra com dados reais (nota inventada em dado estruturado viola política do Google).
-  var ld = { '@context': 'https://schema.org', '@type': 'AutoRepair', name: O.nome, telephone: '+' + O.telefone.tel,
+  var ld = { '@context': 'https://schema.org', '@type': 'AutoRepair', name: O.nome, description: interpola(O.seo.descricao), telephone: '+' + O.telefone.tel,
+    geo: { '@type': 'GeoCoordinates', latitude: O.geo.lat, longitude: O.geo.lng },
     address: { '@type': 'PostalAddress', streetAddress: O.endereco.rua, addressLocality: O.cidade, addressRegion: O.uf, postalCode: O.endereco.cep, addressCountry: 'BR' },
     openingHoursSpecification: O.horarios.filter(function(h){ return h.abre; }).map(function(h){
       return { '@type': 'OpeningHoursSpecification', dayOfWeek: h.dow.map(function(d){ return ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][d]; }), opens: h.abre, closes: h.fecha };
@@ -696,14 +829,23 @@ window.addEventListener('DOMContentLoaded', function(){
     } });
   });
 
-  // Só em tela grande: ponteiro balança e a foto do hero sobe um pouco mais devagar que a página
-  mm.add('(min-width: 980px)', function(){
-    gsap.to('#ponteiro', { rotation: 28, svgOrigin: '60 62', duration: 2.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-    gsap.to('.hero-foto', { y: -36, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-  });
-  // No celular, ponteiro só faz uma passada curta ao carregar
-  mm.add('(max-width: 979px)', function(){
-    gsap.fromTo('#ponteiro', { rotation: -40, svgOrigin: '60 62' }, { rotation: 20, svgOrigin: '60 62', duration: 1.4, ease: 'power2.out' });
+  // Hero: raio de scanner (~2 s) passa pelo carro e acende os 5 pontos; depois um pulso discreto (3x) convida ao toque.
+  // Com foto de fundo: só os botões entram em escada. Tudo em transform/opacity.
+  window.heroPronto.then(function(modo){
+    if(modo === 'foto'){
+      gsap.from('.pt', { y: 12, opacity: 0, duration: .5, ease: 'power2.out', stagger: .08, delay: .3, clearProps: 'all' });
+      return;
+    }
+    var D = 2, W = 870, pts = document.querySelectorAll('.pt');
+    var tl = gsap.timeline({ delay: .3 });
+    tl.set(['#raio', '#varreG'], { opacity: 1 })
+      .to(['#raio', '#varreR'], { x: W, duration: D, ease: 'none' }, 0);
+    pts.forEach(function(b, i){
+      var xv = parseFloat(b.style.left) / 100 * 800;     // posição do ponto no desenho (viewBox 800)
+      tl.fromTo(b.querySelector('.dot'), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: .35, ease: 'back.out(2)' }, (xv / W) * D);
+    });
+    tl.to(['#raio', '#varreG'], { opacity: 0, duration: .5 }, D)
+      .fromTo('.pt .anel', { scale: .6, opacity: .7 }, { scale: 2.1, opacity: 0, duration: 1.1, ease: 'power1.out', repeat: 2, repeatDelay: 1.3, stagger: .15 }, D + .3);
   });
 });
 </script>
